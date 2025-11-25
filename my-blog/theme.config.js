@@ -4,7 +4,7 @@ export default {
   footer: (
     <footer>
       <small>
-        <time>{YEAR}</time> © Your Name.
+        <time>{YEAR}</time> © HURRAEY. 모든 글은 저작자 표시 후 공유돼요.
         <a href="/feed.xml">RSS</a>
       </small>
       <style jsx>{`
