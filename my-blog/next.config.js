@@ -10,6 +10,10 @@ const nextConfig = {
     // Ensure Next.js treats this folder as the workspace root.
     root: __dirname,
   },
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
 };
 
 module.exports = withNextra(nextConfig);
