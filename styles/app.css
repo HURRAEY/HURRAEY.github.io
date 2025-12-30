@@ -2,7 +2,8 @@
   margin-left: 280px;
   transition: margin-left 0.3s ease;
   min-height: 100vh;
-  background: var(--bg-primary);
+  background: linear-gradient(to bottom right, #fce4ec, #f8bbd0, #f48fb1) !important;
+  background-attachment: fixed;
   color: var(--text-primary);
 }
 

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Search from './Search';
-import DarkModeToggle from './DarkModeToggle';
 
 interface SidebarProps {
   posts?: Array<{
@@ -59,7 +58,6 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           <div className="sidebar-header">
             <h2>HURRAEY</h2>
             <div className="sidebar-header-actions">
-              <DarkModeToggle />
               <button
                 className="sidebar-toggle"
                 onClick={() => setIsOpen(!isOpen)}
@@ -165,17 +163,12 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           top: 0;
           height: 100vh;
           width: 280px;
-          background: var(--sidebar-bg, #fff);
-          border-right: 1px solid var(--border-color, #e5e7eb);
+          background: #f8bbd0;
+          border-right: 1px solid #f48fb1;
           transition: transform 0.3s ease, width 0.3s ease;
           z-index: 100;
           overflow-y: auto;
           box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
-        }
-
-        :global(.dark) .sidebar {
-          --sidebar-bg: #111827;
-          --border-color: #374151;
         }
 
         .sidebar.closed {
@@ -192,7 +185,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           align-items: center;
           margin-bottom: 1.5rem;
           padding-bottom: 1rem;
-          border-bottom: 1px solid var(--border-color, #e5e7eb);
+          border-bottom: 1px solid #f48fb1;
         }
 
         .sidebar-header-actions {
@@ -209,11 +202,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           margin: 0;
           font-size: 1.25rem;
           font-weight: 700;
-          color: var(--text-primary, #111);
-        }
-
-        :global(.dark) .sidebar-header h2 {
-          --text-primary: #f9fafb;
+          color: #1a0033;
         }
 
         .sidebar-toggle {
@@ -222,12 +211,12 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           font-size: 1.25rem;
           cursor: pointer;
           padding: 0.25rem 0.5rem;
-          color: #69778c;
+          color: #4a0066;
           transition: color 0.2s;
         }
 
         .sidebar-toggle:hover {
-          color: #111;
+          color: #1a0033;
         }
 
         .sidebar-nav ul {
@@ -243,7 +232,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         .sidebar-nav a {
           display: block;
           padding: 0.75rem 1rem;
-          color: var(--text-secondary, #69778c);
+          color: #4a0066;
           text-decoration: none;
           border-radius: 0.5rem;
           transition: all 0.2s;
@@ -251,25 +240,19 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         }
 
         .sidebar-nav a:hover {
-          background: var(--hover-bg, #f3f4f6);
-          color: var(--text-primary, #111);
+          background: #f48fb1;
+          color: #1a0033;
         }
 
         .sidebar-nav a.active {
-          background: #0074de;
+          background: #e91e63;
           color: #fff;
-        }
-
-        :global(.dark) .sidebar-nav a {
-          --text-secondary: #9ca3af;
-          --text-primary: #f9fafb;
-          --hover-bg: #1f2937;
         }
 
         .sidebar-posts {
           margin-top: 2rem;
           padding-top: 2rem;
-          border-top: 1px solid var(--border-color, #e5e7eb);
+          border-top: 1px solid #f48fb1;
           width: 100%;
           overflow: hidden;
         }
@@ -277,15 +260,10 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         .sidebar-posts h3 {
           font-size: 0.875rem;
           font-weight: 600;
-          color: var(--text-secondary, #69778c);
+          color: #4a0066;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin: 0 0 1rem 0;
-        }
-
-        :global(.dark) .sidebar-posts {
-          --border-color: #374151;
-          --text-secondary: #9ca3af;
         }
 
         .sidebar-posts ul {
@@ -308,7 +286,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         :global(.sidebar-post-link) {
           display: block !important;
           padding: 0.5rem 0;
-          color: var(--text-secondary, #69778c);
+          color: #4a0066;
           text-decoration: none;
           font-size: 0.875rem;
           transition: color 0.2s;
@@ -323,38 +301,29 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
 
         :global(.sidebar-post-link:hover),
         .sidebar-posts a:hover {
-          color: #0074de;
+          color: #e91e63;
         }
 
         :global(.sidebar-post-link.active),
         .sidebar-posts a.active {
-          color: #0074de;
+          color: #e91e63;
           font-weight: 600;
-        }
-
-        :global(.dark) .sidebar-posts a {
-          --text-secondary: #9ca3af;
         }
 
         .sidebar-tags {
           margin-top: 2rem;
           padding-top: 2rem;
-          border-top: 1px solid var(--border-color, #e5e7eb);
+          border-top: 1px solid #f48fb1;
           width: 100%;
         }
 
         .sidebar-tags h3 {
           font-size: 0.875rem;
           font-weight: 600;
-          color: var(--text-secondary, #69778c);
+          color: #4a0066;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin: 0 0 1rem 0;
-        }
-
-        :global(.dark) .sidebar-tags {
-          --border-color: #374151;
-          --text-secondary: #9ca3af;
         }
 
         .sidebar-tag-search {
@@ -365,23 +334,23 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         .sidebar-tag-search-input {
           width: 100%;
           padding: 0.5rem 2rem 0.5rem 0.75rem;
-          border: 1px solid var(--border-color, #e5e7eb);
+          border: 1px solid #f48fb1;
           border-radius: 0.5rem;
           font-size: 0.875rem;
-          background: var(--tag-search-bg, #fff);
-          color: var(--text-primary, #111);
+          background: #fff;
+          color: #1a0033;
           transition: all 0.2s;
           box-sizing: border-box;
         }
 
         .sidebar-tag-search-input:focus {
           outline: none;
-          border-color: #0074de;
-          box-shadow: 0 0 0 3px rgba(0, 116, 222, 0.1);
+          border-color: #e91e63;
+          box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
         }
 
         .sidebar-tag-search-input::placeholder {
-          color: var(--text-secondary, #9ca3af);
+          color: #4a0066;
         }
 
         .sidebar-tag-search-clear {
@@ -392,7 +361,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           background: none;
           border: none;
           font-size: 1.25rem;
-          color: var(--text-secondary, #9ca3af);
+          color: #4a0066;
           cursor: pointer;
           padding: 0.25rem;
           line-height: 1;
@@ -403,21 +372,14 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         }
 
         .sidebar-tag-search-clear:hover {
-          color: var(--text-primary, #111);
+          color: #1a0033;
         }
 
         .sidebar-tags-no-results {
           padding: 1rem;
           text-align: center;
-          color: var(--text-secondary, #9ca3af);
+          color: #4a0066;
           font-size: 0.875rem;
-        }
-
-        :global(.dark) .sidebar-tag-search-input {
-          --tag-search-bg: #1f2937;
-          --border-color: #374151;
-          --text-primary: #f9fafb;
-          --text-secondary: #9ca3af;
         }
 
         .sidebar-tags-list {
@@ -431,8 +393,8 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           align-items: center;
           gap: 0.375rem;
           padding: 0.375rem 0.75rem;
-          background: var(--tag-bg, #f3f4f6);
-          color: var(--text-secondary, #69778c);
+          background: #fce4ec;
+          color: #4a0066;
           text-decoration: none;
           border-radius: 1rem;
           font-size: 0.75rem;
@@ -441,15 +403,15 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         }
 
         :global(.sidebar-tag:hover) {
-          background: var(--tag-hover-bg, #e5e7eb);
-          color: var(--text-primary, #111);
+          background: #f48fb1;
+          color: #1a0033;
           transform: translateY(-1px);
         }
 
         :global(.sidebar-tag.active) {
-          background: #0074de;
+          background: #e91e63;
           color: #fff;
-          border-color: #0074de;
+          border-color: #e91e63;
           font-weight: 500;
         }
 
@@ -467,17 +429,6 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
 
         :global(.sidebar-tag.active .sidebar-tag-count) {
           background: rgba(255, 255, 255, 0.2);
-        }
-
-        :global(.dark) .sidebar-tag {
-          --tag-bg: #1f2937;
-          --tag-hover-bg: #374151;
-          --text-secondary: #9ca3af;
-          --text-primary: #f9fafb;
-        }
-
-        :global(.dark) .sidebar-tag:hover {
-          --tag-bg: #374151;
         }
 
         @media (max-width: 768px) {

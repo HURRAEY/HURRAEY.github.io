@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
 import AppHead from "../components/AppHead";
 import PostExtras from "../components/PostExtras";
+import { PixelBackground } from "../components/PixelBackground";
+import { FloatingHearts } from "../components/FloatingHearts";
 import { loadPosts } from "../lib/loadPosts";
 import "../styles/main.css";
 import "../styles/app.css";
@@ -27,6 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <AppHead />
+      {/* 전체 배경 애니메이션 요소 */}
+      <PixelBackground />
+      <FloatingHearts />
       <Sidebar posts={posts} />
       <div className="main-content">
         <Component {...pageProps} />
