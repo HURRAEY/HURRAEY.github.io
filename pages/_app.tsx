@@ -8,40 +8,34 @@ import RelatedPosts from "../components/RelatedPosts";
 import Giscus from "../components/Giscus";
 import "../styles/main.css";
 
+// 자동 생성된 포스트 목록 import (빌드 시 scripts/gen-rss.js에서 생성)
+// 파일이 없을 경우를 대비해 기본값 제공
+let posts: Array<{
+  title: string;
+  route: string;
+  date: string;
+  description: string;
+  tag: string;
+}> = [];
+
+try {
+  // 빌드 타임에 생성된 포스트 목록 import
+  // @ts-ignore - 동적으로 생성되는 파일이므로 타입 체크 무시
+  const postsModule = require("../lib/posts");
+  posts = postsModule.posts || [];
+} catch (e) {
+  // 개발 환경에서 아직 빌드되지 않은 경우를 위한 기본값
+  // 빌드 전에는 빈 배열로 시작
+  if (process.env.NODE_ENV === "development") {
+    console.warn(
+      "포스트 목록을 불러올 수 없습니다. 'pnpm build' 또는 'node scripts/gen-rss.js'를 실행해주세요."
+    );
+  }
+  posts = [];
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  
-  // 포스트 목록 (정적 데이터, 필요시 동적으로 가져올 수 있음)
-  const posts = [
-    { 
-      title: "Next.js Pages", 
-      route: "/posts/pages", 
-      date: "2021/3/18",
-      description: "Learn more about Next.js pages.",
-      tag: "web development"
-    },
-    { 
-      title: "Markdown", 
-      route: "/posts/markdown", 
-      date: "2021/3/18",
-      description: "View examples of all possible Markdown options.",
-      tag: "web development"
-    },
-    { 
-      title: "Hello HURRAEY", 
-      route: "/posts/hello-hurraey", 
-      date: "2025/11/25",
-      description: "HURRAEY 블로그 기본 설정 과정을 기록하고 다음 글거리 메모.",
-      tag: "setup"
-    },
-    { 
-      title: "Footer Motion", 
-      route: "/posts/footer-motion", 
-      date: "2025/11/25",
-      description: "Footer ripple 애니메이션을 React 렌더 사이클에서 분리한 여정.",
-      tag: "interaction"
-    },
-  ];
 
   const isPost = router.pathname.startsWith('/posts/') && router.pathname !== '/posts';
   const currentPost = posts.find(p => p.route === router.asPath);
