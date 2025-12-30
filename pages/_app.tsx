@@ -7,6 +7,7 @@ import PostExtras from "../components/PostExtras";
 import { loadPosts } from "../lib/loadPosts";
 import "../styles/main.css";
 import "../styles/app.css";
+import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
 
 // 빌드 타임에 포스트 목록 로드
