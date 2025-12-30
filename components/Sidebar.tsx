@@ -23,6 +23,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
     { href: '/', label: '홈' },
     { href: '/posts', label: '포스트' },
     { href: '/photos', label: '사진' },
+    { href: '/about', label: '소개' },
   ];
 
   // 태그 추출 및 개수 계산

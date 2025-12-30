@@ -11,3 +11,4 @@ export const BASE_URL = "https://hurraey.github.io";
 
 export const SIDEBAR_WIDTH = 280;
 
+

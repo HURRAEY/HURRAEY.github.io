@@ -6,11 +6,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "@radix-ui/react-tooltip": "^1.2.8",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "nextra": "^2.0.0-beta.5",
     "nextra-theme-blog": "^2.0.0-beta.5",
     "react": "^18.2.0",
+    "react-clock": "^6.0.0",
     "react-dom": "^18.2.0",
     "rss": "^1.2.2"
   },

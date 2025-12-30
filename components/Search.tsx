@@ -228,3 +228,4 @@ export default function Search({ posts }: SearchProps) {
   );
 }
 
+
