@@ -51,11 +51,12 @@ async function generate() {
     );
     const frontmatter = matter(content);
     const tagField = frontmatter.data.tag;
-    const tag = tagField
+    const tags = tagField
       ? String(tagField)
           .split(",")
           .map((tag) => tag.trim())
-          .filter(Boolean)[0] || ""
+          .filter(Boolean)
+          .join(", ")
       : "";
 
     postsList.push({
@@ -63,7 +64,7 @@ async function generate() {
       route: "/posts/" + name.replace(/\.mdx?/, ""),
       date: frontmatter.data.date || "",
       description: frontmatter.data.description || "",
-      tag: tag,
+      tag: tags,
     });
   }
 

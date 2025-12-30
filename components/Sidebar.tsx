@@ -17,6 +17,7 @@ interface SidebarProps {
 export default function Sidebar({ posts = [] }: SidebarProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);
+  const [tagSearchQuery, setTagSearchQuery] = useState('');
 
   const navItems = [
     { href: '/', label: '홈' },
@@ -36,12 +37,19 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
   }, {} as Record<string, number>);
 
   // 태그를 개수순으로 정렬 (같으면 알파벳순)
-  const sortedTags = Object.entries(tagCounts)
+  const allTags = Object.entries(tagCounts)
     .sort((a, b) => {
       if (b[1] !== a[1]) return b[1] - a[1]; // 개수순
       return a[0].localeCompare(b[0]); // 알파벳순
     })
     .map(([tag]) => tag);
+
+  // 태그 검색 필터링
+  const filteredTags = tagSearchQuery.trim()
+    ? allTags.filter((tag) =>
+        tag.toLowerCase().includes(tagSearchQuery.toLowerCase())
+      )
+    : allTags;
 
   return (
     <>
@@ -101,24 +109,48 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
                 </div>
               )}
 
-              {sortedTags.length > 0 && (
+              {allTags.length > 0 && (
                 <div className="sidebar-tags">
                   <h3>태그</h3>
-                  <div className="sidebar-tags-list">
-                    {sortedTags.map((tag) => {
-                      const isActive = router.query.tag === tag;
-                      return (
-                        <Link
-                          key={tag}
-                          href={`/tags/${encodeURIComponent(tag)}`}
-                          className={`sidebar-tag ${isActive ? 'active' : ''}`}
-                        >
-                          <span className="sidebar-tag-name">{tag}</span>
-                          <span className="sidebar-tag-count">{tagCounts[tag]}</span>
-                        </Link>
-                      );
-                    })}
+                  <div className="sidebar-tag-search">
+                    <input
+                      type="text"
+                      placeholder="태그 검색..."
+                      value={tagSearchQuery}
+                      onChange={(e) => setTagSearchQuery(e.target.value)}
+                      className="sidebar-tag-search-input"
+                    />
+                    {tagSearchQuery && (
+                      <button
+                        className="sidebar-tag-search-clear"
+                        onClick={() => setTagSearchQuery('')}
+                        aria-label="검색 초기화"
+                      >
+                        ×
+                      </button>
+                    )}
                   </div>
+                  {filteredTags.length > 0 ? (
+                    <div className="sidebar-tags-list">
+                      {filteredTags.map((tag) => {
+                        const isActive = router.query.tag === tag;
+                        return (
+                          <Link
+                            key={tag}
+                            href={`/tags/${encodeURIComponent(tag)}`}
+                            className={`sidebar-tag ${isActive ? 'active' : ''}`}
+                          >
+                            <span className="sidebar-tag-name">{tag}</span>
+                            <span className="sidebar-tag-count">{tagCounts[tag]}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="sidebar-tags-no-results">
+                      검색 결과가 없습니다.
+                    </div>
+                  )}
                 </div>
               )}
             </>
@@ -321,6 +353,69 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
 
         :global(.dark) .sidebar-tags {
           --border-color: #374151;
+          --text-secondary: #9ca3af;
+        }
+
+        .sidebar-tag-search {
+          position: relative;
+          margin-bottom: 1rem;
+        }
+
+        .sidebar-tag-search-input {
+          width: 100%;
+          padding: 0.5rem 2rem 0.5rem 0.75rem;
+          border: 1px solid var(--border-color, #e5e7eb);
+          border-radius: 0.5rem;
+          font-size: 0.875rem;
+          background: var(--tag-search-bg, #fff);
+          color: var(--text-primary, #111);
+          transition: all 0.2s;
+          box-sizing: border-box;
+        }
+
+        .sidebar-tag-search-input:focus {
+          outline: none;
+          border-color: #0074de;
+          box-shadow: 0 0 0 3px rgba(0, 116, 222, 0.1);
+        }
+
+        .sidebar-tag-search-input::placeholder {
+          color: var(--text-secondary, #9ca3af);
+        }
+
+        .sidebar-tag-search-clear {
+          position: absolute;
+          right: 0.5rem;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          font-size: 1.25rem;
+          color: var(--text-secondary, #9ca3af);
+          cursor: pointer;
+          padding: 0.25rem;
+          line-height: 1;
+          transition: color 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .sidebar-tag-search-clear:hover {
+          color: var(--text-primary, #111);
+        }
+
+        .sidebar-tags-no-results {
+          padding: 1rem;
+          text-align: center;
+          color: var(--text-secondary, #9ca3af);
+          font-size: 0.875rem;
+        }
+
+        :global(.dark) .sidebar-tag-search-input {
+          --tag-search-bg: #1f2937;
+          --border-color: #374151;
+          --text-primary: #f9fafb;
           --text-secondary: #9ca3af;
         }
 

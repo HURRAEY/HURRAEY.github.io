@@ -6,14 +6,6 @@ tag: typescript, zustand, react, daw, ai
 author: HURRAEY
 ---
 
-# TypeScript와 Zustand Slice 패턴으로 AI 기반 웹 DAW 상태 관리하기
-
-**작성자** HURRAEY· 2025년 12월
-
-**태그**: `typescript` `zustand` `react` `daw` `ai`
-
----
-
 ## 목차
 
 1. 왜 Slice 패턴을 사용했을까?

@@ -4,7 +4,7 @@
         <description><![CDATA[HURRAEY의 개발로그]]></description>
         <link>https://hurraey.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Tue, 30 Dec 2025 06:42:30 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 30 Dec 2025 07:17:10 GMT</lastBuildDate>
         <atom:link href="https://hurraey.github.io/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
             <title><![CDATA[Footer 인터랙션 리팩터링 노트]]></title>
@@ -12,15 +12,6 @@
             <link>/posts/footer-motion</link>
             <guid isPermaLink="true">/posts/footer-motion</guid>
             <category><![CDATA[interaction]]></category>
-            <dc:creator><![CDATA[HURRAEY]]></dc:creator>
-            <pubDate>Mon, 24 Nov 2025 15:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[블로그 리셋과 앞으로의 계획]]></title>
-            <description><![CDATA[HURRAEY 블로그 기본 설정 과정을 기록하고 다음 글거리 메모.]]></description>
-            <link>/posts/hello-hurraey</link>
-            <guid isPermaLink="true">/posts/hello-hurraey</guid>
-            <category><![CDATA[setup]]></category>
             <dc:creator><![CDATA[HURRAEY]]></dc:creator>
             <pubDate>Mon, 24 Nov 2025 15:00:00 GMT</pubDate>
         </item>
@@ -54,6 +45,15 @@
             <category><![CDATA[web development]]></category>
             <dc:creator><![CDATA[You]]></dc:creator>
             <pubDate>Wed, 17 Mar 2021 15:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[블로그 리셋과 앞으로의 계획]]></title>
+            <description><![CDATA[HURRAEY 블로그 기본 설정 과정을 기록하고 다음 글거리 메모.]]></description>
+            <link>/posts/hello-hurraey</link>
+            <guid isPermaLink="true">/posts/hello-hurraey</guid>
+            <category><![CDATA[setup]]></category>
+            <dc:creator><![CDATA[HURRAEY]]></dc:creator>
+            <pubDate>Mon, 24 Nov 2025 15:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
