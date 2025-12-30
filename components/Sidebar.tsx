@@ -24,6 +24,25 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
     { href: '/photos', label: '사진' },
   ];
 
+  // 태그 추출 및 개수 계산
+  const tagCounts = posts.reduce((acc, post) => {
+    if (post.tag) {
+      const tags = post.tag.split(',').map((t) => t.trim()).filter(Boolean);
+      tags.forEach((tag) => {
+        acc[tag] = (acc[tag] || 0) + 1;
+      });
+    }
+    return acc;
+  }, {} as Record<string, number>);
+
+  // 태그를 개수순으로 정렬 (같으면 알파벳순)
+  const sortedTags = Object.entries(tagCounts)
+    .sort((a, b) => {
+      if (b[1] !== a[1]) return b[1] - a[1]; // 개수순
+      return a[0].localeCompare(b[0]); // 알파벳순
+    })
+    .map(([tag]) => tag);
+
   return (
     <>
       <aside className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
@@ -79,6 +98,27 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {sortedTags.length > 0 && (
+                <div className="sidebar-tags">
+                  <h3>태그</h3>
+                  <div className="sidebar-tags-list">
+                    {sortedTags.map((tag) => {
+                      const isActive = router.query.tag === tag;
+                      return (
+                        <Link
+                          key={tag}
+                          href={`/tags/${encodeURIComponent(tag)}`}
+                          className={`sidebar-tag ${isActive ? 'active' : ''}`}
+                        >
+                          <span className="sidebar-tag-name">{tag}</span>
+                          <span className="sidebar-tag-count">{tagCounts[tag]}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </>
@@ -261,6 +301,87 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
 
         :global(.dark) .sidebar-posts a {
           --text-secondary: #9ca3af;
+        }
+
+        .sidebar-tags {
+          margin-top: 2rem;
+          padding-top: 2rem;
+          border-top: 1px solid var(--border-color, #e5e7eb);
+          width: 100%;
+        }
+
+        .sidebar-tags h3 {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--text-secondary, #69778c);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0 0 1rem 0;
+        }
+
+        :global(.dark) .sidebar-tags {
+          --border-color: #374151;
+          --text-secondary: #9ca3af;
+        }
+
+        .sidebar-tags-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        :global(.sidebar-tag) {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.375rem;
+          padding: 0.375rem 0.75rem;
+          background: var(--tag-bg, #f3f4f6);
+          color: var(--text-secondary, #69778c);
+          text-decoration: none;
+          border-radius: 1rem;
+          font-size: 0.75rem;
+          transition: all 0.2s;
+          border: 1px solid transparent;
+        }
+
+        :global(.sidebar-tag:hover) {
+          background: var(--tag-hover-bg, #e5e7eb);
+          color: var(--text-primary, #111);
+          transform: translateY(-1px);
+        }
+
+        :global(.sidebar-tag.active) {
+          background: #0074de;
+          color: #fff;
+          border-color: #0074de;
+          font-weight: 500;
+        }
+
+        :global(.sidebar-tag-name) {
+          font-weight: 500;
+        }
+
+        :global(.sidebar-tag-count) {
+          background: rgba(0, 0, 0, 0.1);
+          padding: 0.125rem 0.375rem;
+          border-radius: 0.75rem;
+          font-size: 0.6875rem;
+          font-weight: 600;
+        }
+
+        :global(.sidebar-tag.active .sidebar-tag-count) {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        :global(.dark) .sidebar-tag {
+          --tag-bg: #1f2937;
+          --tag-hover-bg: #374151;
+          --text-secondary: #9ca3af;
+          --text-primary: #f9fafb;
+        }
+
+        :global(.dark) .sidebar-tag:hover {
+          --tag-bg: #374151;
         }
 
         @media (max-width: 768px) {
