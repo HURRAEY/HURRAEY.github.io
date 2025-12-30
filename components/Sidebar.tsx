@@ -231,6 +231,9 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           font-size: 0.875rem;
           transition: color 0.2s;
           line-height: 1.5;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .sidebar-posts a:hover {
