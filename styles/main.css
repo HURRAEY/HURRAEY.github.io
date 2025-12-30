@@ -81,3 +81,16 @@ img.next-image {
 .nav-line .nav-link {
   color: #69778c;
 }
+
+/* 사이드바 관련 스타일 */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Nextra 블로그 테마와의 호환성 */
+@media (min-width: 769px) {
+  body {
+    padding-left: 0;
+  }
+}
