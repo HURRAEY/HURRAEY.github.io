@@ -14,6 +14,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Next.js 13+ Link 컴포넌트 동작 명시적 설정
+  reactStrictMode: true,
 };
 
 module.exports = withNextra(nextConfig);
