@@ -137,3 +137,21 @@ body {
   background: #374151 !important;
   color: #f9fafb !important;
 }
+
+/* 사이드바 포스트 제목 말줄임 처리 */
+.sidebar-posts li,
+.sidebar-posts ul {
+  width: 100%;
+  overflow: hidden;
+}
+
+.sidebar-posts li a,
+.sidebar-post-link {
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}

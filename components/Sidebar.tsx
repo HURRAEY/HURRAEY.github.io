@@ -70,9 +70,9 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
                       <li key={post.route}>
                         <Link
                           href={post.route}
-                          className={
+                          className={`sidebar-post-link ${
                             router.asPath === post.route ? 'active' : ''
-                          }
+                          }`}
                         >
                           {post.title}
                         </Link>
@@ -197,6 +197,8 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           margin-top: 2rem;
           padding-top: 2rem;
           border-top: 1px solid var(--border-color, #e5e7eb);
+          width: 100%;
+          overflow: hidden;
         }
 
         .sidebar-posts h3 {
@@ -217,29 +219,41 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           list-style: none;
           padding: 0;
           margin: 0;
+          width: 100%;
+          overflow: hidden;
         }
 
         .sidebar-posts li {
           margin-bottom: 0.5rem;
+          overflow: hidden;
+          width: 100%;
+          max-width: 100%;
         }
 
-        .sidebar-posts a {
-          display: block;
+        :global(.sidebar-posts li a),
+        .sidebar-posts li :global(a),
+        :global(.sidebar-post-link) {
+          display: block !important;
           padding: 0.5rem 0;
           color: var(--text-secondary, #69778c);
           text-decoration: none;
           font-size: 0.875rem;
           transition: color 0.2s;
           line-height: 1.5;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box;
         }
 
+        :global(.sidebar-post-link:hover),
         .sidebar-posts a:hover {
           color: #0074de;
         }
 
+        :global(.sidebar-post-link.active),
         .sidebar-posts a.active {
           color: #0074de;
           font-weight: 600;
