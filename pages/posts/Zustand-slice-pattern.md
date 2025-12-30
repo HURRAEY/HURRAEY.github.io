@@ -1,3 +1,11 @@
+---
+title: TypeScript와 Zustand Slice 패턴으로 AI 기반 웹 DAW 상태 관리하기
+date: 2025/12/01
+description: Drop AI 프로젝트에서 Zustand Slice 패턴을 적용하여 복잡한 상태 관리를 모듈화한 경험을 공유합니다.
+tag: typescript, zustand, react, daw, ai
+author: HURRAEY
+---
+
 # TypeScript와 Zustand Slice 패턴으로 AI 기반 웹 DAW 상태 관리하기
 
 **작성자** HURRAEY· 2025년 12월
