@@ -94,3 +94,46 @@ body {
     padding-left: 0;
   }
 }
+
+/* 다크 모드 스타일 */
+:root {
+  --bg-primary: #fff;
+  --bg-secondary: #f9fafb;
+  --text-primary: #111;
+  --text-secondary: #69778c;
+  --border-color: #e5e7eb;
+}
+
+.dark {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --border-color: #374151;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 다크 모드에서의 링크 색상 */
+.dark .prose a {
+  color: #60a5fa;
+}
+
+.dark .prose a:hover {
+  color: #93c5fd;
+}
+
+/* 다크 모드에서의 코드 블록 */
+.dark pre {
+  background: #1f2937 !important;
+  color: #f9fafb !important;
+}
+
+.dark code {
+  background: #374151 !important;
+  color: #f9fafb !important;
+}

@@ -1,21 +1,60 @@
-# Portfolio Starter Kit
+# HURRAEY 블로그
 
-This portfolio is built with **Next.js** and a library called [Nextra](https://nextra.vercel.app/). It allows you to write Markdown and focus on the _content_ of your portfolio. This starter includes:
+**Next.js**와 [Nextra](https://nextra.vercel.app/)로 구축된 개인 블로그입니다. Markdown으로 콘텐츠에 집중할 수 있습니다.
 
-- Automatically configured to handle Markdown/MDX
-- Generates an RSS feed based on your posts
-- A beautiful theme included out of the box
-- Easily categorize posts with tags
-- Fast, optimized web font loading
+## 주요 기능
+
+### 기본 기능
+- ✅ Markdown/MDX 자동 처리
+- ✅ RSS 피드 자동 생성
+- ✅ 아름다운 테마 제공
+- ✅ 태그로 포스트 분류
+- ✅ 최적화된 웹 폰트 로딩
+
+### 추가된 기능
+- 🔍 **검색 기능**: 포스트 제목, 설명, 태그로 검색 (⌘K 또는 Ctrl+K)
+- 🌙 **다크 모드**: 시스템 설정 자동 감지 및 수동 전환
+- 💬 **댓글 시스템**: Giscus 기반 GitHub Discussions 연동
+- 📤 **소셜 공유**: Twitter, Facebook, LinkedIn, 링크 복사
+- 🔗 **관련 포스트 추천**: 태그 기반 자동 추천
+- 🖼️ **이미지 최적화**: Nextra 자동 이미지 최적화 활성화
+- 🎨 **MDX 컴포넌트**: Video, Callout, CodeBlock 등 커스텀 컴포넌트
 
 https://demo.vercel.blog
 
-## Configuration
+## 설정
 
-1. Update your name in `theme.config.js` or change the footer.
-1. Update your name and site URL for the RSS feed in `scripts/gen-rss.js`.
-1. Update the meta tags in `pages/_document.tsx`.
-1. Update the posts inside `pages/posts/*.md` with your own content.
+### 기본 설정
+
+1. `theme.config.js`에서 이름과 푸터를 업데이트하세요.
+2. `scripts/gen-rss.js`에서 RSS 피드 정보를 업데이트하세요.
+3. `pages/_document.tsx`에서 메타 태그를 업데이트하세요.
+4. `pages/posts/*.md`에 포스트를 작성하세요.
+
+### Giscus 댓글 설정
+
+댓글 기능을 사용하려면 [GISCUS_SETUP.md](./GISCUS_SETUP.md)를 참고하여 설정하세요.
+
+### MDX 컴포넌트 사용
+
+포스트에서 커스텀 컴포넌트를 사용할 수 있습니다:
+
+```mdx
+import { Video, Callout } from '../components/mdx-components'
+
+<Video src="/path/to/video.mp4" title="비디오 제목" />
+
+<Callout type="info">
+  이것은 정보성 콜아웃입니다.
+</Callout>
+```
+
+사용 가능한 컴포넌트:
+- `Video`: 비디오 플레이어
+- `Callout`: 정보/경고/에러/성공 메시지
+- `CodeBlock`: 코드 블록
+- `Image`: 이미지 (캡션 포함)
+- `Tabs`, `Tab`: 탭 컴포넌트
 
 ## Deploy your own
 

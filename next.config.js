@@ -1,7 +1,7 @@
 const withNextra = require("nextra")({
   theme: "nextra-theme-blog",
   themeConfig: "./theme.config.js",
-  // optional: add `unstable_staticImage: true` to enable Nextra's auto image import
+  unstable_staticImage: true, // 이미지 최적화 활성화
 });
 
 /** @type {import('next').NextConfig} */

@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Search from './Search';
+import DarkModeToggle from './DarkModeToggle';
 
 interface SidebarProps {
   posts?: Array<{
     title: string;
     date: string;
     route: string;
+    description?: string;
+    tag?: string;
   }>;
 }
 
@@ -26,17 +30,23 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         <div className="sidebar-content">
           <div className="sidebar-header">
             <h2>HURRAEY</h2>
-            <button
-              className="sidebar-toggle"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="사이드바 토글"
-            >
-              {isOpen ? '←' : '→'}
-            </button>
+            <div className="sidebar-header-actions">
+              <DarkModeToggle />
+              <button
+                className="sidebar-toggle"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="사이드바 토글"
+              >
+                {isOpen ? '←' : '→'}
+              </button>
+            </div>
           </div>
 
           {isOpen && (
             <>
+              <div className="sidebar-search">
+                <Search posts={posts} />
+              </div>
               <nav className="sidebar-nav">
                 <ul>
                   {navItems.map((item) => (
@@ -82,12 +92,17 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           top: 0;
           height: 100vh;
           width: 280px;
-          background: #fff;
-          border-right: 1px solid #e5e7eb;
+          background: var(--sidebar-bg, #fff);
+          border-right: 1px solid var(--border-color, #e5e7eb);
           transition: transform 0.3s ease, width 0.3s ease;
           z-index: 100;
           overflow-y: auto;
           box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        :global(.dark) .sidebar {
+          --sidebar-bg: #111827;
+          --border-color: #374151;
         }
 
         .sidebar.closed {
@@ -102,16 +117,30 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
           padding-bottom: 1rem;
-          border-bottom: 1px solid #e5e7eb;
+          border-bottom: 1px solid var(--border-color, #e5e7eb);
+        }
+
+        .sidebar-header-actions {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .sidebar-search {
+          margin-bottom: 1.5rem;
         }
 
         .sidebar-header h2 {
           margin: 0;
           font-size: 1.25rem;
           font-weight: 700;
-          color: #111;
+          color: var(--text-primary, #111);
+        }
+
+        :global(.dark) .sidebar-header h2 {
+          --text-primary: #f9fafb;
         }
 
         .sidebar-toggle {
@@ -141,7 +170,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         .sidebar-nav a {
           display: block;
           padding: 0.75rem 1rem;
-          color: #69778c;
+          color: var(--text-secondary, #69778c);
           text-decoration: none;
           border-radius: 0.5rem;
           transition: all 0.2s;
@@ -149,8 +178,8 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         }
 
         .sidebar-nav a:hover {
-          background: #f3f4f6;
-          color: #111;
+          background: var(--hover-bg, #f3f4f6);
+          color: var(--text-primary, #111);
         }
 
         .sidebar-nav a.active {
@@ -158,19 +187,30 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
           color: #fff;
         }
 
+        :global(.dark) .sidebar-nav a {
+          --text-secondary: #9ca3af;
+          --text-primary: #f9fafb;
+          --hover-bg: #1f2937;
+        }
+
         .sidebar-posts {
           margin-top: 2rem;
           padding-top: 2rem;
-          border-top: 1px solid #e5e7eb;
+          border-top: 1px solid var(--border-color, #e5e7eb);
         }
 
         .sidebar-posts h3 {
           font-size: 0.875rem;
           font-weight: 600;
-          color: #69778c;
+          color: var(--text-secondary, #69778c);
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin: 0 0 1rem 0;
+        }
+
+        :global(.dark) .sidebar-posts {
+          --border-color: #374151;
+          --text-secondary: #9ca3af;
         }
 
         .sidebar-posts ul {
@@ -186,7 +226,7 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         .sidebar-posts a {
           display: block;
           padding: 0.5rem 0;
-          color: #69778c;
+          color: var(--text-secondary, #69778c);
           text-decoration: none;
           font-size: 0.875rem;
           transition: color 0.2s;
@@ -200,6 +240,10 @@ export default function Sidebar({ posts = [] }: SidebarProps) {
         .sidebar-posts a.active {
           color: #0074de;
           font-weight: 600;
+        }
+
+        :global(.dark) .sidebar-posts a {
+          --text-secondary: #9ca3af;
         }
 
         @media (max-width: 768px) {
