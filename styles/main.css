@@ -1,7 +1,21 @@
-/* Retro Pixel Art Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+/* Retro Pixel Art Fonts - 로컬 폰트 */
+@font-face {
+  font-family: "Press Start 2P";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/PressStart2P-Regular.ttf) format("truetype");
+}
 
+@font-face {
+  font-family: "VT323";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/VT323-Regular.ttf) format("truetype");
+}
+
+/* Inter 폰트 - 로컬 폰트 */
 @font-face {
   font-family: "Inter var";
   font-style: normal;
