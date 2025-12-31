@@ -4,23 +4,23 @@
         <description><![CDATA[HURRAEY의 개발로그]]></description>
         <link>https://hurraey.github.io</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 31 Dec 2025 02:06:15 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 31 Dec 2025 04:27:36 GMT</lastBuildDate>
         <atom:link href="https://hurraey.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-        <item>
-            <title><![CDATA[Footer 인터랙션 리팩터링 노트]]></title>
-            <description><![CDATA[Footer ripple 애니메이션을 React 렌더 사이클에서 분리한 여정.]]></description>
-            <link>/posts/footer-motion</link>
-            <guid isPermaLink="true">/posts/footer-motion</guid>
-            <category><![CDATA[interaction]]></category>
-            <dc:creator><![CDATA[HURRAEY]]></dc:creator>
-            <pubDate>Mon, 24 Nov 2025 15:00:00 GMT</pubDate>
-        </item>
         <item>
             <title><![CDATA[블로그 리셋과 앞으로의 계획]]></title>
             <description><![CDATA[HURRAEY 블로그 기본 설정 과정을 기록하고 다음 글거리 메모.]]></description>
             <link>/posts/hello-hurraey</link>
             <guid isPermaLink="true">/posts/hello-hurraey</guid>
             <category><![CDATA[setup]]></category>
+            <dc:creator><![CDATA[HURRAEY]]></dc:creator>
+            <pubDate>Mon, 24 Nov 2025 15:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Footer 인터랙션 리팩터링 노트]]></title>
+            <description><![CDATA[Footer ripple 애니메이션을 React 렌더 사이클에서 분리한 여정.]]></description>
+            <link>/posts/footer-motion</link>
+            <guid isPermaLink="true">/posts/footer-motion</guid>
+            <category><![CDATA[interaction]]></category>
             <dc:creator><![CDATA[HURRAEY]]></dc:creator>
             <pubDate>Mon, 24 Nov 2025 15:00:00 GMT</pubDate>
         </item>

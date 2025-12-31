@@ -12,7 +12,7 @@ import "../styles/app.css";
 import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
 import { RetroSidebar } from "../components/RetroSidebar";
-import { PageTitleProvider } from "../components/RetroWindow";
+import { PageTitleProvider } from "../contexts/PageTitleContext";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
