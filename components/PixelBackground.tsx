@@ -42,6 +42,7 @@ export function PixelBackground() {
             left: `${pixel.left}%`,
             top: `${pixel.top}%`,
             backgroundColor: pixel.backgroundColor,
+            imageRendering: "pixelated",
           }}
           animate={{
             y: [0, -20, 0],

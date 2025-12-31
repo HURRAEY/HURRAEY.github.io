@@ -27,7 +27,10 @@ export function FloatingHearts() {
             ease: "linear",
           }}
         >
-          <Heart className="floating-heart-icon" />
+          <Heart 
+            className="floating-heart-icon" 
+            style={{ imageRendering: "pixelated" }}
+          />
         </motion.div>
       ))}
     </div>

@@ -14,7 +14,7 @@ export function RetroTitleBar({ title, onMinimize }: RetroTitleBarProps) {
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
         >
-          <Star className="retro-icon-star" />
+          <Star className="retro-icon-star" style={{ imageRendering: "pixelated" }} />
         </motion.div>
         <span className="retro-title-text">{title}</span>
       </div>
@@ -33,7 +33,7 @@ export function RetroTitleBar({ title, onMinimize }: RetroTitleBarProps) {
               delay: i * 0.3,
             }}
           >
-            <Heart className="retro-icon-heart" />
+            <Heart className="retro-icon-heart" style={{ imageRendering: "pixelated" }} />
           </motion.div>
         ))}
         <button

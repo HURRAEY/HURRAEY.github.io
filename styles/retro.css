@@ -29,15 +29,15 @@
 }
 
 .retro-icon-star {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   color: #ffeb3b;
   fill: #ffeb3b;
 }
 
 .retro-title-text {
   color: white;
-  font-size: 12px;
+  font-size: 10px;
   font-family: 'Press Start 2P', monospace;
 }
 
@@ -48,15 +48,15 @@
 }
 
 .retro-icon-heart {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   color: #ffb6c1;
   fill: #ffb6c1;
 }
 
 .retro-button {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border: 2px solid black;
   transition: background-color 0.2s;
   display: flex;
@@ -93,24 +93,24 @@
 
 .retro-button-text {
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
+  font-size: 8px;
 }
 
 .retro-menu-bar {
   background: #f8bbd0;
   padding: 4px 8px;
   display: flex;
-  gap: 16px;
+  gap: 4px;
   border-bottom: 2px solid #ec407a;
   flex-wrap: wrap;
 }
 
 .retro-menu-button {
-  padding: 4px 12px;
+  padding: 4px 8px;
   background: transparent;
   border: none;
   transition: all 0.2s;
-  font-size: 10px;
+  font-size: 8px;
   font-family: 'Press Start 2P', monospace;
   cursor: pointer;
 }
@@ -169,13 +169,13 @@
   padding: 8px;
   border-bottom: 2px solid #ec407a;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
 }
 
 .retro-toolbar-button {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   background: white;
   border: 2px solid #ec407a;
   transition: all 0.2s;
@@ -191,14 +191,14 @@
 }
 
 .retro-toolbar-icon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: linear-gradient(to bottom right, #e91e63, #9c27b0);
 }
 
 .retro-content {
-  padding: 16px 32px;
-  min-height: 400px;
+  padding: 16px;
+  min-height: 300px;
   position: relative;
   overflow: hidden;
 }
@@ -206,7 +206,7 @@
 .retro-content-inner {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   position: relative;
   z-index: 2;
 }
@@ -214,33 +214,34 @@
 .retro-heading,
 h1.retro-heading {
   color: #e91e63 !important;
-  margin-bottom: 16px !important;
-  font-size: 16px !important;
+  margin-bottom: 8px !important;
+  font-size: 12px !important;
   font-family: 'Press Start 2P', monospace !important;
 }
 
 .retro-text-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .retro-text {
   color: #4a0066;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 1.6;
   font-family: 'VT323', monospace;
+  margin: 0;
 }
 
 .retro-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-top: 24px;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .retro-card {
-  padding: 16px;
+  padding: 12px;
   border: 4px solid black;
   box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
   cursor: pointer;
@@ -264,15 +265,30 @@ h1.retro-heading {
 
 .retro-card-title {
   color: white;
-  font-size: 12px;
+  font-size: 10px;
   margin-bottom: 8px;
   font-family: 'Press Start 2P', monospace;
 }
 
 .retro-card-content {
-  height: 64px;
+  height: 48px;
   background: rgba(255, 255, 255, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 768px) {
+  .retro-card {
+    padding: 16px;
+  }
+
+  .retro-card-title {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .retro-card-content {
+    height: 64px;
+  }
 }
 
 .retro-sparkles {
@@ -282,9 +298,16 @@ h1.retro-heading {
 }
 
 .retro-icon-sparkles {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   color: #e91e63;
+}
+
+@media (min-width: 768px) {
+  .retro-icon-sparkles {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .retro-status-bar {
@@ -294,7 +317,7 @@ h1.retro-heading {
   justify-content: space-between;
   align-items: center;
   border-top: 2px solid #ec407a;
-  font-size: 10px;
+  font-size: 8px;
 }
 
 .retro-status-left {
@@ -304,14 +327,33 @@ h1.retro-heading {
 }
 
 .retro-status-indicator {
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   background: #4caf50;
   border: 1px solid black;
 }
 
+@media (min-width: 768px) {
+  .retro-status-indicator {
+    width: 12px;
+    height: 12px;
+  }
+}
+
 .retro-status-text {
   font-family: 'VT323', monospace;
+  font-size: 8px;
+}
+
+@media (min-width: 768px) {
+  .retro-status-bar {
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  .retro-status-text {
+    font-size: 12px;
+  }
 }
 
 /* Pixel Background */
@@ -325,8 +367,8 @@ h1.retro-heading {
 
 .pixel-background-item {
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 8px;
+  height: 8px;
   opacity: 0.2;
   image-rendering: pixelated;
 }
@@ -345,8 +387,8 @@ h1.retro-heading {
 }
 
 .floating-heart-icon {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   color: #f48fb1;
   fill: #f48fb1;
   image-rendering: pixelated;
@@ -356,7 +398,7 @@ h1.retro-heading {
 .retro-image-container {
   width: 100%;
   max-width: 768px;
-  margin: 24px auto;
+  margin: 24px auto 24px auto;
 }
 
 .retro-image-frame {
@@ -376,8 +418,8 @@ h1.retro-heading {
 }
 
 .retro-image-dot {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   border: 2px solid black;
 }
 
@@ -396,7 +438,7 @@ h1.retro-heading {
 .retro-image-title {
   color: white;
   margin-left: 8px;
-  font-size: 10px;
+  font-size: 8px;
   font-family: 'Press Start 2P', monospace;
 }
 
@@ -411,7 +453,7 @@ h1.retro-heading {
 .pixel-grid-container {
   width: 100%;
   max-width: 1024px;
-  margin: 24px auto;
+  margin: 24px auto 0 auto;
   padding: 0 16px;
 }
 
@@ -421,31 +463,14 @@ h2.pixel-grid-title,
   text-align: center !important;
   font-family: 'Press Start 2P', monospace !important;
   color: #e91e63 !important;
-  margin-bottom: 0.5rem !important;
-  font-size: 0.875rem !important;
-}
-
-@media (min-width: 768px) {
-  .pixel-grid-title,
-  h2.pixel-grid-title,
-  .pixel-grid-container h2.pixel-grid-title {
-    margin-bottom: 1rem !important;
-    font-size: 1rem !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .pixel-grid-title,
-  h2.pixel-grid-title,
-  .pixel-grid-container h2.pixel-grid-title {
-    font-size: 1.125rem !important;
-  }
+  margin-bottom: 16px !important;
+  font-size: 10px !important;
 }
 
 .pixel-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px;
 }
 
 .pixel-grid-item {
@@ -487,7 +512,7 @@ h2.pixel-grid-title,
   }
 
   .retro-title-text {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .retro-icon-heart {
@@ -504,12 +529,18 @@ h2.pixel-grid-title,
     font-size: 10px;
   }
 
+  .retro-menu-bar {
+    gap: 16px;
+  }
+
   .retro-menu-button {
-    font-size: 12px;
+    padding: 4px 12px;
+    font-size: 10px;
   }
 
   .retro-toolbar {
     grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
   }
 
   .retro-toolbar-button {
@@ -517,21 +548,39 @@ h2.pixel-grid-title,
     height: 40px;
   }
 
+  .retro-toolbar-icon {
+    width: 20px;
+    height: 20px;
+  }
+
   .retro-content {
     padding: 32px;
     min-height: 400px;
   }
 
-  .retro-heading {
-    font-size: 18px;
+  .retro-content-inner {
+    gap: 24px;
+  }
+
+  .retro-heading,
+  h1.retro-heading {
+    font-size: 16px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .retro-text-list {
+    gap: 12px;
   }
 
   .retro-text {
-    font-size: 16px;
+    font-size: 14px;
+    margin: 0;
   }
 
   .retro-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
   }
 
   .retro-icon-sparkles {
@@ -553,14 +602,41 @@ h2.pixel-grid-title,
     margin: 32px auto;
   }
 
+  .retro-image-dot {
+    width: 16px;
+    height: 16px;
+  }
+
+  .retro-image-title {
+    font-size: 10px;
+  }
+
+  .pixel-grid-container {
+    margin-top: 32px;
+  }
+
+  .pixel-grid-title,
+  h2.pixel-grid-title,
+  .pixel-grid-container h2.pixel-grid-title {
+    margin-bottom: 24px !important;
+    font-size: 12px !important;
+  }
+
   .pixel-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 }
 
 @media (min-width: 1024px) {
   .pixel-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .pixel-grid-title,
+  h2.pixel-grid-title,
+  .pixel-grid-container h2.pixel-grid-title {
+    font-size: 14px !important;
   }
 }
 
@@ -873,6 +949,63 @@ h2.pixel-grid-title,
   .retro-sidebar-icon {
     width: 24px;
     height: 24px;
+  }
+}
+
+/* Main content area with sidebar margin */
+.retro-home-content {
+  position: relative;
+  z-index: 10;
+  padding: 16px;
+  padding-top: 64px;
+  overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  .retro-home-content {
+    padding: 32px;
+    padding-top: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .retro-home-content {
+    padding-left: 256px;
+    padding-right: 16px;
+    padding-top: 32px;
+  }
+}
+
+/* Retro footer with sidebar margin */
+.retro-footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 24px 16px;
+  margin-top: 24px;
+}
+
+.retro-footer-text {
+  color: #4a0066;
+  font-size: 8px;
+  font-family: 'VT323', monospace;
+}
+
+@media (min-width: 768px) {
+  .retro-footer {
+    padding: 32px 16px;
+    margin-top: 32px;
+  }
+
+  .retro-footer-text {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .retro-footer {
+    padding-left: 256px;
+    padding-right: 16px;
   }
 }
 

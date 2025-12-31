@@ -163,36 +163,5 @@ h2.pixel-grid-title,
   color: #e91e63 !important;
 }
 
-/* DefaultLayout 관련 스타일 */
-.retro-home-content {
-  position: relative;
-  z-index: 10;
-  padding: 16px;
-  padding-top: 32px;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.retro-footer {
-  position: relative;
-  z-index: 10;
-  text-align: center;
-  padding: 24px 0;
-  margin-top: 24px;
-}
-
-.retro-footer-text {
-  color: #4a0066;
-  font-size: 10px;
-  font-family: 'VT323', monospace;
-}
-
-@media (min-width: 768px) {
-  .retro-footer-text {
-    font-size: 12px;
-  }
-}
+/* DefaultLayout 관련 스타일 - retro.css로 이동됨 */
 
