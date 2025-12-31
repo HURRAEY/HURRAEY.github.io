@@ -1,31 +1,71 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo, useContext, createContext } from "react";
 import { useRouter } from "next/router";
 import { Heart, Star, Sparkles } from "lucide-react";
+import { loadPosts } from "../lib/loadPosts";
 
-export function RetroWindow() {
+// pageProps.title을 공유하기 위한 간단한 Context
+const PageTitleContext = createContext<string | undefined>(undefined);
+
+export function PageTitleProvider({ children, title }: { children: React.ReactNode; title?: string }) {
+  return <PageTitleContext.Provider value={title}>{children}</PageTitleContext.Provider>;
+}
+
+interface RetroWindowProps {
+  pageTitle?: string;
+}
+
+export function RetroWindow({ pageTitle }: RetroWindowProps = {}) {
+  const contextTitle = useContext(PageTitleContext);
+  // prop이 있으면 prop 우선, 없으면 context에서 가져오기
+  const pageTitleFromProps = pageTitle || contextTitle;
+  
   const [isMinimized, setIsMinimized] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const router = useRouter();
   const menuRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  
+  // 포스트 데이터 로드
+  const posts = useMemo(() => loadPosts(), []);
+  
+  // 태그 추출 및 개수 계산 (Sidebar와 동일한 로직)
+  const tagData = useMemo(() => {
+    const tagCounts = posts.reduce((acc, post) => {
+      if (post.tag) {
+        const tags = post.tag.split(',').map((t) => t.trim()).filter(Boolean);
+        tags.forEach((tag) => {
+          acc[tag] = (acc[tag] || 0) + 1;
+        });
+      }
+      return acc;
+    }, {} as Record<string, number>);
+
+    // 태그를 개수순으로 정렬 (같으면 알파벳순)
+    const allTags = Object.entries(tagCounts)
+      .sort((a, b) => {
+        if (b[1] !== a[1]) return b[1] - a[1]; // 개수순
+        return a[0].localeCompare(b[0]); // 알파벳순
+      })
+      .map(([tag]) => tag);
+
+    return { tagCounts, allTags };
+  }, [posts]);
 
   // 현재 경로에 따라 탭 이름 결정
   const getTabName = () => {
-    const pathname = router.pathname;
-    
-    if (pathname === "/") {
-      return "HOME";
-    } else if (pathname === "/posts" || pathname.startsWith("/posts/")) {
-      return "POSTS";
-    } else if (pathname === "/photos" || pathname.startsWith("/photos/")) {
-      return "PHOTOS";
-    } else if (pathname === "/about") {
-      return "ABOUT";
-    } else if (pathname.startsWith("/tags/")) {
-      return "TAGS";
+    // pageProps에서 받은 title이 있으면 우선 사용
+    if (pageTitleFromProps) {
+      return pageTitleFromProps.toUpperCase();
     }
     
-    // 기본값: 경로의 첫 번째 부분을 대문자로 변환
+    const pathname = router.pathname;
+    
+    // 루트 경로인 경우
+    if (pathname === "/") {
+      return "HOME";
+    }
+    
+    // 경로의 첫 번째 부분(슬래시 뒤의 단어)을 대문자로 변환
     const firstPath = pathname.split("/")[1];
     return firstPath ? firstPath.toUpperCase() : "HOME";
   };
@@ -33,25 +73,20 @@ export function RetroWindow() {
   const currentTabName = getTabName();
 
   // 메뉴 구조 정의
-  const menuItems = {
-    Home: [
-      { label: "Home", path: "/" },
-      { label: "Posts", path: "/posts" },
-      { label: "Photos", path: "/photos" },
-    ],
-    Posts: [
-      { label: "Posts", path: "/posts" },
-    ],
-    Photos: [
-      { label: "Photos", path: "/photos" },
-    ],
-    Tags: [
-      { label: "Tags", path: "/tags" },
-    ],
-    About: [
-      { label: "About", path: "/about" },
-    ],
+  const menuPaths: { [key: string]: string } = {
+    Home: "/",
+    Posts: "/posts",
+    Photos: "/photos",
+    About: "/about",
   };
+
+  // Tags 메뉴 항목 (드롭다운용)
+  const tagsMenuItems = tagData.allTags.length > 0
+    ? tagData.allTags.map((tag) => ({
+        label: `${tag} (${tagData.tagCounts[tag]})`,
+        path: `/tags/${encodeURIComponent(tag)}`,
+      }))
+    : [{ label: "No tags", path: "/tags" }];
 
   // 메뉴 외부 클릭 감지
   useEffect(() => {
@@ -74,6 +109,12 @@ export function RetroWindow() {
   }, [openMenu]);
 
   const handleMenuClick = (menuName: string) => {
+    // Tags가 아닌 경우 바로 이동
+    if (menuName !== "Tags" && menuPaths[menuName]) {
+      router.push(menuPaths[menuName]);
+      return;
+    }
+    // Tags인 경우 드롭다운 토글
     setOpenMenu(openMenu === menuName ? null : menuName);
   };
 
@@ -135,47 +176,56 @@ export function RetroWindow() {
 
       {/* Menu Bar */}
       <div className="retro-menu-bar">
-        {Object.keys(menuItems).map((menu) => (
-          <div
+        {Object.keys(menuPaths).map((menu) => (
+          <motion.button
             key={menu}
-            ref={(el) => {
-              menuRefs.current[menu] = el;
-            }}
-            className="retro-menu-item-wrapper"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleMenuClick(menu)}
+            className="retro-menu-button"
           >
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleMenuClick(menu)}
-              className={`retro-menu-button ${openMenu === menu ? "retro-menu-button-active" : ""}`}
-            >
-              {menu}
-            </motion.button>
-            <AnimatePresence>
-              {openMenu === menu && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="retro-menu-dropdown"
-                >
-                  {menuItems[menu as keyof typeof menuItems].map((item) => (
-                    <motion.button
-                      key={item.path}
-                      whileHover={{ x: 4, backgroundColor: "#e91e63" }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => handleMenuItemClick(item.path)}
-                      className="retro-menu-dropdown-item"
-                    >
-                      {item.label}
-                    </motion.button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            {menu}
+          </motion.button>
         ))}
+        {/* Tags 메뉴 (드롭다운 포함) */}
+        <div
+          ref={(el) => {
+            menuRefs.current["Tags"] = el;
+          }}
+          className="retro-menu-item-wrapper"
+        >
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleMenuClick("Tags")}
+            className={`retro-menu-button ${openMenu === "Tags" ? "retro-menu-button-active" : ""}`}
+          >
+            Tags
+          </motion.button>
+          <AnimatePresence>
+            {openMenu === "Tags" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="retro-menu-dropdown"
+              >
+                {tagsMenuItems.map((item) => (
+                  <motion.button
+                    key={item.path}
+                    whileHover={{ x: 4, backgroundColor: "#e91e63" }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleMenuItemClick(item.path)}
+                    className="retro-menu-dropdown-item"
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Toolbar */}

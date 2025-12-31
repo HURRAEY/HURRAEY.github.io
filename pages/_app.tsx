@@ -12,6 +12,7 @@ import "../styles/app.css";
 import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
 import { RetroSidebar } from "../components/RetroSidebar";
+import { PageTitleProvider } from "../components/RetroWindow";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
@@ -27,8 +28,11 @@ export default function App({ Component, pageProps }: AppProps) {
     router.pathname.startsWith("/posts/") && router.pathname !== "/posts";
   const currentPost = posts.find((p) => p.route === router.asPath);
 
+  // pageProps에서 title 추출 (nextra-theme-blog가 frontmatter에서 가져온 값)
+  const pageTitle = (pageProps as any)?.title;
+
   return (
-    <>
+    <PageTitleProvider title={pageTitle}>
       <AppHead />
       {/* 전체 배경 애니메이션 요소 */}
       <PixelBackground />
@@ -41,6 +45,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <PostExtras currentPost={currentPost} allPosts={posts} />
         )}
       </div>
-    </>
+    </PageTitleProvider>
   );
 }
