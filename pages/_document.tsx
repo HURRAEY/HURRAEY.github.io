@@ -8,7 +8,7 @@ export default function Document() {
   };
 
   return (
-    <Html lang="en">
+    <Html lang="ko">
       <Head>
         <meta name="robots" content="follow, index" />
         <meta name="description" content={meta.description} />
@@ -48,6 +48,13 @@ export default function Document() {
           href="/fonts/Inter-italic.latin.var.woff2"
           as="font"
           type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/DungGeunMo.ttf"
+          as="font"
+          type="font/ttf"
           crossOrigin="anonymous"
         />
       </Head>

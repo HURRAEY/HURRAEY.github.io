@@ -14,6 +14,10 @@ const nextConfig = {
   reactStrictMode: true,
   // MDX 파일을 페이지로 처리
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+  // Emotion 설정
+  compiler: {
+    emotion: true,
+  },
   webpack: (config, options) => {
     // .md 파일도 MDX 로더로 처리
     config.module.rules.push({

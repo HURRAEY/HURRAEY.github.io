@@ -15,6 +15,15 @@
   src: url(/fonts/VT323-Regular.ttf) format("truetype");
 }
 
+/* DungGeunMo (둥근모꼴) - 한글 레트로 픽셀 폰트 */
+@font-face {
+  font-family: "DungGeunMo";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/DungGeunMo.ttf) format("truetype");
+}
+
 /* Inter 폰트 - 로컬 폰트 */
 @font-face {
   font-family: "Inter var";
@@ -34,6 +43,7 @@
 
 body {
   font-family:
+    "DungGeunMo",
     "Inter var",
     system-ui,
     -apple-system,
