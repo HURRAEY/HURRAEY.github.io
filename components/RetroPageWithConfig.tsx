@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { RetroPageLayout } from "./Home/RetroHome";
 import { PageConfig } from "../lib/pageConfig";
 import { loadPageConfig } from "../lib/loadPageConfig";
+import { RetroLoading } from "./RetroLoading";
 
 interface RetroPageWithConfigProps {
   pageId: string;
@@ -27,7 +28,7 @@ export function RetroPageWithConfig({ pageId }: RetroPageWithConfigProps) {
   }, [pageId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <RetroLoading message="페이지 로딩 중" />;
   }
 
   return <RetroPageLayout config={config || undefined} pageId={pageId} />;

@@ -1,0 +1,278 @@
+/* Retro Loading Overlay */
+.retroLoadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(248, 187, 208, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+/* Retro Loading Window */
+.retroLoadingWindow {
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  box-shadow: 12px 12px 0px 0px rgba(0, 0, 0, 0.3);
+  border: 4px solid #ec407a;
+  image-rendering: pixelated;
+  animation: retroLoadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes retroLoadingPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Retro Loading Title Bar */
+.retroLoadingTitleBar {
+  background: linear-gradient(to right, #ff69b4, #e91e63, #ff69b4);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 4px solid #ec407a;
+}
+
+.retroLoadingTitleLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.retroLoadingIcon {
+  width: 20px;
+  height: 20px;
+  color: #ffeb3b;
+  animation: retroLoadingRotate 2s linear infinite;
+}
+
+@keyframes retroLoadingRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.retroLoadingTitleText {
+  color: white;
+  font-size: 12px;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.retroLoadingTitleRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.retroLoadingButton {
+  width: 16px;
+  height: 16px;
+  border: 2px solid black;
+  background: white;
+}
+
+/* Retro Loading Content */
+.retroLoadingContent {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-height: 200px;
+  background: #fce4ec;
+}
+
+/* Retro Loading Spinner */
+.retroLoadingSpinner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 4px;
+  width: 80px;
+  height: 80px;
+}
+
+.retroLoadingPixel {
+  background: #e91e63;
+  border: 2px solid #ec407a;
+  animation: retroLoadingPixelPulse 1.5s ease-in-out infinite;
+}
+
+.retroLoadingPixel:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.retroLoadingPixel:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.retroLoadingPixel:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.retroLoadingPixel:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.retroLoadingPixel:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.retroLoadingPixel:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+.retroLoadingPixel:nth-child(7) {
+  animation-delay: 0.6s;
+}
+
+.retroLoadingPixel:nth-child(8) {
+  animation-delay: 0.7s;
+}
+
+@keyframes retroLoadingPixelPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+    background: #ff69b4;
+  }
+}
+
+/* Retro Loading Text */
+.retroLoadingText {
+  color: #4a0066;
+  font-size: 14px;
+  font-family: 'VT323', monospace;
+  text-align: center;
+}
+
+.retroLoadingDots {
+  display: inline-block;
+  min-width: 20px;
+}
+
+/* Retro Loading Progress */
+.retroLoadingProgress {
+  width: 100%;
+  height: 16px;
+  background: white;
+  border: 3px solid #ec407a;
+  box-shadow: inset 2px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.retroLoadingProgressBar {
+  height: 100%;
+  background: linear-gradient(to right, #ff69b4, #e91e63, #9c27b0);
+  animation: retroLoadingProgress 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(233, 30, 99, 0.5);
+}
+
+@keyframes retroLoadingProgress {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Retro Loading Status Bar */
+.retroLoadingStatusBar {
+  background: #f8bbd0;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid #ec407a;
+}
+
+.retroLoadingStatusLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.retroLoadingStatusIndicator {
+  width: 10px;
+  height: 10px;
+  background: #4caf50;
+  border: 1px solid black;
+  animation: retroLoadingStatusBlink 1s ease-in-out infinite;
+}
+
+@keyframes retroLoadingStatusBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.retroLoadingStatusText {
+  font-family: 'VT323', monospace;
+  font-size: 10px;
+  color: #4a0066;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .retroLoadingWindow {
+    max-width: 480px;
+  }
+
+  .retroLoadingTitleText {
+    font-size: 14px;
+  }
+
+  .retroLoadingIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .retroLoadingButton {
+    width: 20px;
+    height: 20px;
+  }
+
+  .retroLoadingContent {
+    padding: 40px 32px;
+    min-height: 240px;
+  }
+
+  .retroLoadingSpinner {
+    width: 100px;
+    height: 100px;
+  }
+
+  .retroLoadingText {
+    font-size: 18px;
+  }
+
+  .retroLoadingProgress {
+    height: 20px;
+  }
+
+  .retroLoadingStatusText {
+    font-size: 12px;
+  }
+}
+

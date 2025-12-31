@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import AppHead from "../components/AppHead";
 import PostExtras from "../components/PostExtras";
@@ -10,6 +11,7 @@ import "react-clock/dist/Clock.css";
 import { RetroSidebar } from "../components/RetroSidebar";
 import { PageTitleProvider } from "../contexts/PageTitleContext";
 import DefaultLayout from "../components/DefaultLayout";
+import { RetroLoading } from "../components/RetroLoading";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
@@ -20,6 +22,30 @@ const posts = loadPosts();
  */
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const handleStart = () => {
+      setLoading(true);
+    };
+
+    const handleComplete = () => {
+      // 약간의 딜레이를 주어 부드러운 전환 효과
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
+    };
+
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleComplete);
+
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+      router.events.off("routeChangeError", handleComplete);
+    };
+  }, [router]);
 
   const isPost =
     router.pathname.startsWith("/posts/") && router.pathname !== "/posts";
@@ -31,6 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <PageTitleProvider title={pageTitle}>
       <AppHead />
+      {loading && <RetroLoading />}
       <div className="retro-home-page">
         <DefaultLayout>
           <Component {...pageProps} />
