@@ -11,6 +11,7 @@ import "../styles/main.css";
 import "../styles/app.css";
 import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
+import { RetroSidebar } from "../components/RetroSidebar";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
@@ -32,7 +33,8 @@ export default function App({ Component, pageProps }: AppProps) {
       {/* 전체 배경 애니메이션 요소 */}
       <PixelBackground />
       <FloatingHearts />
-      <Sidebar posts={posts} />
+      <RetroSidebar />
+      {/* <Sidebar posts={posts} /> */}
       <div className="main-content">
         <Component {...pageProps} />
         {isPost && currentPost && (
