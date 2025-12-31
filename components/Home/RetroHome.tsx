@@ -22,9 +22,6 @@ export function RetroPageLayout({ config, pageId }: RetroPageLayoutProps) {
     window: { title: pageId?.toUpperCase() || "PAGE" },
   };
 
-  console.log('RetroPageLayout pageConfig:', pageConfig);
-  console.log('RetroPageLayout contentConfig:', pageConfig.content);
-
   return (
     <div>
       {/* Main Content */}

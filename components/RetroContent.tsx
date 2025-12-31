@@ -14,9 +14,6 @@ export function RetroContent({ children, config }: RetroContentProps) {
   const childrenCount = React.Children.count(children);
   const hasValidChildren = childrenCount > 0;
   
-  console.log('RetroContent - children:', children, 'count:', childrenCount, 'hasValid:', hasValidChildren);
-  console.log('RetroContent - config:', config);
-  
   if (hasValidChildren) {
     return (
       <motion.div
@@ -34,11 +31,8 @@ export function RetroContent({ children, config }: RetroContentProps) {
 
   // config가 없거나 enabled가 false면 아무것도 표시하지 않음
   if (!config || config.enabled === false) {
-    console.log('RetroContent - no config or disabled');
     return null;
   }
-  
-  console.log('RetroContent - using config, heading:', config.heading);
 
   // 기본값 설정
   const heading = config.heading || "★ WELCOME TO PIXEL WORLD ★";

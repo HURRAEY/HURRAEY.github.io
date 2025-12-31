@@ -20,7 +20,6 @@ export function RetroPageWithConfig({ pageId }: RetroPageWithConfigProps) {
     async function fetchConfig() {
       setLoading(true);
       const pageConfig = await loadPageConfig(pageId);
-      console.log('Loaded page config for', pageId, ':', pageConfig);
       setConfig(pageConfig);
       setLoading(false);
     }
