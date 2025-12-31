@@ -1,9 +1,86 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import { Heart, Star, Sparkles } from "lucide-react";
 
 export function RetroWindow() {
   const [isMinimized, setIsMinimized] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const router = useRouter();
+  const menuRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  // 현재 경로에 따라 탭 이름 결정
+  const getTabName = () => {
+    const pathname = router.pathname;
+    
+    if (pathname === "/") {
+      return "HOME";
+    } else if (pathname === "/posts" || pathname.startsWith("/posts/")) {
+      return "POSTS";
+    } else if (pathname === "/photos" || pathname.startsWith("/photos/")) {
+      return "PHOTOS";
+    } else if (pathname === "/about") {
+      return "ABOUT";
+    } else if (pathname.startsWith("/tags/")) {
+      return "TAGS";
+    }
+    
+    // 기본값: 경로의 첫 번째 부분을 대문자로 변환
+    const firstPath = pathname.split("/")[1];
+    return firstPath ? firstPath.toUpperCase() : "HOME";
+  };
+
+  const currentTabName = getTabName();
+
+  // 메뉴 구조 정의
+  const menuItems = {
+    Home: [
+      { label: "Home", path: "/" },
+      { label: "Posts", path: "/posts" },
+      { label: "Photos", path: "/photos" },
+    ],
+    Posts: [
+      { label: "Posts", path: "/posts" },
+    ],
+    Photos: [
+      { label: "Photos", path: "/photos" },
+    ],
+    Tags: [
+      { label: "Tags", path: "/tags" },
+    ],
+    About: [
+      { label: "About", path: "/about" },
+    ],
+  };
+
+  // 메뉴 외부 클릭 감지
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (openMenu) {
+        const menuElement = menuRefs.current[openMenu];
+        if (menuElement && !menuElement.contains(event.target as Node)) {
+          setOpenMenu(null);
+        }
+      }
+    };
+
+    if (openMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openMenu]);
+
+  const handleMenuClick = (menuName: string) => {
+    setOpenMenu(openMenu === menuName ? null : menuName);
+  };
+
+  const handleMenuItemClick = (path: string) => {
+    router.push(path);
+    setOpenMenu(null);
+  };
 
   return (
     <motion.div
@@ -21,7 +98,7 @@ export function RetroWindow() {
           >
             <Star className="retro-icon-star" />
           </motion.div>
-          <span className="retro-title-text">RETRO PIXEL</span>
+          <span className="retro-title-text">{currentTabName}</span>
         </div>
         
         <div className="retro-title-right">
@@ -58,15 +135,46 @@ export function RetroWindow() {
 
       {/* Menu Bar */}
       <div className="retro-menu-bar">
-        {["File", "Edit", "View", "Insert", "Help"].map((menu) => (
-          <motion.button
+        {Object.keys(menuItems).map((menu) => (
+          <div
             key={menu}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="retro-menu-button"
+            ref={(el) => {
+              menuRefs.current[menu] = el;
+            }}
+            className="retro-menu-item-wrapper"
           >
-            {menu}
-          </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleMenuClick(menu)}
+              className={`retro-menu-button ${openMenu === menu ? "retro-menu-button-active" : ""}`}
+            >
+              {menu}
+            </motion.button>
+            <AnimatePresence>
+              {openMenu === menu && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="retro-menu-dropdown"
+                >
+                  {menuItems[menu as keyof typeof menuItems].map((item) => (
+                    <motion.button
+                      key={item.path}
+                      whileHover={{ x: 4, backgroundColor: "#e91e63" }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => handleMenuItemClick(item.path)}
+                      className="retro-menu-dropdown-item"
+                    >
+                      {item.label}
+                    </motion.button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         ))}
       </div>
 

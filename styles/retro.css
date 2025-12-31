@@ -120,6 +120,50 @@
   color: white;
 }
 
+.retro-menu-button-active {
+  background: #e91e63;
+  color: white;
+}
+
+.retro-menu-item-wrapper {
+  position: relative;
+}
+
+.retro-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: white;
+  border: 4px solid #ec407a;
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  min-width: 120px;
+}
+
+.retro-menu-dropdown-item {
+  width: 100%;
+  padding: 8px 12px;
+  background: white;
+  border: none;
+  border-bottom: 2px solid #f8bbd0;
+  text-align: left;
+  font-size: 10px;
+  font-family: 'Press Start 2P', monospace;
+  color: #1a0033;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retro-menu-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.retro-menu-dropdown-item:hover {
+  background: #e91e63;
+  color: white;
+}
+
 .retro-toolbar {
   background: #fce4ec;
   padding: 8px;
