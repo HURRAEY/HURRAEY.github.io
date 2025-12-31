@@ -24,10 +24,10 @@ importers:
         specifier: latest
         version: 16.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       nextra:
-        specifier: ^2.0.0-beta.5
+        specifier: ^2.13.4
         version: 2.13.4(next@16.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       nextra-theme-blog:
-        specifier: ^2.0.0-beta.5
+        specifier: ^2.13.4
         version: 2.13.4(next@16.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nextra@2.13.4(next@16.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18.2.0

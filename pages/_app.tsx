@@ -19,6 +19,21 @@ import { FloatingHearts } from "../components/FloatingHearts";
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
 
+// 개발 환경에서 legacyBehavior 경고 필터링 (nextra-theme-blog 내부 문제)
+if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+  const originalError = console.error;
+  console.error = (...args: any[]) => {
+    if (
+      typeof args[0] === "string" &&
+      args[0].includes("legacyBehavior") &&
+      args[0].includes("deprecated")
+    ) {
+      return; // legacyBehavior 경고 무시
+    }
+    originalError.apply(console, args);
+  };
+}
+
 /**
  * Next.js 앱의 루트 컴포넌트
  * 모든 페이지에 공통으로 적용되는 레이아웃과 기능을 제공합니다.
