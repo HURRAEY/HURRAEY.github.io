@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import { motion } from "framer-motion";
 import { Heart, MessageCircle, Share2, Clock, User, Tag } from "lucide-react";
 import { useState } from "react";
@@ -7,6 +9,7 @@ import type { Post } from "../lib/types";
 interface PostCardProps {
   post: Post;
   delay?: number;
+  onClick?: () => void;
 }
 
 // 태그 문자열을 배열로 변환
@@ -16,14 +19,14 @@ function parseTags(tagString: string): string[] {
 }
 
 // 색상 그라데이션 선택 함수
-function getColorGradient(index: number): string {
+function getColorGradient(index: number): { from: string; to: string } {
   const colors = [
-    "from-[#e91e63] to-[#f06292]",
-    "from-[#9c27b0] to-[#ba68c8]",
-    "from-[#00bcd4] to-[#4dd0e1]",
-    "from-[#4caf50] to-[#81c784]",
-    "from-[#ff9800] to-[#ffb74d]",
-    "from-[#f44336] to-[#e57373]",
+    { from: "#e91e63", to: "#f06292" },
+    { from: "#9c27b0", to: "#ba68c8" },
+    { from: "#00bcd4", to: "#4dd0e1" },
+    { from: "#4caf50", to: "#81c784" },
+    { from: "#ff9800", to: "#ffb74d" },
+    { from: "#f44336", to: "#e57373" },
   ];
   return colors[index % colors.length];
 }
@@ -51,13 +54,11 @@ function getInitialComments(post: Post): number {
   return 10 + (hash % 50);
 }
 
-export function RetroPostCard({ post, delay = 0 }: PostCardProps) {
+export function RetroPostCard({ post, delay = 0, onClick }: PostCardProps) {
   const [likes, setLikes] = useState(getInitialLikes(post));
   const [isLiked, setIsLiked] = useState(false);
   const tags = parseTags(post.tag);
-  const color = getColorGradient(
-    post.title.charCodeAt(0) % 6
-  );
+  const colorGradient = getColorGradient(post.title.charCodeAt(0) % 6);
   const comments = getInitialComments(post);
 
   const handleLike = (e: React.MouseEvent) => {
@@ -71,121 +72,328 @@ export function RetroPostCard({ post, delay = 0 }: PostCardProps) {
     setIsLiked(!isLiked);
   };
 
-  return (
-    <Link href={post.route}>
-      <motion.article
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay, type: "spring", stiffness: 100 }}
-        whileHover={{ scale: 1.02 }}
-        className="bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,0.3)] overflow-hidden mb-4 md:mb-6 cursor-pointer"
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
+  const CardContent = (
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, type: "spring", stiffness: 100 }}
+      whileHover={{ scale: 1.02 }}
+      css={css`
+        background: white;
+        border: 4px solid black;
+        box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        @media (min-width: 768px) {
+          margin-bottom: 1.5rem;
+        }
+      `}
+    >
+      {/* Header Bar */}
+      <div
+        css={css`
+          background: linear-gradient(to right, ${colorGradient.from}, ${colorGradient.to});
+          padding: 0.75rem;
+          border-bottom: 4px solid black;
+          @media (min-width: 768px) {
+            padding: 1rem;
+          }
+        `}
+        onClick={handleCardClick}
       >
-        {/* Header Bar */}
-        <div
-          className={`bg-gradient-to-r ${color} p-3 md:p-4 border-b-4 border-black`}
+        <h2
+          css={css`
+            color: white;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+            font-family: "Press Start 2P", monospace;
+            @media (min-width: 768px) {
+              font-size: 1rem;
+            }
+          `}
         >
-          <h2
-            className="text-white text-sm md:text-base mb-1"
-            style={{ fontFamily: "'Press Start 2P', monospace" }}
+          {post.title.toUpperCase()}
+        </h2>
+      </div>
+
+      {/* Meta Info */}
+      <div
+        css={css`
+          background: #fce4ec;
+          padding: 0.5rem;
+          border-bottom: 2px solid #ec407a;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          font-size: 0.75rem;
+          @media (min-width: 768px) {
+            padding: 0.75rem;
+            gap: 1rem;
+          }
+        `}
+      >
+        <div
+          css={css`
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+          `}
+        >
+          <User
+            css={css`
+              width: 0.75rem;
+              height: 0.75rem;
+              color: #e91e63;
+              @media (min-width: 768px) {
+                width: 1rem;
+                height: 1rem;
+              }
+            `}
+          />
+          <span css={css`font-family: "DungGeunMo", monospace;`}>
+            HURRAEY
+          </span>
+        </div>
+        <div
+          css={css`
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+          `}
+        >
+          <Clock
+            css={css`
+              width: 0.75rem;
+              height: 0.75rem;
+              color: #9c27b0;
+              @media (min-width: 768px) {
+                width: 1rem;
+                height: 1rem;
+              }
+            `}
+          />
+          <span css={css`font-family: "VT323", monospace;`}>{post.date}</span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div
+        css={css`
+          padding: 1rem;
+          @media (min-width: 768px) {
+            padding: 1.5rem;
+          }
+        `}
+      >
+        <p
+          css={css`
+            color: #1a0033;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-family: "DungGeunMo", monospace;
+            @media (min-width: 768px) {
+              font-size: 0.875rem;
+            }
+          `}
+        >
+          {post.description}
+        </p>
+
+        {/* Tags */}
+        {tags.length > 0 && (
+          <div
+            css={css`
+              display: flex;
+              flex-wrap: wrap;
+              gap: 0.5rem;
+              margin-bottom: 1rem;
+            `}
           >
-            {post.title.toUpperCase()}
-          </h2>
-        </div>
-
-        {/* Meta Info */}
-        <div className="bg-[#fce4ec] p-2 md:p-3 border-b-2 border-[#ec407a] flex flex-wrap gap-2 md:gap-4 text-xs">
-          <div className="flex items-center gap-1">
-            <User className="w-3 h-3 md:w-4 md:h-4 text-[#e91e63]" />
-            <span style={{ fontFamily: "'DungGeunMo', monospace" }}>
-              HURRAEY
-            </span>
+            {tags.map((tag) => (
+              <motion.span
+                key={tag}
+                whileHover={{ scale: 1.1 }}
+                css={css`
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 0.25rem;
+                  padding: 0.25rem 0.5rem;
+                  background: #f8bbd0;
+                  border: 2px solid #ec407a;
+                  font-size: 0.625rem;
+                  font-family: "DungGeunMo", monospace;
+                  @media (min-width: 768px) {
+                    padding: 0.25rem 0.75rem;
+                    font-size: 0.75rem;
+                  }
+                `}
+              >
+                <Tag
+                  css={css`
+                    width: 0.75rem;
+                    height: 0.75rem;
+                  `}
+                />
+                {tag}
+              </motion.span>
+            ))}
           </div>
-          <div className="flex items-center gap-1">
-            <Clock className="w-3 h-3 md:w-4 md:h-4 text-[#9c27b0]" />
-            <span style={{ fontFamily: "'VT323', monospace" }}>{post.date}</span>
-          </div>
-        </div>
+        )}
 
-        {/* Content */}
-        <div className="p-4 md:p-6">
-          <p
-            className="text-[#1a0033] text-xs md:text-sm leading-relaxed mb-4"
-            style={{ fontFamily: "'DungGeunMo', monospace" }}
+        {/* Action Buttons */}
+        <div
+          css={css`
+            display: flex;
+            gap: 0.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid #fce4ec;
+            @media (min-width: 768px) {
+              gap: 0.75rem;
+            }
+          `}
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleLike}
+            css={css`
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              padding: 0.5rem 0.75rem;
+              border: 2px solid black;
+              box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+              transition: all 0.2s;
+              font-family: "DungGeunMo", monospace;
+              font-size: 0.75rem;
+              @media (min-width: 768px) {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+              }
+              ${isLiked
+                ? css`
+                    background: #e91e63;
+                    color: white;
+                  `
+                : css`
+                    background: white;
+                    color: #e91e63;
+                    &:hover {
+                      background: #fce4ec;
+                    }
+                  `}
+            `}
           >
-            {post.description}
-          </p>
+            <Heart
+              css={css`
+                width: 1rem;
+                height: 1rem;
+                ${isLiked ? "fill: currentColor;" : ""}
+                @media (min-width: 768px) {
+                  width: 1.25rem;
+                  height: 1.25rem;
+                }
+              `}
+            />
+            <span>{likes}</span>
+          </motion.button>
 
-          {/* Tags */}
-          {tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-4">
-              {tags.map((tag) => (
-                <motion.span
-                  key={tag}
-                  whileHover={{ scale: 1.1 }}
-                  className="inline-flex items-center gap-1 px-2 md:px-3 py-1 bg-[#f8bbd0] border-2 border-[#ec407a] text-[10px] md:text-xs"
-                  style={{ fontFamily: "'DungGeunMo', monospace" }}
-                >
-                  <Tag className="w-3 h-3" />
-                  {tag}
-                </motion.span>
-              ))}
-            </div>
-          )}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            css={css`
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              padding: 0.5rem 0.75rem;
+              background: white;
+              border: 2px solid black;
+              box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+              color: #9c27b0;
+              transition: all 0.2s;
+              font-family: "DungGeunMo", monospace;
+              font-size: 0.75rem;
+              &:hover {
+                background: #fce4ec;
+              }
+              @media (min-width: 768px) {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+              }
+            `}
+          >
+            <MessageCircle
+              css={css`
+                width: 1rem;
+                height: 1rem;
+                @media (min-width: 768px) {
+                  width: 1.25rem;
+                  height: 1.25rem;
+                }
+              `}
+            />
+            <span>{comments}</span>
+          </motion.button>
 
-          {/* Action Buttons */}
-          <div className="flex gap-2 md:gap-3 pt-4 border-t-2 border-[#fce4ec]">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleLike}
-              className={`flex items-center gap-2 px-3 md:px-4 py-2 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-colors ${
-                isLiked
-                  ? "bg-[#e91e63] text-white"
-                  : "bg-white text-[#e91e63] hover:bg-[#fce4ec]"
-              }`}
-            >
-              <Heart
-                className={`w-4 h-4 md:w-5 md:h-5 ${isLiked ? "fill-current" : ""}`}
-              />
-              <span
-                className="text-xs md:text-sm"
-                style={{ fontFamily: "'DungGeunMo', monospace" }}
-              >
-                {likes}
-              </span>
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-[#9c27b0] hover:bg-[#fce4ec] transition-colors"
-            >
-              <MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
-              <span
-                className="text-xs md:text-sm"
-                style={{ fontFamily: "'DungGeunMo', monospace" }}
-              >
-                {comments}
-              </span>
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-[#00bcd4] hover:bg-[#fce4ec] transition-colors ml-auto"
-            >
-              <Share2 className="w-4 h-4 md:w-5 md:h-5" />
-              <span
-                className="text-xs md:text-sm hidden md:inline"
-                style={{ fontFamily: "'DungGeunMo', monospace" }}
-              >
-                Share
-              </span>
-            </motion.button>
-          </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            css={css`
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              padding: 0.5rem 0.75rem;
+              background: white;
+              border: 2px solid black;
+              box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+              color: #00bcd4;
+              transition: all 0.2s;
+              margin-left: auto;
+              font-family: "DungGeunMo", monospace;
+              font-size: 0.75rem;
+              &:hover {
+                background: #fce4ec;
+              }
+              @media (min-width: 768px) {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+                span {
+                  display: inline;
+                }
+              }
+              span {
+                display: none;
+              }
+            `}
+          >
+            <Share2
+              css={css`
+                width: 1rem;
+                height: 1rem;
+                @media (min-width: 768px) {
+                  width: 1.25rem;
+                  height: 1.25rem;
+                }
+              `}
+            />
+            <span>Share</span>
+          </motion.button>
         </div>
-      </motion.article>
-    </Link>
+      </div>
+    </motion.article>
   );
-}
 
+  if (onClick) {
+    return CardContent;
+  }
+
+  return <Link href={post.route}>{CardContent}</Link>;
+}
