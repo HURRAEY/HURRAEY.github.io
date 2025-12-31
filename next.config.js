@@ -1,8 +1,4 @@
-const withNextra = require("nextra")({
-  theme: "nextra-theme-blog",
-  themeConfig: "./theme.config.js",
-  unstable_staticImage: true, // 이미지 최적화 활성화
-});
+const createMDX = require("@next/mdx");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,6 +12,34 @@ const nextConfig = {
   },
   // Next.js 13+ Link 컴포넌트 동작 명시적 설정
   reactStrictMode: true,
+  // MDX 파일을 페이지로 처리
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+  webpack: (config, options) => {
+    // .md 파일도 MDX 로더로 처리
+    config.module.rules.push({
+      test: /\.md$/,
+      use: [
+        options.defaultLoaders.babel,
+        {
+          loader: "@mdx-js/loader",
+          options: {
+            remarkPlugins: [],
+            rehypePlugins: [],
+          },
+        },
+      ],
+    });
+
+    return config;
+  },
 };
 
-module.exports = withNextra(nextConfig);
+const withMDX = createMDX({
+  // MDX 옵션 설정
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
+
+module.exports = withMDX(nextConfig);

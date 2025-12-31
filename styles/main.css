@@ -127,7 +127,7 @@ body {
   box-sizing: border-box !important;
 }
 
-/* Nextra 자동 생성 제목 및 네비게이션 숨기기 */
+/* 자동 생성 제목 및 네비게이션 숨기기 */
 h1:first-of-type:not(.retro-heading) {
   display: none !important;
 }
@@ -136,7 +136,7 @@ h1:first-of-type:not(.retro-heading) {
   display: none !important;
 }
 
-/* Nextra prose 스타일 override - retro-heading 색상 보호 */
+/* prose 스타일 override - retro-heading 색상 보호 */
 .retro-heading,
 h1.retro-heading,
 .nx-prose :where(h1.retro-heading),
@@ -144,7 +144,7 @@ h1.retro-heading,
   color: #e91e63 !important;
 }
 
-/* Nextra article 여백 제거 */
+/* article 여백 제거 */
 article.nx-container {
   margin: 0 !important;
   padding: 0 !important;
@@ -155,7 +155,7 @@ article.nx-container.nx-prose {
   padding: 0 !important;
 }
 
-/* Nextra prose 스타일 override - pixel-grid-title 색상 보호 */
+/* prose 스타일 override - pixel-grid-title 색상 보호 */
 .pixel-grid-title,
 h2.pixel-grid-title,
 .nx-prose :where(h2.pixel-grid-title),

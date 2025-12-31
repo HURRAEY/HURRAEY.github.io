@@ -1,6 +1,6 @@
 # HURRAEY 블로그
 
-**Next.js**와 [Nextra](https://nextra.vercel.app/)로 구축된 개인 블로그입니다. Markdown으로 콘텐츠에 집중할 수 있습니다.
+**Next.js**로 구축된 개인 블로그입니다. Markdown으로 콘텐츠에 집중할 수 있습니다.
 
 ## 주요 기능
 
@@ -17,7 +17,7 @@
 - 💬 **댓글 시스템**: Giscus 기반 GitHub Discussions 연동
 - 📤 **소셜 공유**: Twitter, Facebook, LinkedIn, 링크 복사
 - 🔗 **관련 포스트 추천**: 태그 기반 자동 추천
-- 🖼️ **이미지 최적화**: Nextra 자동 이미지 최적화 활성화
+- 🖼️ **이미지 최적화**: Next.js 이미지 최적화 지원
 - 🎨 **MDX 컴포넌트**: Video, Callout, CodeBlock 등 커스텀 컴포넌트
 
 https://demo.vercel.blog
@@ -26,7 +26,7 @@ https://demo.vercel.blog
 
 ### 기본 설정
 
-1. `theme.config.js`에서 이름과 푸터를 업데이트하세요.
+1. 설정 파일에서 블로그 정보를 업데이트하세요.
 2. `scripts/gen-rss.js`에서 RSS 피드 정보를 업데이트하세요.
 3. `pages/_document.tsx`에서 메타 태그를 업데이트하세요.
 4. `pages/posts/*.md`에 포스트를 작성하세요.

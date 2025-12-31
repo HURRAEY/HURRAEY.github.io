@@ -49,7 +49,7 @@ Ordered
 Inline `code`
 
 ```
-export default function Nextra({ Component, pageProps }) {
+export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -84,7 +84,6 @@ export default function Nextra({ Component, pageProps }) {
 ## Links
 
 - [Next.js](https://nextjs.org)
-- [Nextra](https://nextra.vercel.app/)
 - [Vercel](http://vercel.com)
 
 ### Footnotes
