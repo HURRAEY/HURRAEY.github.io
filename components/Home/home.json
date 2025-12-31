@@ -1,0 +1,45 @@
+{
+  "window": {
+    "title": "HOME"
+  },
+  "content": {
+    "heading": "★ WELCOME TO PIXEL WORLD ★",
+    "textList": [
+      "► Experience the nostalgic charm of retro computing",
+      "► Pixel-perfect design with modern responsiveness",
+      "► Built with love and retro vibes ♥"
+    ],
+    "cards": [
+      {
+        "title": "GAME",
+        "color": "retro-card-pink"
+      },
+      {
+        "title": "MUSIC",
+        "color": "retro-card-purple"
+      },
+      {
+        "title": "ART",
+        "color": "retro-card-cyan"
+      },
+      {
+        "title": "CODE",
+        "color": "retro-card-yellow"
+      }
+    ],
+    "showSparkles": true,
+    "enabled": true
+  },
+  "image": {
+    "src": "/images/home/Gemini_Generated_Image_fk02h4fk02h4fk02.png",
+    "alt": "Retro Home Image",
+    "title": "RETRO.IMG",
+    "enabled": true
+  },
+  "pixelGrid": {
+    "title": "◆ PIXEL GALLERY ◆",
+    "itemCount": 12,
+    "enabled": true
+  }
+}
+

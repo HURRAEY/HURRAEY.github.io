@@ -1,8 +1,19 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { PagePixelGridConfig } from "../lib/pageConfig";
 
-export function PixelGrid() {
-  const gridItems = Array.from({ length: 12 });
+interface PixelGridProps {
+  config?: PagePixelGridConfig;
+}
+
+export function PixelGrid({ config }: PixelGridProps) {
+  // config가 없거나 enabled가 false면 렌더링하지 않음
+  if (!config || config.enabled === false) {
+    return null;
+  }
+
+  const itemCount = config.itemCount || 12;
+  const gridItems = Array.from({ length: itemCount });
   const [cellColors, setCellColors] = useState<Array<Array<string>>>([]);
 
   useEffect(() => {
@@ -15,18 +26,21 @@ export function PixelGrid() {
       )
     );
     setCellColors(colors);
-  }, []);
+  }, [itemCount]);
 
   return (
     <div className="pixel-grid-container">
-      <motion.h2
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="pixel-grid-title"
-      >
-        ◆ PIXEL GALLERY ◆
-      </motion.h2>
+      {config.title && (
+        <motion.h2
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="pixel-grid-title"
+          style={{ color: '#e91e63' }}
+        >
+          {config.title}
+        </motion.h2>
+      )}
       
       <div className="pixel-grid">
         {gridItems.map((_, i) => (

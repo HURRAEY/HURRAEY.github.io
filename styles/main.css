@@ -99,6 +99,7 @@ body {
   --text-primary: #1a0033;
   --text-secondary: #4a0066;
   --border-color: #f48fb1;
+  --retro-pink: #e91e63;
 }
 
 body {
@@ -127,12 +128,20 @@ body {
 }
 
 /* Nextra 자동 생성 제목 및 네비게이션 숨기기 */
-h1:first-of-type {
+h1:first-of-type:not(.retro-heading) {
   display: none !important;
 }
 
 .nx-mb-8.nx-flex.nx-items-center.nx-gap-3 {
   display: none !important;
+}
+
+/* Nextra prose 스타일 override - retro-heading 색상 보호 */
+.retro-heading,
+h1.retro-heading,
+.nx-prose :where(h1.retro-heading),
+[class*="prose"] h1.retro-heading {
+  color: #e91e63 !important;
 }
 
 /* Nextra article 여백 제거 */
@@ -144,6 +153,14 @@ article.nx-container {
 article.nx-container.nx-prose {
   margin: 0 !important;
   padding: 0 !important;
+}
+
+/* Nextra prose 스타일 override - pixel-grid-title 색상 보호 */
+.pixel-grid-title,
+h2.pixel-grid-title,
+.nx-prose :where(h2.pixel-grid-title),
+[class*="prose"] h2.pixel-grid-title {
+  color: #e91e63 !important;
 }
 
 /* DefaultLayout 관련 스타일 */

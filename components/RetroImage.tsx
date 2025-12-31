@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
+import { PageImageConfig } from "../lib/pageConfig";
 
-export function RetroImage() {
+interface RetroImageProps {
+  config?: PageImageConfig;
+}
+
+export function RetroImage({ config }: RetroImageProps) {
+  // config가 없거나 enabled가 false면 렌더링하지 않음
+  if (!config || config.enabled === false) {
+    return null;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -14,12 +24,12 @@ export function RetroImage() {
           <div className="retro-image-dot retro-image-dot-yellow" />
           <div className="retro-image-dot retro-image-dot-green" />
           <span className="retro-image-title">
-            RETRO.IMG
+            {config.title || "RETRO.IMG"}
           </span>
         </div>
         <motion.img
-          src="/images/home/Gemini_Generated_Image_fk02h4fk02h4fk02.png"
-          alt="Retro Document"
+          src={config.src}
+          alt={config.alt}
           className="retro-image"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3 }}

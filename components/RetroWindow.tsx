@@ -6,13 +6,15 @@ import { RetroMenuBar } from "./RetroMenuBar";
 import { RetroToolbar } from "./RetroToolbar";
 import { RetroContent } from "./RetroContent";
 import { RetroStatusBar } from "./RetroStatusBar";
+import { PageContentConfig } from "../lib/pageConfig";
 
 interface RetroWindowProps {
   pageTitle?: string;
   children?: React.ReactNode;
+  contentConfig?: PageContentConfig;
 }
 
-export function RetroWindow({ pageTitle, children }: RetroWindowProps = {}) {
+export function RetroWindow({ pageTitle, children, contentConfig }: RetroWindowProps = {}) {
   const [isMinimized, setIsMinimized] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const currentTabName = useTabName(pageTitle);
@@ -37,7 +39,11 @@ export function RetroWindow({ pageTitle, children }: RetroWindowProps = {}) {
 
       <RetroToolbar />
 
-      {!isMinimized && <RetroContent>{children}</RetroContent>}
+      {!isMinimized && (
+        <RetroContent config={contentConfig}>
+          {children}
+        </RetroContent>
+      )}
 
       <RetroStatusBar />
     </motion.div>
