@@ -833,6 +833,7 @@ h2.pixel-grid-title,
   border: none;
   outline: none;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 .retro-sidebar-menu-item:hover {

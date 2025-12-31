@@ -1,14 +1,14 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { 
   Menu, 
   Home, 
-  Gamepad2, 
-  Music, 
-  Palette, 
-  Code, 
-  Mail, 
-  Settings,
+  FileText,
+  Image,
+  User,
+  Tag,
   X,
   Star,
   Heart
@@ -18,13 +18,11 @@ export function RetroSidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
-    { icon: Home, label: "HOME", color: "#e91e63" },
-    { icon: Gamepad2, label: "GAMES", color: "#9c27b0" },
-    { icon: Music, label: "MUSIC", color: "#00bcd4" },
-    { icon: Palette, label: "ART", color: "#ffeb3b" },
-    { icon: Code, label: "CODE", color: "#4caf50" },
-    { icon: Mail, label: "MAIL", color: "#ff5722" },
-    { icon: Settings, label: "SETUP", color: "#607d8b" },
+    { icon: Home, label: "Home", path: "/", color: "#e91e63" },
+    { icon: FileText, label: "Posts", path: "/posts", color: "#9c27b0" },
+    { icon: Image, label: "Photos", path: "/photos", color: "#00bcd4" },
+    { icon: User, label: "About", path: "/about", color: "#ffeb3b" },
+    { icon: Tag, label: "Tags", path: "/tags", color: "#4caf50" },
   ];
 
   return (
@@ -86,10 +84,18 @@ function SidebarContent({
   menuItems, 
   onClose 
 }: { 
-  menuItems: Array<{ icon: any; label: string; color: string }>;
+  menuItems: Array<{ icon: any; label: string; path: string; color: string }>;
   onClose?: () => void;
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const router = useRouter();
+  const [currentPath, setCurrentPath] = useState<string>('/');
+
+  useEffect(() => {
+    // 클라이언트에서만 경로 업데이트
+    if (typeof window !== 'undefined') {
+      setCurrentPath(router.asPath.split('?')[0]);
+    }
+  }, [router.asPath]);
 
   return (
     <div className="retro-sidebar-content">
@@ -139,37 +145,51 @@ function SidebarContent({
       <nav className="retro-sidebar-nav">
         {menuItems.map((item, index) => {
           const Icon = item.icon;
-          const isActive = activeIndex === index;
+          const isActive = currentPath === item.path || 
+            (item.path !== '/' && currentPath.startsWith(item.path));
           return (
-            <motion.button
+            <motion.div
               key={item.label}
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ x: 8, scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                setActiveIndex(index);
-                if (onClose) onClose();
-              }}
-              className={`retro-sidebar-menu-item ${isActive ? 'retro-sidebar-menu-item-active' : ''}`}
             >
-              <div 
-                className="retro-sidebar-menu-icon-wrapper"
-                style={{ backgroundColor: isActive ? 'white' : item.color }}
+              <Link
+                href={item.path}
+                className={`retro-sidebar-menu-item ${isActive ? 'retro-sidebar-menu-item-active' : ''}`}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateX(8px) scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateX(0) scale(1)';
+                }}
+                onClick={() => {
+                  if (onClose) onClose();
+                }}
+                style={{ 
+                  transition: 'transform 0.2s',
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  display: 'block'
+                }}
               >
-                <Icon 
-                  className="retro-sidebar-menu-icon" 
-                  style={{ 
-                    color: isActive ? item.color : 'white',
-                    imageRendering: "pixelated" 
-                  }} 
-                />
-              </div>
-              <span className="retro-sidebar-menu-label">
-                {item.label}
-              </span>
-            </motion.button>
+                <div 
+                  className="retro-sidebar-menu-icon-wrapper"
+                  style={{ backgroundColor: isActive ? 'white' : item.color }}
+                >
+                  <Icon 
+                    className="retro-sidebar-menu-icon" 
+                    style={{ 
+                      color: isActive ? item.color : 'white',
+                      imageRendering: "pixelated" 
+                    }} 
+                  />
+                </div>
+                <span className="retro-sidebar-menu-label">
+                  {item.label}
+                </span>
+              </Link>
+            </motion.div>
           );
         })}
       </nav>
