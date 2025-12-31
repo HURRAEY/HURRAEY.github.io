@@ -52,9 +52,9 @@ export default function Document() {
         />
         <link
           rel="preload"
-          href="/fonts/DungGeunMo.ttf"
+          href="/fonts/DungGeunMo.woff"
           as="font"
-          type="font/ttf"
+          type="font/woff"
           crossOrigin="anonymous"
         />
       </Head>

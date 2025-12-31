@@ -1,3 +1,8 @@
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Retro Pixel Art Fonts - 로컬 폰트 */
 @font-face {
   font-family: "Press Start 2P";
