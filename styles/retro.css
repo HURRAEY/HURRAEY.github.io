@@ -464,6 +464,11 @@
   z-index: 10;
   padding: 16px;
   padding-top: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .retro-footer {
