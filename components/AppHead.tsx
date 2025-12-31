@@ -12,13 +12,7 @@ export default function AppHead() {
         title="RSS"
         href="/feed.xml"
       />
-      <link
-        rel="preload"
-        href="/fonts/Inter-roman.latin.var.woff2"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
-      />
+      {/* 폰트는 CSS @font-face에서 로드되므로 preload 제거 */}
     </Head>
   );
 }

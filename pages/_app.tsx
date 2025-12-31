@@ -11,7 +11,6 @@ import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
 import { RetroSidebar } from "../components/RetroSidebar";
 import { PageTitleProvider } from "../contexts/PageTitleContext";
-import { RetroWindow } from "../components/RetroWindow";
 import { RetroImage } from "../components/RetroImage";
 import { PixelGrid } from "../components/PixelGrid";
 import { PixelBackground } from "../components/PixelBackground";
@@ -39,19 +38,14 @@ export default function App({ Component, pageProps }: AppProps) {
       <AppHead />
       <div className="retro-home-page">
         {/* 배경 애니메이션 요소 */}
-          <PixelBackground />
-          <FloatingHearts />
+        <PixelBackground />
+        <FloatingHearts />
         {/* Main Content */}
         <div className="retro-home-content">
-          <RetroWindow pageTitle={pageTitle}>
-
           <Component {...pageProps} />
-            {isPost && currentPost && (
-              <PostExtras currentPost={currentPost} allPosts={posts} />
-            )}
-          </RetroWindow>
-          <RetroImage />
-          <PixelGrid />
+          {isPost && currentPost && (
+            <PostExtras currentPost={currentPost} allPosts={posts} />
+          )}
         </div>
         
         {/* Footer */}

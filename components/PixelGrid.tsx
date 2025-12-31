@@ -1,7 +1,21 @@
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 export function PixelGrid() {
   const gridItems = Array.from({ length: 12 });
+  const [cellColors, setCellColors] = useState<Array<Array<string>>>([]);
+
+  useEffect(() => {
+    // 클라이언트에서만 랜덤 색상 생성
+    const colors = gridItems.map(() =>
+      Array.from({ length: 16 }).map(() =>
+        Math.random() > 0.5 
+          ? "rgba(255,255,255,0.1)" 
+          : "rgba(0,0,0,0.1)"
+      )
+    );
+    setCellColors(colors);
+  }, []);
 
   return (
     <div className="pixel-grid-container">
@@ -38,9 +52,7 @@ export function PixelGrid() {
                   key={j}
                   className="pixel-grid-cell"
                   style={{
-                    backgroundColor: Math.random() > 0.5 
-                      ? "rgba(255,255,255,0.1)" 
-                      : "rgba(0,0,0,0.1)",
+                    backgroundColor: cellColors[i]?.[j] || "rgba(255,255,255,0.1)",
                   }}
                   animate={{
                     backgroundColor: [
