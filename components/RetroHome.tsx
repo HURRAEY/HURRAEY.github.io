@@ -6,7 +6,7 @@ export function RetroHome() {
   return (
     <div className="retro-home-page">
       {/* Main Content */}
-      <div className="retro-home-content">
+      <div>
         <RetroWindow />
         <RetroImage />
         <PixelGrid />

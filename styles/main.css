@@ -92,13 +92,6 @@ body {
   padding: 0;
 }
 
-/* Nextra 블로그 테마와의 호환성 */
-@media (min-width: 769px) {
-  body {
-    padding-left: 0;
-  }
-}
-
 /* 배경색 고정 (분홍색 그라데이션) */
 :root {
   --bg-primary: #fce4ec;
@@ -141,3 +134,15 @@ h1:first-of-type {
 .nx-mb-8.nx-flex.nx-items-center.nx-gap-3 {
   display: none !important;
 }
+
+/* Nextra article 여백 제거 */
+article.nx-container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+article.nx-container.nx-prose {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+

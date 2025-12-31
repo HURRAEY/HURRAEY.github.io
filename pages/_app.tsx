@@ -1,4 +1,3 @@
-import "nextra-theme-blog/style.css";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
@@ -6,15 +5,11 @@ import AppHead from "../components/AppHead";
 import PostExtras from "../components/PostExtras";
 import { loadPosts } from "../lib/loadPosts";
 import "../styles/main.css";
-import "../styles/app.css";
 import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
 import { RetroSidebar } from "../components/RetroSidebar";
 import { PageTitleProvider } from "../contexts/PageTitleContext";
-import { RetroImage } from "../components/RetroImage";
-import { PixelGrid } from "../components/PixelGrid";
-import { PixelBackground } from "../components/PixelBackground";
-import { FloatingHearts } from "../components/FloatingHearts";
+import DefaultLayout from "../components/DefaultLayout";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
@@ -52,23 +47,12 @@ export default function App({ Component, pageProps }: AppProps) {
     <PageTitleProvider title={pageTitle}>
       <AppHead />
       <div className="retro-home-page">
-        {/* 배경 애니메이션 요소 */}
-        <PixelBackground />
-        <FloatingHearts />
-        {/* Main Content */}
-        <div className="retro-home-content">
+        <DefaultLayout>
           <Component {...pageProps} />
           {isPost && currentPost && (
             <PostExtras currentPost={currentPost} allPosts={posts} />
           )}
-        </div>
-        
-        {/* Footer */}
-        <div className="retro-footer">
-          <p className="retro-footer-text">
-            ♥ MADE WITH PIXEL LOVE ♥
-          </p>
-        </div>
+        </DefaultLayout>
       </div>
       <RetroSidebar />
       {/* <Sidebar posts={posts} /> */}
