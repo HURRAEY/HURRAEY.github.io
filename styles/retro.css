@@ -199,12 +199,16 @@
 .retro-content {
   padding: 16px 32px;
   min-height: 400px;
+  position: relative;
+  overflow: hidden;
 }
 
 .retro-content-inner {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .retro-heading {
@@ -311,7 +315,7 @@
 
 /* Pixel Background */
 .pixel-background {
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
@@ -328,7 +332,7 @@
 
 /* Floating Hearts */
 .floating-hearts {
-  position: fixed;
+  position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
