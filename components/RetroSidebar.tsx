@@ -169,8 +169,7 @@ function SidebarContent({
                 style={{ 
                   transition: 'transform 0.2s',
                   cursor: 'pointer',
-                  textDecoration: 'none',
-                  display: 'block'
+                  textDecoration: 'none'
                 }}
               >
                 <div 
