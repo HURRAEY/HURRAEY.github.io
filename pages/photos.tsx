@@ -4,3 +4,4 @@ export default function Photos() {
   return <RetroPageWithConfig pageId="photos" />;
 }
 
+
