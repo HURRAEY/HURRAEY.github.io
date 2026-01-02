@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useTabName } from "../hooks/useTabName";
+import { useTabName } from "../../hooks/useTabName";
 import { RetroTitleBar } from "./RetroTitleBar";
 import { RetroMenuBar } from "./RetroMenuBar";
 import { RetroToolbar } from "./RetroToolbar";
 import { RetroContent } from "./RetroContent";
 import { RetroStatusBar } from "./RetroStatusBar";
-import { PageContentConfig } from "../lib/pageConfig";
+import { PageContentConfig } from "../../lib/pageConfig";
 
 interface RetroWindowProps {
   pageTitle?: string;

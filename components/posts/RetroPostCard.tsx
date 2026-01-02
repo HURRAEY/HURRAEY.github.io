@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Heart, MessageCircle, Share2, Clock, User, Tag } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
-import type { Post } from "../lib/types";
+import type { Post } from "../../lib/types";
 
 interface PostCardProps {
   post: Post;

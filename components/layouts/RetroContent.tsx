@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import React from "react";
-import { PageContentConfig } from "../lib/pageConfig";
+import { PageContentConfig } from "../../lib/pageConfig";
 
 interface RetroContentProps {
   children?: React.ReactNode;

@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import SocialShare from "./SocialShare";
 import RelatedPosts from "./RelatedPosts";
 import Giscus from "./Giscus";
-import { GISCUS_CONFIG } from "../lib/constants";
-import type { Post } from "../lib/types";
+import { GISCUS_CONFIG } from "../../lib/constants";
+import type { Post } from "../../lib/types";
 
 interface PostExtrasProps {
   currentPost: Post;

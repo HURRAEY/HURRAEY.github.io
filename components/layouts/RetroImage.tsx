@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { PageImageConfig } from "../lib/pageConfig";
+import { PageImageConfig } from "../../lib/pageConfig";
 
 interface RetroImageProps {
   config?: PageImageConfig;

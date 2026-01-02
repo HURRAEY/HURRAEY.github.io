@@ -1,8 +1,8 @@
-import { RetroWindow } from "../RetroWindow";
-import { RetroImage } from "../RetroImage";
-import { PixelGrid } from "../PixelGrid";
+import { RetroWindow } from "../layouts/RetroWindow";
+import { RetroImage } from "../layouts/RetroImage";
+import { PixelGrid } from "../layouts/PixelGrid";
 import { PageConfig } from "../../lib/pageConfig";
-import { RetroPageWithConfig } from "../RetroPageWithConfig";
+import { RetroPageWithConfig } from "../layouts/RetroPageWithConfig";
 
 interface RetroPageLayoutProps {
   config?: PageConfig;

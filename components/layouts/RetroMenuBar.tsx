@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useRef, useEffect } from "react";
-import { useTags } from "../hooks/useTags";
+import { useTags } from "../../hooks/useTags";
 
 interface TagMenuItem {
   label: string;

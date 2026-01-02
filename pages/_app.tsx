@@ -1,17 +1,17 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import AppHead from "../components/AppHead";
-import PostExtras from "../components/PostExtras";
+import Sidebar from "../components/layouts/Sidebar";
+import AppHead from "../components/layouts/AppHead";
+import PostExtras from "../components/posts/PostExtras";
 import { loadPosts } from "../lib/loadPosts";
 import "../styles/main.css";
 import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
-import { RetroSidebar } from "../components/RetroSidebar";
+import { RetroSidebar } from "../components/layouts/RetroSidebar";
 import { PageTitleProvider } from "../contexts/PageTitleContext";
-import DefaultLayout from "../components/DefaultLayout";
-import { RetroLoading } from "../components/RetroLoading";
+import DefaultLayout from "../components/layouts/DefaultLayout";
+import { RetroLoading } from "../components/layouts/loading/RetroLoading";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();

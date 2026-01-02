@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { RetroPageLayout } from "./Home/RetroHome";
-import { PageConfig } from "../lib/pageConfig";
-import { loadPageConfig } from "../lib/loadPageConfig";
-import { RetroLoading } from "./RetroLoading";
+import { RetroPageLayout } from "../Home/RetroHome";
+import { PageConfig } from "../../lib/pageConfig";
+import { loadPageConfig } from "../../lib/loadPageConfig";
+import { RetroLoading } from "./loading/RetroLoading";
 
 interface RetroPageWithConfigProps {
   pageId: string;

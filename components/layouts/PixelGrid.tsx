@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { PagePixelGridConfig } from "../lib/pageConfig";
+import { PagePixelGridConfig } from "../../lib/pageConfig";
 
 interface PixelGridProps {
   config?: PagePixelGridConfig;
