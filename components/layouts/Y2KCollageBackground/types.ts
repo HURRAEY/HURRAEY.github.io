@@ -25,3 +25,4 @@ export interface Sticker {
   rotation: number;
 }
 
+
