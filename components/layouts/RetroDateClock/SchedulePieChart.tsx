@@ -3,9 +3,16 @@ import { SCHEDULE } from "./constants";
 import { createPieSlice, getTextPosition } from "./utils";
 import styles from "./styles.module.css";
 
-export function SchedulePieChart() {
-  const centerX = 50;
-  const centerY = 50;
+interface SchedulePieChartProps {
+  imageWidth?: number;
+  imageHeight?: number;
+}
+
+export function SchedulePieChart({ imageWidth, imageHeight }: SchedulePieChartProps) {
+  // 이미지의 실제 크기에 맞춰 viewBox 계산 (정사각형 기준)
+  const viewBoxSize = 100;
+  const centerX = viewBoxSize / 2;
+  const centerY = viewBoxSize / 2;
   const radius = 38;
   const textRadius = 28;
 
@@ -14,6 +21,14 @@ export function SchedulePieChart() {
       className={styles.pieChartOverlay}
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid meet"
+      style={
+        imageWidth && imageHeight
+          ? {
+              width: imageWidth,
+              height: imageHeight,
+            }
+          : undefined
+      }
     >
       {SCHEDULE.map((slot, index) => {
         const textPos = getTextPosition(
@@ -41,8 +56,6 @@ export function SchedulePieChart() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 + index * 0.08 }}
             />
-
-            {/* Activity text */}
             <text
               x={textPos.x}
               y={textPos.y}

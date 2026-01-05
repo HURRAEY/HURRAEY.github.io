@@ -153,22 +153,12 @@ export function ClockDecorations() {
         }}
       >
         <svg width="48" height="48" viewBox="0 0 48 48">
-          {/* Pixel Cat */}
-          {/* Ears */}
           <rect x="8" y="12" width="8" height="8" fill="#FFB6C1" stroke="#000" strokeWidth="2" />
           <rect x="32" y="12" width="8" height="8" fill="#FFB6C1" stroke="#000" strokeWidth="2" />
-
-          {/* Head */}
           <rect x="12" y="16" width="24" height="20" fill="#FFE4E1" stroke="#000" strokeWidth="2" />
-
-          {/* Eyes */}
           <rect x="16" y="22" width="4" height="4" fill="#000" />
           <rect x="28" y="22" width="4" height="4" fill="#000" />
-
-          {/* Nose */}
           <rect x="22" y="28" width="4" height="2" fill="#FF69B4" />
-
-          {/* Whiskers */}
           <line x1="8" y1="26" x2="12" y2="26" stroke="#000" strokeWidth="2" />
           <line x1="36" y1="26" x2="40" y2="26" stroke="#000" strokeWidth="2" />
         </svg>

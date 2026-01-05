@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ClockHand } from "./ClockHand";
 import { ClockTooltip } from "./ClockTooltip";
 import { SchedulePieChart } from "./SchedulePieChart";
@@ -10,6 +10,8 @@ import styles from "./styles.module.css";
 export function RetroDateClock() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showTooltip, setShowTooltip] = useState(false);
+  const clockImageRef = useRef<HTMLImageElement>(null);
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -17,6 +19,31 @@ export function RetroDateClock() {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (clockImageRef.current) {
+        setImageSize({
+          width: clockImageRef.current.offsetWidth,
+          height: clockImageRef.current.offsetHeight,
+        });
+      }
+    };
+
+    if (clockImageRef.current?.complete) {
+      updateSize();
+    }
+
+    const img = clockImageRef.current;
+    if (img) {
+      img.addEventListener("load", updateSize);
+      window.addEventListener("resize", updateSize);
+      return () => {
+        img.removeEventListener("load", updateSize);
+        window.removeEventListener("resize", updateSize);
+      };
+    }
   }, []);
 
   const currentMonth = currentDate.getMonth() + 1; // 0-11 to 1-12
@@ -35,15 +62,27 @@ export function RetroDateClock() {
         {/* Clock Face */}
         <div className={styles.clockFaceContainer}>
           <motion.img
-            src="/images/home/clock.png"
+            ref={clockImageRef}
+            src="/images/home/clock/clock.svg"
             alt="Clock Face"
             className={styles.clockImage}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}
+            onLoad={() => {
+              if (clockImageRef.current) {
+                setImageSize({
+                  width: clockImageRef.current.offsetWidth,
+                  height: clockImageRef.current.offsetHeight,
+                });
+              }
+            }}
           />
 
           {/* 24-Hour Schedule Pie Chart Overlay */}
-          <SchedulePieChart />
+          <SchedulePieChart 
+            imageWidth={imageSize.width || undefined} 
+            imageHeight={imageSize.height || undefined} 
+          />
 
           {/* Clock Hand - rotating based on month */}
           <ClockHand rotation={rotation} />
