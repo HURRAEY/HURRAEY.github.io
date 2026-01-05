@@ -132,7 +132,7 @@ body {
 }
 
 body {
-  background: linear-gradient(to bottom right, #fce4ec, #f8bbd0, #f48fb1) !important;
+  background: linear-gradient(to bottom right, #fbcfe8, #e9d5ff, #fce7f3) !important;
   background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;

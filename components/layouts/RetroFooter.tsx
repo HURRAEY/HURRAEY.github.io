@@ -1,9 +1,30 @@
+import { Y2KSticker } from "./Y2KSticker";
+import { Y2KTextBox } from "./Y2KTextBox";
+
 export function RetroFooter() {
   return (
-    <div className="retro-footer">
-      <p className="retro-footer-text">
-        ♥ MADE WITH PIXEL LOVE ♥
-      </p>
+    <div className="relative z-10 text-center py-6 md:py-8 mt-6 md:mt-8 lg:ml-64">
+      <Y2KTextBox variant="gradient" className="inline-block">
+        <p 
+          className="text-purple-900 text-xs md:text-sm mb-2"
+          style={{ fontFamily: "'Press Start 2P', monospace" }}
+        >
+          ♥ Y2K VIBES FOREVER ♥
+        </p>
+        <p 
+          className="text-pink-600 text-sm md:text-base"
+          style={{ fontFamily: "'DungGeunMo', monospace" }}
+        >
+          ♥ 2000년대 감성 영원히 ♥
+        </p>
+      </Y2KTextBox>
+      
+      {/* Footer stickers */}
+      <div className="mt-4 flex justify-center gap-4">
+        <Y2KSticker type="star" size={40} rotation={0} />
+        <Y2KSticker type="heart" size={40} rotation={0} />
+        <Y2KSticker type="sparkle" size={40} rotation={0} />
+      </div>
     </div>
   );
 }
