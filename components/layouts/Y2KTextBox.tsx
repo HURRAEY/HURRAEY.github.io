@@ -29,9 +29,9 @@ export function Y2KTextBox({
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
       className={`
         ${variantStyles[variant]}
-        border-2 sm:border-4 border-dashed
+        border-4 border-dashed
         shadow-[6px_6px_0px_0px_rgba(0,0,0,0.3)]
-        p-2 sm:p-3 md:p-4 lg:p-5
+        p-4
         ${className}
       `}
       style={{
