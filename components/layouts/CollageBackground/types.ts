@@ -5,6 +5,7 @@ export interface GlitterStar {
   size: number;
   delay: number;
   duration: number;
+  repeatDelay: number;
 }
 
 export interface FloatingHeart {
