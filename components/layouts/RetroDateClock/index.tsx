@@ -35,7 +35,7 @@ export function RetroDateClock() {
         {/* Clock Face */}
         <div className={styles.clockFaceContainer}>
           <motion.img
-            src="/images/home/clock/clock.svg"
+            src="/images/home/clock/1.svg"
             alt="Clock Face"
             className={styles.clockImage}
             whileHover={{ scale: 1.02 }}

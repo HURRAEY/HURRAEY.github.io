@@ -9,8 +9,8 @@ export const SchedulePieChart = memo(function SchedulePieChart() {
   const viewBoxSize = 100;
   const centerX = viewBoxSize / 2;
   const centerY = viewBoxSize / 2;
-  const radius = 32; // 시계보다 작게 설정
-  const textRadius = 24; // 텍스트도 비례해서 조정
+  const radius = 42; // 시계 크기에 맞게 조정
+  const textRadius = 32; // 텍스트도 비례해서 조정
 
   return (
     <svg
