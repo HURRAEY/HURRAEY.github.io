@@ -16,3 +16,4 @@ export const SCHEDULE: TimeSlot[] = [
   { startHour: 22, endHour: 24, title: "휴식", color: "#FFE5EC80" },
 ];
 
+

@@ -1,34 +1,22 @@
-import { motion } from "motion/react";
+import { memo } from "react";
 import { SCHEDULE } from "./constants";
 import { createPieSlice, getTextPosition } from "./utils";
 import styles from "./styles.module.css";
 
-interface SchedulePieChartProps {
-  imageWidth?: number;
-  imageHeight?: number;
-}
-
-export function SchedulePieChart({ imageWidth, imageHeight }: SchedulePieChartProps) {
+// CSS 애니메이션으로 변경하여 React 리렌더 완전 분리
+export const SchedulePieChart = memo(function SchedulePieChart() {
   // 이미지의 실제 크기에 맞춰 viewBox 계산 (정사각형 기준)
   const viewBoxSize = 100;
   const centerX = viewBoxSize / 2;
   const centerY = viewBoxSize / 2;
-  const radius = 38;
-  const textRadius = 28;
+  const radius = 32; // 시계보다 작게 설정
+  const textRadius = 24; // 텍스트도 비례해서 조정
 
   return (
     <svg
       className={styles.pieChartOverlay}
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid meet"
-      style={
-        imageWidth && imageHeight
-          ? {
-              width: imageWidth,
-              height: imageHeight,
-            }
-          : undefined
-      }
     >
       {SCHEDULE.map((slot, index) => {
         const textPos = getTextPosition(
@@ -41,7 +29,8 @@ export function SchedulePieChart({ imageWidth, imageHeight }: SchedulePieChartPr
 
         return (
           <g key={index}>
-            <motion.path
+            <path
+              className={styles.pieSlice}
               d={createPieSlice(
                 slot.startHour,
                 slot.endHour,
@@ -52,9 +41,9 @@ export function SchedulePieChart({ imageWidth, imageHeight }: SchedulePieChartPr
               fill={slot.color}
               stroke="black"
               strokeWidth="0.3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 + index * 0.08 }}
+              style={{
+                animationDelay: `${0.5 + index * 0.08}s`,
+              }}
             />
             <text
               x={textPos.x}
@@ -77,5 +66,5 @@ export function SchedulePieChart({ imageWidth, imageHeight }: SchedulePieChartPr
       })}
     </svg>
   );
-}
+});
 

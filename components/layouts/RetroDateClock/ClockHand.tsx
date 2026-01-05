@@ -1,38 +1,27 @@
-import { motion } from "motion/react";
+import { memo } from "react";
 import styles from "./styles.module.css";
 
 interface ClockHandProps {
   rotation: number;
 }
 
-export function ClockHand({ rotation }: ClockHandProps) {
+// CSS 애니메이션으로 변경하여 React 리렌더 완전 분리
+export const ClockHand = memo(function ClockHand({ rotation }: ClockHandProps) {
   return (
-    <motion.div
+    <div
       className={styles.clockHandContainer}
-      animate={{
-        rotate: rotation,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 50,
-        damping: 15,
+      style={{
+        transform: `rotate(${rotation}deg)`,
+        transition: "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",
       }}
     >
       <div className={styles.handWrapper}>
         <div className={styles.handBody}>
-          <motion.svg
+          <svg
             width="24"
             height="24"
             viewBox="0 0 24 24"
             className={styles.heartIcon}
-            animate={{
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           >
             <defs>
               <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -84,7 +73,7 @@ export function ClockHand({ rotation }: ClockHandProps) {
             <rect x="15" y="18" width="3" height="3" fill="#9c27b0" />
 
             <rect x="12" y="21" width="3" height="3" fill="#9c27b0" />
-          </motion.svg>
+          </svg>
           <div className={styles.pixelStick}>
             {[...Array(20)].map((_, i) => {
               const opacity = 1 - (i / 20) * 0.3;
@@ -110,7 +99,7 @@ export function ClockHand({ rotation }: ClockHandProps) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
-}
+});
 

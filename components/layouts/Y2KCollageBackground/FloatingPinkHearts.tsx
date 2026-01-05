@@ -1,14 +1,12 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { memo, useMemo } from "react";
 import { FloatingHeart } from "./types";
 import { Y2K_CONFIG, COLORS } from "./constants";
 import styles from "./styles.module.css";
 
-export function FloatingPinkHearts() {
-  const [hearts, setHearts] = useState<FloatingHeart[]>([]);
-
-  useEffect(() => {
-    const floatingHearts: FloatingHeart[] = Array.from(
+// CSS 애니메이션으로 변경하여 React 리렌더 완전 분리
+export const FloatingPinkHearts = memo(function FloatingPinkHearts() {
+  const hearts = useMemo<FloatingHeart[]>(() => {
+    return Array.from(
       { length: Y2K_CONFIG.FLOATING_HEARTS_COUNT },
       (_, i) => ({
         id: i,
@@ -20,34 +18,20 @@ export function FloatingPinkHearts() {
         delay: Math.random() * 5,
       })
     );
-    setHearts(floatingHearts);
   }, []);
-
-  if (hearts.length === 0) {
-    return null;
-  }
 
   return (
     <>
       {hearts.map((heart) => (
-        <motion.div
+        <div
           key={`heart-${heart.id}`}
           className={styles.floatingHeart}
           style={{
             left: `${heart.x}%`,
             top: `${heart.y}%`,
-          }}
-          initial={{ opacity: 0, y: 0 }}
-          animate={{
-            opacity: [0, 0.8, 0],
-            y: [0, -100],
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration: heart.duration,
-            delay: heart.delay,
-            repeat: Infinity,
-          }}
+            '--duration': `${heart.duration}s`,
+            '--delay': `${heart.delay}s`,
+          } as React.CSSProperties}
         >
           <svg width="30" height="30" viewBox="0 0 24 24">
             <defs>
@@ -69,10 +53,10 @@ export function FloatingPinkHearts() {
               strokeWidth="0.5"
             />
           </svg>
-        </motion.div>
+        </div>
       ))}
     </>
   );
-}
+});
 
 

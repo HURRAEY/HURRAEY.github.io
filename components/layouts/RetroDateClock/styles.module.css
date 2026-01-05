@@ -43,12 +43,28 @@
 
 .pieChartOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
   pointer-events: none;
-  object-fit: fill;
+  display: block;
+}
+
+.pieSlice {
+  opacity: 0;
+  animation: fadeInPie 0.6s ease-out forwards;
+  will-change: opacity;
+}
+
+@keyframes fadeInPie {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .tooltip {
@@ -149,6 +165,17 @@
   width: 24px;
   height: 24px;
   transition: filter 0.3s ease;
+  animation: heartPulse 1.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes heartPulse {
+  0%, 100% {
+    transform: translateY(2px) scale(1);
+  }
+  50% {
+    transform: translateY(2px) scale(1.1);
+  }
 }
 
 @media (min-width: 768px) {
@@ -405,5 +432,139 @@
     width: 3.5rem;
     height: 3.5rem;
   }
+}
+
+/* CSS 애니메이션 - React 리렌더 없이 GPU 가속 */
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes floatScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes floatLeftRight {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes rotateSwing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+}
+
+@keyframes starScaleRotate {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+  }
+}
+
+@keyframes starScaleRotateReverse {
+  0%, 100% {
+    transform: scale(1) rotate(360deg);
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+  }
+}
+
+@keyframes catFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+/* Sparkle 애니메이션 */
+.sparkle {
+  animation: sparkle 2.5s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Heart decoration 애니메이션 */
+.heartDecoration {
+  animation: floatUpDown 3s ease-in-out infinite, floatScale 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Sun decoration 애니메이션 */
+.sunDecoration {
+  animation: rotate 15s linear infinite;
+  will-change: transform;
+}
+
+/* Cloud decoration 애니메이션 */
+.cloudDecoration {
+  animation: floatLeftRight 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Moon decoration 애니메이션 */
+.moonDecoration {
+  animation: rotateSwing 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Pixel star 애니메이션 */
+.pixelStarLeft {
+  animation: starScaleRotate 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.pixelStarRight {
+  animation: starScaleRotateReverse 4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Pixel cat 애니메이션 */
+.pixelCat {
+  animation: catFloat 2s ease-in-out infinite;
+  will-change: transform;
 }
 

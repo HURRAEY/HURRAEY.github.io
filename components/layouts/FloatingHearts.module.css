@@ -1,0 +1,47 @@
+.container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.heartWrapper {
+  position: absolute;
+  animation: floatUp var(--duration, 8s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+}
+
+.heartIcon {
+  width: 16px;
+  height: 16px;
+  color: #f48fb1;
+  fill: #f48fb1;
+  image-rendering: pixelated;
+}
+
+@media (min-width: 768px) {
+  .heartIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) translateX(var(--x-offset, 0px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+

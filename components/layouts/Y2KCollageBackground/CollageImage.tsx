@@ -1,23 +1,21 @@
-import { motion } from "framer-motion";
+import { memo } from "react";
 import { Y2K_CONFIG } from "./constants";
 import styles from "./styles.module.css";
 
-export function CollageImage() {
+// CSS 애니메이션으로 변경하여 React 리렌더 완전 분리
+export const CollageImage = memo(function CollageImage() {
   return (
-    <motion.div
-      className={styles.collageImageWrapper}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
+    <div className={styles.collageImageWrapper}>
       <img
         src={Y2K_CONFIG.COLLAGE_IMAGE_PATH}
         alt="Y2K Collage Background"
         className={styles.collageImage}
-        style={{ opacity: Y2K_CONFIG.COLLAGE_IMAGE_OPACITY }}
+        style={{ 
+          '--image-opacity': Y2K_CONFIG.COLLAGE_IMAGE_OPACITY.toString(),
+        } as React.CSSProperties}
       />
-    </motion.div>
+    </div>
   );
-}
+});
 
 

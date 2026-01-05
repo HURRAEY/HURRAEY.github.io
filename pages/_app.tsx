@@ -9,7 +9,6 @@ import "../styles/main.css";
 import "../styles/retro.css";
 import "react-clock/dist/Clock.css";
 import { RetroSidebar } from "../components/layouts/RetroSidebar";
-import { PageTitleProvider } from "../contexts/PageTitleContext";
 import DefaultLayout from "../components/layouts/DefaultLayout";
 import { RetroLoading } from "../components/layouts/loading/RetroLoading";
 
@@ -257,11 +256,8 @@ export default function App({ Component, pageProps }: AppProps) {
     router.pathname.startsWith("/posts/") && router.pathname !== "/posts";
   const currentPost = posts.find((p) => p.route === router.asPath);
 
-  // pageProps에서 title 추출
-  const pageTitle = (pageProps as any)?.title;
-
   return (
-    <PageTitleProvider title={pageTitle}>
+    <>
       <AppHead />
       {loading && <RetroLoading />}
       <div className="retro-home-page">
@@ -274,6 +270,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </div>
       <RetroSidebar />
       {/* <Sidebar posts={posts} /> */}
-    </PageTitleProvider>
+    </>
   );
 }

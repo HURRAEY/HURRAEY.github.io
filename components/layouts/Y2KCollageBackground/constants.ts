@@ -28,3 +28,4 @@ export const COLORS = {
 export const STICKER_EMOJIS = ["⭐", "💖", "✨", "🌟", "💕", "🎀", "💫", "🌸"] as const;
 
 
+

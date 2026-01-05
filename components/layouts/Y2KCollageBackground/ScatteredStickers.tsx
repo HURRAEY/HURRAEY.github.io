@@ -1,14 +1,12 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { memo, useMemo } from "react";
 import { Sticker } from "./types";
 import { Y2K_CONFIG, STICKER_EMOJIS } from "./constants";
 import styles from "./styles.module.css";
 
-export function ScatteredStickers() {
-  const [stickers, setStickers] = useState<Sticker[]>([]);
-
-  useEffect(() => {
-    const scatteredStickers: Sticker[] = Array.from(
+// CSS 애니메이션으로 변경하여 React 리렌더 완전 분리
+export const ScatteredStickers = memo(function ScatteredStickers() {
+  const stickers = useMemo<Sticker[]>(() => {
+    return Array.from(
       { length: Y2K_CONFIG.SCATTERED_STICKERS_COUNT },
       (_, i) => ({
         id: i,
@@ -20,40 +18,27 @@ export function ScatteredStickers() {
         rotation: Math.random() * 360,
       })
     );
-    setStickers(scatteredStickers);
   }, []);
-
-  if (stickers.length === 0) {
-    return null;
-  }
 
   return (
     <>
       {stickers.map((sticker) => (
-        <motion.div
+        <div
           key={`sticker-${sticker.id}`}
           className={styles.sticker}
           style={{
             left: `${sticker.x}%`,
             top: `${sticker.y}%`,
-          }}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{
-            opacity: [0, 0.6, 0],
-            scale: [0, 1.2, 0],
-            rotate: [0, sticker.rotation],
-          }}
-          transition={{
-            duration: sticker.duration,
-            delay: sticker.delay,
-            repeat: Infinity,
-          }}
+            '--duration': `${sticker.duration}s`,
+            '--delay': `${sticker.delay}s`,
+            '--rotation': `${sticker.rotation}deg`,
+          } as React.CSSProperties}
         >
           {sticker.emoji}
-        </motion.div>
+        </div>
       ))}
     </>
   );
-}
+});
 
 

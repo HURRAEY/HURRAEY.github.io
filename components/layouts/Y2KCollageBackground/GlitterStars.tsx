@@ -1,14 +1,12 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { memo, useMemo } from "react";
 import { GlitterStar } from "./types";
 import { Y2K_CONFIG, COLORS } from "./constants";
 import styles from "./styles.module.css";
 
-export function GlitterStars() {
-  const [stars, setStars] = useState<GlitterStar[]>([]);
-
-  useEffect(() => {
-    const glitterStars: GlitterStar[] = Array.from(
+// CSS 애니메이션으로 변경하여 React 리렌더 완전 분리
+export const GlitterStars = memo(function GlitterStars() {
+  const stars = useMemo<GlitterStar[]>(() => {
+    return Array.from(
       { length: Y2K_CONFIG.GLITTER_STARS_COUNT },
       (_, i) => ({
         id: i,
@@ -21,19 +19,15 @@ export function GlitterStars() {
         duration:
           Math.random() * (Y2K_CONFIG.STAR_DURATION_MAX - Y2K_CONFIG.STAR_DURATION_MIN) +
           Y2K_CONFIG.STAR_DURATION_MIN,
+        repeatDelay: Math.random() * 3,
       })
     );
-    setStars(glitterStars);
   }, []);
-
-  if (stars.length === 0) {
-    return null;
-  }
 
   return (
     <>
       {stars.map((star) => (
-        <motion.div
+        <div
           key={star.id}
           className={styles.glitterStar}
           style={{
@@ -41,19 +35,10 @@ export function GlitterStars() {
             top: `${star.y}%`,
             width: star.size,
             height: star.size,
-          }}
-          initial={{ opacity: 0, scale: 0, rotate: 0 }}
-          animate={{
-            opacity: [0, 1, 1, 0],
-            scale: [0, 1, 1, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: star.duration,
-            delay: star.delay,
-            repeat: Infinity,
-            repeatDelay: Math.random() * 3,
-          }}
+            '--duration': `${star.duration}s`,
+            '--delay': `${star.delay}s`,
+            '--repeat-delay': `${star.repeatDelay}s`,
+          } as React.CSSProperties}
         >
           <svg viewBox="0 0 100 100" className="w-full h-full">
             <defs>
@@ -86,10 +71,10 @@ export function GlitterStars() {
               opacity="0.7"
             />
           </svg>
-        </motion.div>
+        </div>
       ))}
     </>
   );
-}
+});
 
 

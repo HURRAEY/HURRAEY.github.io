@@ -21,8 +21,19 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.2;
   image-rendering: auto;
+  animation: fadeInImage 1s ease-out forwards;
+  /* 인라인 스타일의 opacity가 애니메이션 후에도 유지되도록 */
+  opacity: var(--image-opacity, 0.3);
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: var(--image-opacity, 0.3);
+  }
 }
 
 /* Gradient overlay */
@@ -41,17 +52,69 @@
 /* Glitter star container */
 .glitterStar {
   position: absolute;
+  animation: glitterStar var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+}
+
+@keyframes glitterStar {
+  0%, 100% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  25%, 75% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+  }
 }
 
 /* Floating heart container */
 .floatingHeart {
   position: absolute;
+  animation: floatHeart var(--duration, 6s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 /* Sticker container */
 .sticker {
   position: absolute;
   font-size: 2rem;
+  animation: stickerPulse var(--duration, 4s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+}
+
+@keyframes stickerPulse {
+  0%, 100% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(var(--rotation, 180deg));
+    opacity: 0.6;
+  }
 }
 
 /* Pixel noise overlay */

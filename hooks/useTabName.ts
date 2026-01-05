@@ -1,16 +1,11 @@
 import { useRouter } from "next/router";
-import { usePageTitle } from "../contexts/PageTitleContext";
 
 export function useTabName(pageTitle?: string): string {
-  const contextTitle = usePageTitle();
   const router = useRouter();
   
-  // prop이 있으면 prop 우선, 없으면 context에서 가져오기
-  const pageTitleFromProps = pageTitle || contextTitle;
-
-  // 현재 경로에 따라 탭 이름 결정
-  if (pageTitleFromProps) {
-    return pageTitleFromProps.toUpperCase();
+  // prop이 있으면 prop 사용
+  if (pageTitle) {
+    return pageTitle.toUpperCase();
   }
 
   const pathname = router.pathname;
