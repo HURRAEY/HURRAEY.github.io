@@ -4,6 +4,7 @@ import { FloatingHearts } from "./FloatingHearts";
 import { RetroFooter } from "./RetroFooter";
 import { Y2KSticker } from "./Y2KSticker";
 import { Y2KTextBox } from "./Y2KTextBox";
+import { RetroDateClock } from "./RetroDateClock/index";
 import { ReactNode } from "react";
 
 interface DefaultLayoutProps {
@@ -104,6 +105,9 @@ export default function DefaultLayout({ children }: DefaultLayoutProps) {
             <Y2KSticker type="sparkle" size={35} rotation={-30} />
           </div>
         </div>
+        
+        {/* Date Clock at the top */}
+        <RetroDateClock />
         
         {/* Main Content */}
         <div className="retro-home-content">
