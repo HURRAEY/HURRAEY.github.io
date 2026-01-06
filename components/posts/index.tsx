@@ -4,6 +4,7 @@ import { loadPosts } from "../../lib/loadPosts";
 import { RetroPostCard } from "./RetroPostCard";
 import { motion } from "framer-motion";
 import { PenTool, Star, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export default function PostsIndex() {
   const posts = loadPosts();
@@ -161,7 +162,7 @@ export default function PostsIndex() {
         </motion.div>
       )}
 
-      {/* Posts List */}
+      {/* Posts List + Featured Markdown Post */}
       {posts.length === 0 ? (
         <motion.div
           initial={{ opacity: 0 }}
@@ -189,6 +190,187 @@ export default function PostsIndex() {
         </motion.div>
       ) : (
         <div>
+          {/* Featured Markdown Post (Markdown Examples) */}
+          <Link href="/posts/markdown" passHref legacyBehavior>
+            <a
+              css={css`
+                text-decoration: none;
+                color: inherit;
+                display: block;
+                margin-bottom: 1.5rem;
+              `}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                css={css`
+                  cursor: pointer;
+                `}
+              >
+                <div
+                  css={css`
+                    background: linear-gradient(
+                      to bottom right,
+                      #ffe4e1,
+                      #ffffff,
+                      #ffb6c1
+                    );
+                    border: 4px solid #ff1493;
+                    box-shadow: 8px 8px 0px 0px rgba(255, 20, 147, 0.5);
+                    overflow: hidden;
+                    image-rendering: pixelated;
+                  `}
+                >
+                  {/* Featured Badge */}
+                  <div
+                    css={css`
+                      background: linear-gradient(
+                        to right,
+                        #ff1493,
+                        #ff69b4
+                      );
+                      padding: 0.5rem 0.75rem;
+                      border-bottom: 3px solid #c2185b;
+                      display: flex;
+                      align-items: center;
+                      gap: 0.5rem;
+                    `}
+                  >
+                    <Star
+                      css={css`
+                        width: 1rem;
+                        height: 1rem;
+                        color: #fbbf24;
+                        fill: #fbbf24;
+                        image-rendering: pixelated;
+                      `}
+                    />
+                    <span
+                      css={css`
+                        color: white;
+                        font-size: 0.75rem;
+                        font-family: "Press Start 2P", monospace;
+                      `}
+                    >
+                      FEATURED POST
+                    </span>
+                    <motion.div
+                      animate={{ rotate: [0, 10, -10, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <Sparkles
+                        css={css`
+                          width: 1rem;
+                          height: 1rem;
+                          color: #fbbf24;
+                          image-rendering: pixelated;
+                        `}
+                      />
+                    </motion.div>
+                  </div>
+
+                  <div
+                    css={css`
+                      padding: 1rem;
+                      @media (min-width: 768px) {
+                        padding: 1.5rem;
+                      }
+                    `}
+                  >
+                    <h3
+                      css={css`
+                        color: #ff1493;
+                        font-size: 1rem;
+                        margin-bottom: 0.5rem;
+                        font-family: "Press Start 2P", monospace;
+                        @media (min-width: 768px) {
+                          font-size: 1.125rem;
+                        }
+                      `}
+                    >
+                      Markdown Examples
+                    </h3>
+                    <p
+                      css={css`
+                        color: #c2185b;
+                        font-size: 0.875rem;
+                        margin-bottom: 0.75rem;
+                        font-family: "DungGeunMo", monospace;
+                      `}
+                    >
+                      마크다운 옵션의 모든 예제 보기 • View examples of all
+                      possible Markdown options
+                    </p>
+
+                    <div
+                      css={css`
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.5rem;
+                        margin-bottom: 0.75rem;
+                      `}
+                    >
+                      <span
+                        css={css`
+                          padding: 0.25rem 0.5rem;
+                          background: #ffb6c1;
+                          border: 2px solid #ff1493;
+                          font-size: 0.625rem;
+                          font-family: "Press Start 2P", monospace;
+                          image-rendering: pixelated;
+                        `}
+                      >
+                        web development
+                      </span>
+                      <span
+                        css={css`
+                          padding: 0.25rem 0.5rem;
+                          background: #ffe4e1;
+                          border: 2px solid #ff1493;
+                          font-size: 0.625rem;
+                          font-family: "Press Start 2P", monospace;
+                          image-rendering: pixelated;
+                        `}
+                      >
+                        markdown
+                      </span>
+                      <span
+                        css={css`
+                          padding: 0.25rem 0.5rem;
+                          background: #ffc0cb;
+                          border: 2px solid #ff1493;
+                          font-size: 0.625rem;
+                          font-family: "Press Start 2P", monospace;
+                          image-rendering: pixelated;
+                        `}
+                      >
+                        tutorial
+                      </span>
+                    </div>
+
+                    <div
+                      css={css`
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        font-size: 0.75rem;
+                        color: #9c27b0;
+                        font-family: "VT323", monospace;
+                      `}
+                    >
+                      <span>👤 You</span>
+                      <span>📅 2021/3/19</span>
+                      <span>👁️ 1,234 views</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </a>
+          </Link>
+
+          {/* Regular Posts */}
           {posts.map((post, index) => (
             <RetroPostCard
               key={post.route}

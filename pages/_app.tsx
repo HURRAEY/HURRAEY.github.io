@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Sidebar from "../components/layouts/Sidebar";
 import AppHead from "../components/layouts/AppHead";
 import PostExtras from "../components/posts/PostExtras";
 import { loadPosts } from "../lib/loadPosts";
@@ -11,6 +10,7 @@ import "react-clock/dist/Clock.css";
 import { RetroSidebar } from "../components/layouts/RetroSidebar";
 import DefaultLayout from "../components/layouts/DefaultLayout";
 import { RetroLoading } from "../components/layouts/loading/RetroLoading";
+import { RetroPostDetailLayout } from "../components/posts/RetroPostDetailLayout";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
@@ -262,9 +262,15 @@ export default function App({ Component, pageProps }: AppProps) {
       {loading && <RetroLoading />}
       <div className="retro-home-page">
         <DefaultLayout>
-          <Component {...pageProps} />
-          {isPost && currentPost && (
-            <PostExtras currentPost={currentPost} allPosts={posts} />
+          {isPost && currentPost ? (
+            <>
+              <RetroPostDetailLayout post={currentPost}>
+                <Component {...pageProps} />
+              </RetroPostDetailLayout>
+              <PostExtras currentPost={currentPost} allPosts={posts} />
+            </>
+          ) : (
+            <Component {...pageProps} />
           )}
         </DefaultLayout>
       </div>
