@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 import styles from "./styles.module.css";
 
 interface ClockHandProps {
@@ -7,6 +7,29 @@ interface ClockHandProps {
 
 // CSS 애니메이션으로 변경하여 React 리렌더 완전 분리
 export const ClockHand = memo(function ClockHand({ rotation }: ClockHandProps) {
+  const [handLength, setHandLength] = useState(20);
+
+  useEffect(() => {
+    const updateHandLength = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        // 모바일
+        setHandLength(15);
+      } else if (width < 1024) {
+        // 태블릿
+        setHandLength(18);
+      } else {
+        // 데스크톱
+        setHandLength(20);
+      }
+    };
+
+    updateHandLength();
+    window.addEventListener("resize", updateHandLength);
+
+    return () => window.removeEventListener("resize", updateHandLength);
+  }, []);
+
   return (
     <div
       className={styles.clockHandContainer}
@@ -75,8 +98,8 @@ export const ClockHand = memo(function ClockHand({ rotation }: ClockHandProps) {
             <rect x="12" y="21" width="3" height="3" fill="#9c27b0" />
           </svg>
           <div className={styles.pixelStick}>
-            {[...Array(20)].map((_, i) => {
-              const opacity = 1 - (i / 20) * 0.3;
+            {[...Array(handLength)].map((_, i) => {
+              const opacity = 1 - (i / handLength) * 0.3;
               return (
                 <div key={i} className={styles.pixelRow}>
                   <div className={styles.pixelBorder} />
