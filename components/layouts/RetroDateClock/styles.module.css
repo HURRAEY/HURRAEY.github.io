@@ -15,20 +15,20 @@
 .clockWrapper {
   position: relative;
   width: 100%;
-  max-width: 30rem;
+  max-width: 20rem;
   padding: 0 1rem;
   margin: 0 auto;
 }
 
 @media (min-width: 768px) {
   .clockWrapper {
-    max-width: 40rem;
+    max-width: 43rem;
   }
 }
 
 @media (min-width: 1024px) {
   .clockWrapper {
-    max-width: 50rem;
+    max-width: 43rem;
   }
 }
 
