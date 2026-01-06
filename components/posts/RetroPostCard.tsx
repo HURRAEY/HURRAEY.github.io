@@ -12,6 +12,11 @@ interface PostCardProps {
   onClick?: () => void;
 }
 
+// 한글 포함 여부 체크
+function hasKorean(text: string): boolean {
+  return /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+}
+
 // 태그 문자열을 배열로 변환
 function parseTags(tagString: string): string[] {
   if (!tagString) return [];
@@ -113,7 +118,9 @@ export function RetroPostCard({ post, delay = 0, onClick }: PostCardProps) {
             color: white;
             font-size: 0.875rem;
             margin-bottom: 0.25rem;
-            font-family: "Press Start 2P", monospace;
+            font-family: ${hasKorean(post.title)
+              ? `"DungGeunMo", monospace`
+              : `"Press Start 2P", monospace`};
             @media (min-width: 768px) {
               font-size: 1rem;
             }
