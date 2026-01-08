@@ -1,12 +1,4 @@
 const createMDX = require("@next/mdx");
-// rehype-highlight v7은 MDX 3.x와 호환성 문제가 있어 주석 처리
-// const rehypeHighlight = require("rehype-highlight");
-// const typescript = require("highlight.js/lib/languages/typescript");
-// const javascript = require("highlight.js/lib/languages/javascript");
-// const json = require("highlight.js/lib/languages/json");
-// const bash = require("highlight.js/lib/languages/bash");
-// const css = require("highlight.js/lib/languages/css");
-// const html = require("highlight.js/lib/languages/xml");
 
 // frontmatter를 제거하는 remark 플러그인
 function remarkRemoveFrontmatter() {
@@ -18,6 +10,48 @@ function remarkRemoveFrontmatter() {
       (node) => node.type !== "yaml" && node.type !== "toml"
     );
   };
+}
+
+// rehype-pretty-code 설정
+function getRehypePlugins() {
+  try {
+    const rehypePrettyCode = require("rehype-pretty-code");
+    // 함수인지 확인
+    const plugin = typeof rehypePrettyCode === "function" 
+      ? rehypePrettyCode 
+      : (rehypePrettyCode.default || rehypePrettyCode);
+    
+    if (typeof plugin !== "function") {
+      console.warn("rehype-pretty-code가 함수가 아닙니다. 코드 하이라이팅이 비활성화됩니다.");
+      return [];
+    }
+
+    return [
+      [
+        plugin,
+        {
+          theme: "github-dark",
+          keepBackground: false,
+          onVisitLine(node) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted from the browser
+            if (node.children.length === 0) {
+              node.children = [{ type: "text", value: " " }];
+            }
+          },
+          onVisitHighlightedLine(node) {
+            node.properties.className = ["line", "highlighted"];
+          },
+          onVisitHighlightedWord(node) {
+            node.properties.className = ["word", "highlighted"];
+          },
+        },
+      ],
+    ];
+  } catch (e) {
+    console.warn("rehype-pretty-code를 로드할 수 없습니다:", e.message);
+    return [];
+  }
 }
 
 /** @type {import('next').NextConfig} */
@@ -48,7 +82,7 @@ const nextConfig = {
           loader: "@mdx-js/loader",
           options: {
             remarkPlugins: [remarkRemoveFrontmatter],
-            rehypePlugins: [],
+            rehypePlugins: getRehypePlugins(),
           },
         },
       ],
@@ -62,7 +96,7 @@ const withMDX = createMDX({
   // MDX 옵션 설정
   options: {
     remarkPlugins: [remarkRemoveFrontmatter],
-    rehypePlugins: [],
+    rehypePlugins: getRehypePlugins(),
   },
 });
 

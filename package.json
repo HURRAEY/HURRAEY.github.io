@@ -22,6 +22,7 @@
     "react-clock": "^6.0.0",
     "react-dom": "^18.2.0",
     "rehype-highlight": "^7.0.2",
+    "rehype-pretty-code": "^0.13.1",
     "rss": "^1.2.2"
   },
   "devDependencies": {
