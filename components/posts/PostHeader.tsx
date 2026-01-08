@@ -1,16 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import type { Post } from "../../lib/types";
+import type { ColorGradient } from "../../lib/postUtils";
 
 interface PostHeaderProps {
   post: Post;
+  headerGradient: ColorGradient;
 }
 
-export function PostHeader({ post }: PostHeaderProps) {
+export function PostHeader({ post, headerGradient }: PostHeaderProps) {
   return (
     <div
       css={css`
-        background: linear-gradient(to right, #e91e63, #f06292, #ba68c8);
+        background: linear-gradient(to right, ${headerGradient.from}, ${headerGradient.to});
         padding: 1rem;
         border-bottom: 4px solid black;
         @media (min-width: 768px) {
@@ -19,16 +21,22 @@ export function PostHeader({ post }: PostHeaderProps) {
       `}
     >
       <h1
+        className="post-header-title"
         css={css`
-          color: white;
-          font-size: 1rem;
-          margin: 0 0 0.5rem;
-          font-family: "DungGeunMo", monospace;
-          line-height: 1.6;
-          text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+          color: white !important;
+          font-size: 1.5rem;
+          margin: 0 0 0.75rem;
+          font-family: "DungGeunMo", monospace !important;
+          line-height: 1.5;
+          text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.6);
           font-weight: bold;
+          display: block !important;
           @media (min-width: 768px) {
-            font-size: 1.25rem;
+            font-size: 2rem;
+            margin: 0 0 1rem;
+          }
+          @media (min-width: 1024px) {
+            font-size: 2.5rem;
           }
         `}
       >

@@ -157,7 +157,7 @@ body {
 }
 
 /* 자동 생성 제목 및 네비게이션 숨기기 */
-h1:first-of-type:not(.retro-heading) {
+h1:first-of-type:not(.retro-heading):not(.post-header-title) {
   display: none !important;
 }
 
@@ -166,11 +166,16 @@ h1:first-of-type:not(.retro-heading) {
 }
 
 /* prose 스타일 override - retro-heading 색상 보호 */
-.retro-heading,
-h1.retro-heading,
-.nx-prose :where(h1.retro-heading),
-[class*="prose"] h1.retro-heading {
+.retro-heading:not(.post-header-title),
+h1.retro-heading:not(.post-header-title),
+.nx-prose :where(h1.retro-heading:not(.post-header-title)),
+[class*="prose"] h1.retro-heading:not(.post-header-title) {
   color: #e91e63 !important;
+}
+
+/* PostHeader의 title은 항상 하얀색 */
+.post-header-title {
+  color: white !important;
 }
 
 /* article 여백 제거 */

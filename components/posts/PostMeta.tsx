@@ -49,7 +49,7 @@ export function PostMeta({ post, views }: PostMetaProps) {
             font-family: "DungGeunMo", monospace;
           `}
         >
-          HURRAEY
+          {post.author || "HURRAEY"}
         </span>
       </div>
       <div

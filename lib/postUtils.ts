@@ -39,3 +39,28 @@ export function getInitialViews(post: Post): number {
   const hash = simpleHash(post.route + post.date);
   return 500 + (hash % 5000);
 }
+
+/**
+ * 색상 그라데이션 타입
+ */
+export interface ColorGradient {
+  from: string;
+  to: string;
+}
+
+/**
+ * 포스트 제목 기반으로 색상 그라데이션 결정
+ * RetroPostCard와 동일한 로직 사용
+ */
+export function getColorGradient(post: Post): ColorGradient {
+  const colors: ColorGradient[] = [
+    { from: "#e91e63", to: "#f06292" },
+    { from: "#9c27b0", to: "#ba68c8" },
+    { from: "#00bcd4", to: "#4dd0e1" },
+    { from: "#4caf50", to: "#81c784" },
+    { from: "#ff9800", to: "#ffb74d" },
+    { from: "#f44336", to: "#e57373" },
+  ];
+  const index = post.title.charCodeAt(0) % colors.length;
+  return colors[index];
+}

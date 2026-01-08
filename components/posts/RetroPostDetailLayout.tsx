@@ -8,6 +8,7 @@ import {
   getInitialLikes,
   getInitialViews,
   parseTags,
+  getColorGradient,
 } from "../../lib/postUtils";
 import { BackButton } from "./BackButton";
 import { PostHeader } from "./PostHeader";
@@ -31,6 +32,7 @@ export function RetroPostDetailLayout({
 
   const tags = useMemo(() => parseTags(post.tag), [post.tag]);
   const views = useMemo(() => getInitialViews(post), [post]);
+  const headerGradient = useMemo(() => getColorGradient(post), [post]);
 
   const handleLike = () => {
     setLikes((prev) => (isLiked ? prev - 1 : prev + 1));
@@ -69,7 +71,7 @@ export function RetroPostDetailLayout({
           box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 0.3);
         `}
       >
-        <PostHeader post={post} />
+        <PostHeader post={post} headerGradient={headerGradient} />
         <PostMeta post={post} views={views} />
 
         <div

@@ -147,12 +147,12 @@ export const retroMarkdownStyles = css`
   }
 
   & ul li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
+    display: block;
     margin: 0.5rem 0;
     color: #1a0033;
     font-size: 0.75rem;
+    position: relative;
+    padding-left: 1.25rem;
     @media (min-width: 768px) {
       font-size: 0.875rem;
     }
@@ -161,8 +161,19 @@ export const retroMarkdownStyles = css`
   & ul li::before {
     content: "●";
     color: #ff1493;
-    margin-top: 0.25rem;
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 0.25rem;
+  }
+
+  /* 중첩된 리스트가 아래에 표시되도록 */
+  & ul li > ul,
+  & ul li > ol,
+  & ol li > ul,
+  & ol li > ol {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    width: calc(100% - 1rem);
   }
 
   & ol {
@@ -178,13 +189,13 @@ export const retroMarkdownStyles = css`
   }
 
   & ol li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
+    display: block;
     margin: 0.5rem 0;
     color: #1a0033;
     font-size: 0.75rem;
     counter-increment: list-counter;
+    position: relative;
+    padding-left: 1.75rem;
     @media (min-width: 768px) {
       font-size: 0.875rem;
     }
@@ -193,7 +204,9 @@ export const retroMarkdownStyles = css`
   & ol li::before {
     content: counter(list-counter) ".";
     color: #00bcd4;
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
     font-weight: bold;
   }
 

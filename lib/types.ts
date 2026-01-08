@@ -4,6 +4,7 @@ export interface Post {
   date: string;
   description: string;
   tag: string;
+  author: string;
 }
 
 

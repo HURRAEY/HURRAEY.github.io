@@ -65,6 +65,7 @@ async function generate() {
       date: frontmatter.data.date || "",
       description: frontmatter.data.description || "",
       tag: tags,
+      author: frontmatter.data.author || "HURRAEY",
     });
   }
 
@@ -98,6 +99,7 @@ export interface Post {
   date: string;
   description: string;
   tag: string;
+  author: string;
 }
 
 export const posts: Post[] = ${JSON.stringify(postsList, null, 2)};
