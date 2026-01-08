@@ -11,6 +11,7 @@ import { RetroSidebar } from "../components/layouts/RetroSidebar";
 import DefaultLayout from "../components/layouts/DefaultLayout";
 import { RetroLoading } from "../components/layouts/loading/RetroLoading";
 import { RetroPostDetailLayout } from "../components/posts/RetroPostDetailLayout";
+import { CursorSparkles } from "../components/layouts/CursorSparkles";
 
 // 빌드 타임에 포스트 목록 로드
 const posts = loadPosts();
@@ -275,6 +276,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </DefaultLayout>
       </div>
       <RetroSidebar />
+      <CursorSparkles />
       {/* <Sidebar posts={posts} /> */}
     </>
   );
