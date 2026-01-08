@@ -1,4 +1,11 @@
 const createMDX = require("@next/mdx");
+const rehypeHighlight = require("rehype-highlight");
+const typescript = require("highlight.js/lib/languages/typescript");
+const javascript = require("highlight.js/lib/languages/javascript");
+const json = require("highlight.js/lib/languages/json");
+const bash = require("highlight.js/lib/languages/bash");
+const css = require("highlight.js/lib/languages/css");
+const html = require("highlight.js/lib/languages/xml");
 
 // frontmatter를 제거하는 remark 플러그인
 function remarkRemoveFrontmatter() {
@@ -76,7 +83,24 @@ const nextConfig = {
           loader: "@mdx-js/loader",
           options: {
             remarkPlugins: [remarkRemoveFrontmatter],
-            rehypePlugins: [rehypeRemoveFrontmatter],
+            rehypePlugins: [
+              rehypeRemoveFrontmatter,
+              [
+                rehypeHighlight,
+                {
+                  languages: {
+                    typescript,
+                    javascript,
+                    json,
+                    bash,
+                    css,
+                    html,
+                  },
+                  detect: true,
+                  ignoreMissing: true,
+                },
+              ],
+            ],
           },
         },
       ],
@@ -90,7 +114,24 @@ const withMDX = createMDX({
   // MDX 옵션 설정
   options: {
     remarkPlugins: [remarkRemoveFrontmatter],
-    rehypePlugins: [rehypeRemoveFrontmatter],
+    rehypePlugins: [
+      rehypeRemoveFrontmatter,
+      [
+        rehypeHighlight,
+        {
+          languages: {
+            typescript,
+            javascript,
+            json,
+            bash,
+            css,
+            html,
+          },
+          detect: true,
+          ignoreMissing: true,
+        },
+      ],
+    ],
   },
 });
 

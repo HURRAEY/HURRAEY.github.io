@@ -213,38 +213,144 @@ export const retroMarkdownStyles = css`
   /* Code */
   & code:not(pre code) {
     padding: 0.25rem 0.5rem;
-    background: #2d2d2d;
-    color: #00ff00;
-    border: 2px solid #00ff00;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border: 2px solid #3e3e3e;
     font-size: 0.75rem;
-    font-family: "VT323", monospace;
-    image-rendering: pixelated;
-    border-radius: 0;
+    font-family: "Fira Code", "JetBrains Mono", "Consolas", "Monaco", "Courier New", monospace;
+    border-radius: 3px;
+    font-weight: 500;
   }
 
   & pre {
-    background: #2d2d2d;
-    border: 4px solid #00ff00;
-    padding: 1rem;
+    background: #1e1e1e;
+    border: 1px solid #3e3e3e;
+    border-left: 4px solid #007acc;
+    padding: 1.25rem;
     margin: 1.5rem 0;
-    box-shadow: 6px 6px 0px 0px rgba(0, 255, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05);
     overflow-x: auto;
-    image-rendering: pixelated;
+    border-radius: 4px;
+    position: relative;
     @media (min-width: 768px) {
       padding: 1.5rem;
     }
   }
 
+  & pre::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2.5rem;
+    background: linear-gradient(to bottom, rgba(0, 122, 204, 0.1), transparent);
+    pointer-events: none;
+    border-radius: 4px 4px 0 0;
+  }
+
   & pre code {
-    background: transparent;
+    background: transparent !important;
     border: none;
     padding: 0;
-    color: #00ff00;
-    font-family: "VT323", monospace;
-    font-size: 0.75rem;
+    color: #d4d4d4 !important;
+    font-family: "Fira Code", "JetBrains Mono", "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    font-weight: 400;
+    display: block;
+    white-space: pre;
     @media (min-width: 768px) {
       font-size: 0.875rem;
+      line-height: 1.7;
     }
+  }
+
+  /* highlight.js 기본 스타일 오버라이드 */
+  & pre code.hljs,
+  & pre code:not(.hljs),
+  & pre code span {
+    background: transparent !important;
+    color: #d4d4d4 !important;
+  }
+
+  /* highlight.js가 적용되지 않은 경우를 위한 기본 색상 */
+  & pre code *:not(.hljs-keyword):not(.hljs-string):not(.hljs-comment):not(.hljs-number):not(.hljs-function):not(.hljs-variable):not(.hljs-type) {
+    color: #d4d4d4 !important;
+  }
+
+  /* 코드 구문 강조 색상 (VS Code 스타일) */
+  & pre code .hljs-keyword,
+  & pre code .hljs-selector-tag,
+  & pre code .hljs-built_in,
+  & pre code .hljs-name,
+  & pre code .hljs-tag {
+    color: #569cd6 !important;
+    font-weight: 600;
+  }
+
+  & pre code .hljs-string,
+  & pre code .hljs-attr,
+  & pre code .hljs-symbol,
+  & pre code .hljs-bullet,
+  & pre code .hljs-link {
+    color: #ce9178 !important;
+  }
+
+  & pre code .hljs-title,
+  & pre code .hljs-section,
+  & pre code .hljs-function,
+  & pre code .hljs-title.function_ {
+    color: #dcdcaa !important;
+  }
+
+  & pre code .hljs-comment,
+  & pre code .hljs-quote,
+  & pre code .hljs-doctag {
+    color: #6a9955 !important;
+    font-style: italic;
+  }
+
+  & pre code .hljs-number,
+  & pre code .hljs-literal {
+    color: #b5cea8 !important;
+  }
+
+  & pre code .hljs-variable,
+  & pre code .hljs-template-variable,
+  & pre code .hljs-attribute {
+    color: #9cdcfe !important;
+  }
+
+  & pre code .hljs-type,
+  & pre code .hljs-class,
+  & pre code .hljs-class .hljs-title {
+    color: #4ec9b0 !important;
+  }
+
+  & pre code .hljs-meta,
+  & pre code .hljs-meta .hljs-keyword {
+    color: #569cd6 !important;
+  }
+
+  & pre code .hljs-params {
+    color: #d4d4d4 !important;
+  }
+
+  & pre code .hljs-property {
+    color: #9cdcfe !important;
+  }
+
+  & pre code .hljs-operator {
+    color: #d4d4d4 !important;
+  }
+
+  & pre code .hljs-punctuation {
+    color: #d4d4d4 !important;
+  }
+
+  & pre code .hljs-regexp {
+    color: #d16969 !important;
   }
 
   /* Tables */
