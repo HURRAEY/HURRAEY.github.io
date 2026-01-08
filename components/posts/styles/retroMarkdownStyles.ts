@@ -1,0 +1,385 @@
+import { css } from "@emotion/react";
+
+/**
+ * 레트로 픽셀 아트 스타일의 마크다운 스타일
+ */
+export const retroMarkdownStyles = css`
+  font-family: "DungGeunMo", monospace;
+  font-size: 0.875rem;
+  color: #1a0033;
+  line-height: 1.7;
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
+
+  /* Headings */
+  & h1 {
+    font-family: "DungGeunMo", monospace;
+    color: #ff1493;
+    font-size: 1.25rem;
+    margin: 2rem 0 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 4px solid #ffb6c1;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      font-size: 1.875rem;
+    }
+  }
+
+  & h2 {
+    font-family: "DungGeunMo", monospace;
+    color: #e91e63;
+    font-size: 1.125rem;
+    margin: 1.5rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #ffb6c1;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  & h3 {
+    font-family: "DungGeunMo", monospace;
+    color: #ff69b4;
+    font-size: 1rem;
+    margin: 1.25rem 0 0.5rem;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 1.125rem;
+    }
+  }
+
+  & h4 {
+    font-family: "DungGeunMo", monospace;
+    color: #ff1493;
+    font-size: 0.875rem;
+    margin: 1rem 0 0.5rem;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  & h5 {
+    font-family: "DungGeunMo", monospace;
+    color: #c2185b;
+    font-size: 0.75rem;
+    margin: 0.875rem 0 0.5rem;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 0.875rem;
+    }
+  }
+
+  & h6 {
+    font-family: "DungGeunMo", monospace;
+    color: #880e4f;
+    font-size: 0.75rem;
+    margin: 0.75rem 0 0.5rem;
+    font-weight: bold;
+  }
+
+  /* Emphasis */
+  & strong {
+    color: #ff1493;
+    font-weight: bold;
+  }
+
+  & em {
+    color: #9c27b0;
+    font-style: italic;
+  }
+
+  & del {
+    color: #808080;
+    text-decoration: line-through;
+  }
+
+  /* Blockquotes */
+  & blockquote {
+    background: linear-gradient(to bottom right, #ffe4e1, #ffc0cb);
+    border-left: 4px solid #ff1493;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 4px 4px 0px 0px rgba(255, 20, 147, 0.3);
+    image-rendering: pixelated;
+    position: relative;
+    @media (min-width: 768px) {
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  & blockquote::before {
+    content: "";
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff69b4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z'/%3E%3Cpath d='M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25-.25 4-2.75 4v3c0 1 0 1 1 1z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 0.5rem;
+  }
+
+  & blockquote p {
+    color: #c2185b;
+    margin: 0;
+    font-family: "DungGeunMo", monospace;
+    font-size: 0.875rem;
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  /* Lists */
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    background: #fff0f5;
+    border: 3px solid #ffb6c1;
+    padding: 1rem;
+    box-shadow: 4px 4px 0px 0px rgba(255, 182, 193, 0.5);
+    image-rendering: pixelated;
+  }
+
+  & ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+    color: #1a0033;
+    font-size: 0.75rem;
+    @media (min-width: 768px) {
+      font-size: 0.875rem;
+    }
+  }
+
+  & ul li::before {
+    content: "●";
+    color: #ff1493;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  & ol {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    background: #f0f8ff;
+    border: 3px solid #00bcd4;
+    padding: 1rem;
+    box-shadow: 4px 4px 0px 0px rgba(0, 188, 212, 0.5);
+    image-rendering: pixelated;
+    counter-reset: list-counter;
+  }
+
+  & ol li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+    color: #1a0033;
+    font-size: 0.75rem;
+    counter-increment: list-counter;
+    @media (min-width: 768px) {
+      font-size: 0.875rem;
+    }
+  }
+
+  & ol li::before {
+    content: counter(list-counter) ".";
+    color: #00bcd4;
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+
+  /* Code */
+  & code:not(pre code) {
+    padding: 0.25rem 0.5rem;
+    background: #2d2d2d;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    font-size: 0.75rem;
+    font-family: "VT323", monospace;
+    image-rendering: pixelated;
+    border-radius: 0;
+  }
+
+  & pre {
+    background: #2d2d2d;
+    border: 4px solid #00ff00;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    box-shadow: 6px 6px 0px 0px rgba(0, 255, 0, 0.3);
+    overflow-x: auto;
+    image-rendering: pixelated;
+    @media (min-width: 768px) {
+      padding: 1.5rem;
+    }
+  }
+
+  & pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #00ff00;
+    font-family: "VT323", monospace;
+    font-size: 0.75rem;
+    @media (min-width: 768px) {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Tables */
+  & table {
+    width: 100%;
+    border: 4px solid #ff1493;
+    box-shadow: 6px 6px 0px 0px rgba(255, 20, 147, 0.3);
+    margin: 1.5rem 0;
+    image-rendering: pixelated;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  & thead {
+    background: linear-gradient(to right, #ff1493, #ff69b4);
+  }
+
+  & th {
+    border: 2px solid #c2185b;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    color: white;
+    font-family: "DungGeunMo", monospace;
+    font-size: 0.625rem;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 0.75rem;
+      padding: 1rem;
+    }
+  }
+
+  & tbody {
+    font-family: "DungGeunMo", monospace;
+  }
+
+  & tbody tr:nth-child(even) {
+    background: #ffe4e1;
+  }
+
+  & tbody tr:nth-child(odd) {
+    background: white;
+  }
+
+  & tbody tr:hover {
+    background: #ffb6c1;
+    transition: background-color 0.2s;
+  }
+
+  & td {
+    border: 2px solid #ffb6c1;
+    padding: 0.75rem 1rem;
+    color: #1a0033;
+    font-size: 0.75rem;
+    @media (min-width: 768px) {
+      font-size: 0.875rem;
+      padding: 1rem;
+    }
+  }
+
+  & td:first-child {
+    color: #ff1493;
+    font-weight: bold;
+  }
+
+  /* Links */
+  & a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #ffe4e1;
+    border: 3px solid #ff1493;
+    color: #ff1493;
+    text-decoration: none;
+    font-family: "DungGeunMo", monospace;
+    font-size: 0.875rem;
+    box-shadow: 4px 4px 0px 0px rgba(255, 20, 147, 0.3);
+    image-rendering: pixelated;
+    transition: all 0.2s;
+    margin: 0.25rem 0;
+  }
+
+  & a:hover {
+    background: #ffb6c1;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px rgba(255, 20, 147, 0.3);
+  }
+
+  & a::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ff1493' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  /* Footnotes */
+  & sup {
+    color: #ff1493;
+    font-size: 0.625rem;
+  }
+
+  & sup a {
+    display: inline;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    font-size: inherit;
+  }
+
+  & sup a:hover {
+    text-decoration: underline;
+    transform: none;
+    box-shadow: none;
+  }
+
+  & sup a::before {
+    display: none;
+  }
+
+  /* Paragraphs */
+  & p {
+    margin: 1rem 0;
+    color: #1a0033;
+    font-size: 0.875rem;
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  /* Images */
+  & img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+    border: 3px solid #ff1493;
+    box-shadow: 4px 4px 0px 0px rgba(255, 20, 147, 0.3);
+    image-rendering: pixelated;
+  }
+
+  /* Horizontal Rules */
+  & hr {
+    border: none;
+    border-top: 4px solid #ffb6c1;
+    margin: 2rem 0;
+  }
+`;
