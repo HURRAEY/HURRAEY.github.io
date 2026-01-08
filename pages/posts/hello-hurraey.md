@@ -1,9 +1,14 @@
 ---
-title: 블로그 리셋과 앞으로의 계획
-date: 2025/11/25
-description: HURRAEY 블로그 기본 설정 과정을 기록하고 다음 글거리 메모.
-tag: setup
+title: BLOG RESET & PLANS
+titleKo: 블로그 리셋과 앞으로의 계획
 author: HURRAEY
+date: 2025-11-25
+description: HURRAEY 블로그 기본 설정 과정을 기록하고 다음 글거리 메모. Recording the basic setup process and planning future content.
+tags: setup, blog
+color: from-[#667eea] to-[#764ba2]
+likes: 42
+comments: 8
+views: 256
 ---
 
 # 블로그 리셋과 앞으로의 계획

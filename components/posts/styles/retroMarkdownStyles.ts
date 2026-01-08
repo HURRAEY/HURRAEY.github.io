@@ -210,88 +210,309 @@ export const retroMarkdownStyles = css`
     font-weight: bold;
   }
 
-  /* Code - Inline code */
+  /* Code - Inline code with Pink Gradient */
   & code:not(pre code) {
     padding: 0.25rem 0.5rem;
-    background: #1e1e1e;
-    color: #d4d4d4;
-    border: 2px solid #3e3e3e;
+    background: linear-gradient(to right, #ff1493, #ff69b4);
+    color: white;
+    border: 3px solid #ff1493;
     font-size: 0.75rem;
-    font-family: "Fira Code", "JetBrains Mono", "Consolas", "Monaco", "Courier New", monospace;
-    border-radius: 3px;
+    font-family: "VT323", monospace;
+    border-radius: 0;
     font-weight: 500;
+    margin: 0 0.25rem;
+    box-shadow: 
+      3px 3px 0px 0px rgba(255, 20, 147, 0.6),
+      inset -1px -1px 0 0 rgba(0, 0, 0, 0.3),
+      inset 1px 1px 0 0 rgba(255, 255, 255, 0.3);
+    image-rendering: pixelated;
+    transition: all 0.2s;
+    display: inline-block;
   }
 
-  /* Code blocks - rehype-pretty-code */
+  & code:not(pre code):hover {
+    box-shadow: 
+      5px 5px 0px 0px rgba(255, 20, 147, 0.8),
+      inset -1px -1px 0 0 rgba(0, 0, 0, 0.3),
+      inset 1px 1px 0 0 rgba(255, 255, 255, 0.3);
+  }
+
+  & code:not(pre code)::before {
+    content: "⟨ ";
+  }
+
+  & code:not(pre code)::after {
+    content: " ⟩";
+  }
+
+  /* Code blocks - Windows 95 Style with Pink Theme */
   & pre {
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-left: 4px solid #007acc;
+    background: #c0c0c0;
+    border: 4px solid #ff1493;
     padding: 0;
-    margin: 1.5rem 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    margin: 2rem 0;
+    box-shadow: 8px 8px 0px 0px rgba(255, 20, 147, 0.5);
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 0;
     position: relative;
+    image-rendering: pixelated;
   }
 
-  & pre code {
-    display: grid;
-    min-width: 100%;
-    width: 100%;
-    background: transparent !important;
-    border: none;
-    padding: 1.25rem;
-    color: #c9d1d9;
-    font-family: "Fira Code", "JetBrains Mono", "Consolas", "Monaco", "Courier New", monospace;
-    font-size: 0.8125rem;
-    line-height: 1.6;
-    font-weight: 400;
-    counter-reset: line;
+  /* Window Title Bar */
+  & pre::before {
+    content: "📟 CODE_BLOCK.EXE   🟢 🟡 🟣";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    background: linear-gradient(to right, #ff1493, #ff69b4);
+    border-bottom: 4px solid #c71585;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.75rem;
+    color: white;
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.625rem;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 
+      inset -1px -1px 0 0 rgba(0, 0, 0, 0.5),
+      inset 1px 1px 0 0 rgba(255, 255, 255, 0.5);
     @media (min-width: 768px) {
-      padding: 1.5rem;
-      font-size: 0.875rem;
-      line-height: 1.7;
+      font-size: 0.75rem;
+      height: 2.5rem;
+    }
+  }
+  
+  /* Blinking green LED animation */
+  @keyframes blink-led {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0.3;
     }
   }
 
-  & pre code > .line {
-    padding: 0 0.5rem;
-    border-left: 3px solid transparent;
+  /* Window Control Buttons (right side of title bar) */
+  & pre::after {
+    content: "▭  ☐  ✕";
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    color: black;
+    background: #c0c0c0;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.625rem;
+    font-family: "Press Start 2P", monospace;
+    z-index: 4;
+    letter-spacing: 0.5rem;
+    box-shadow: 
+      inset -1px -1px 0 0 #000000,
+      inset 1px 1px 0 0 #ffffff;
+    @media (min-width: 768px) {
+      font-size: 0.75rem;
+      top: 0.75rem;
+      right: 1rem;
+    }
   }
 
+  /* Menu Bar */
+  & pre code::before {
+    content: "File    Edit    View    Help";
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    height: 1.5rem;
+    background: #c0c0c0;
+    border-bottom: 2px solid #808080;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    font-family: "VT323", monospace;
+    font-size: 0.625rem;
+    color: black;
+    box-shadow: 
+      inset -1px -1px 0 0 #000000,
+      inset 1px 1px 0 0 #ffffff;
+    word-spacing: 0.5rem;
+    @media (min-width: 768px) {
+      top: 2.5rem;
+      height: 1.75rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  & pre code {
+    display: block;
+    min-width: 100%;
+    width: max-content;
+    background: linear-gradient(to bottom right, #1a0033, #2d0a4e, #1a0033) !important;
+    border: none;
+    padding: 1rem;
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
+    color: #f8f8f2;
+    font-family: "VT323", monospace;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    font-weight: 400;
+    counter-reset: line;
+    position: relative;
+    white-space: pre;
+    overflow-x: auto;
+    @media (min-width: 768px) {
+      padding: 1.5rem;
+      padding-top: 5.5rem;
+      padding-bottom: 3.5rem;
+      font-size: 1rem;
+      line-height: 2;
+    }
+  }
+
+  /* Code Content Wrapper with Inner Border */
+  & pre code {
+    box-shadow: 
+      inset 0 0 0 4px rgba(255, 105, 180, 0.3),
+      inset 4px 4px 12px rgba(255, 20, 147, 0.2);
+  }
+
+  & pre code > .line {
+    padding: 0.125rem 0.5rem;
+    position: relative;
+    display: block;
+    padding-left: 4.5rem;
+    min-height: 1.5rem;
+    @media (min-width: 768px) {
+      padding-left: 5rem;
+      min-height: 1.75rem;
+    }
+  }
+
+  /* Line Numbers */
   & pre code > .line::before {
     counter-increment: line;
-    content: counter(line);
-    display: inline-block;
-    width: 1rem;
-    margin-right: 1rem;
+    content: counter(line, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    width: 3rem;
     text-align: right;
-    color: #6e7681;
-    font-size: 0.75rem;
+    color: #ff69b4;
+    font-size: 0.625rem;
+    font-family: "Press Start 2P", monospace;
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+    user-select: none;
+    background: rgba(45, 10, 78, 0.5);
+    border-right: 4px solid rgba(255, 20, 147, 0.5);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    @media (min-width: 768px) {
+      font-size: 0.75rem;
+      width: 3.5rem;
+    }
   }
 
   /* Highlighted lines */
   & pre code > .line.highlighted {
-    background: rgba(56, 139, 253, 0.1);
-    border-left-color: #388bfd;
+    background: rgba(255, 182, 193, 0.2);
   }
 
   /* Highlighted words */
   & pre code .word.highlighted {
-    background: rgba(56, 139, 253, 0.2);
+    background: rgba(255, 20, 147, 0.3);
     padding: 0.125rem 0.25rem;
-    border-radius: 2px;
+    border: 2px solid #ff69b4;
   }
 
-  /* rehype-pretty-code가 생성하는 스타일 보존 */
+  /* Status Bar */
+  & pre code::after {
+    content: "🟩 LINES: " counter(line) "   🟢 READY   │   UTF-8   │   CRLF   │   PIXEL MODE";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    background: #c0c0c0;
+    border-top: 2px solid #808080;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    font-family: "VT323", monospace;
+    font-size: 0.625rem;
+    color: black;
+    box-shadow: 
+      inset -1px -1px 0 0 #000000,
+      inset 1px 1px 0 0 #ffffff;
+    justify-content: flex-start;
+    gap: 1rem;
+    @media (min-width: 768px) {
+      height: 2.25rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  /* rehype-pretty-code가 생성하는 스타일 - Windows 95 Pink Theme */
   & pre code[data-theme*=" "] {
     color-scheme: dark;
   }
 
   & pre code[data-theme*=" "] span[data-highlighted-chars] {
-    background-color: rgba(56, 139, 253, 0.2);
-    border-radius: 2px;
+    background-color: rgba(255, 20, 147, 0.3);
+    border: 2px solid #ff69b4;
+  }
+
+  /* Syntax highlighting colors - Dracula-inspired Pink Theme with Icons */
+  /* 주석 - 퍼플 (💭 이모지) */
+  & pre code[data-theme*=" "] .line span[style*="rgb(106, 115, 125)"],
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(106, 115, 125)"] {
+    color: #bd93f9 !important;
+    opacity: 0.7;
+  }
+
+  /* 키워드, 함수 - 핑크 (★ 이모지) */
+  & pre code[data-theme*=" "] .line span[style*="rgb(215, 58, 73)"],
+  & pre code[data-theme*=" "] .line span[style*="rgb(111, 66, 193)"],
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(215, 58, 73)"],
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(111, 66, 193)"] {
+    color: #ff79c6 !important;
+    font-weight: 600;
+  }
+
+  /* import/export - 사이언 (⚡ 이모지) */
+  & pre code[data-theme*=" "] .line span[style*="rgb(0, 92, 197)"],
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(0, 92, 197)"] {
+    color: #8be9fd !important;
+  }
+
+  /* return - 그린 (← 이모지) */
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(34, 134, 58)"] {
+    color: #50fa7b !important;
+  }
+
+  /* 문자열 - 옐로우 (✿ 이모지) */
+  & pre code[data-theme*=" "] .line span[style*="rgb(0, 111, 224)"],
+  & pre code[data-theme*=" "] .line span[style*="rgb(0, 134, 179)"],
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(0, 111, 224)"],
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(0, 134, 179)"] {
+    color: #f1fa8c !important;
+  }
+
+  /* JSX 태그 - 오렌지 (♦ 이모지) */
+  & pre code[data-theme*=" "] .line span[style*="color: rgb(173, 86, 0)"] {
+    color: #ffb86c !important;
+  }
+
+  /* 기본 텍스트 - 화이트 */
+  & pre code[data-theme*=" "] .line span {
+    color: #f8f8f2;
   }
 
   /* Tables */

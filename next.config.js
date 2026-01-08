@@ -30,7 +30,7 @@ function getRehypePlugins() {
       [
         plugin,
         {
-          theme: "github-dark",
+          theme: "github-light",
           keepBackground: false,
           onVisitLine(node) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty

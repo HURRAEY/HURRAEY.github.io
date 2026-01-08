@@ -1,9 +1,14 @@
 ---
-title: Next.js Pages
-date: 2021/3/18
-description: Learn more about Next.js pages.
-tag: web development
-author: You
+title: NEXT.JS PAGES GUIDE
+titleKo: Next.js 페이지 가이드
+author: HURRAEY
+date: 2021-03-18
+description: Learn more about Next.js pages. Next.js 페이지 시스템을 완벽하게 이해하는 가이드입니다.
+tags: nextjs, react, web development
+color: from-[#fa709a] to-[#fee140]
+likes: 167
+comments: 42
+views: 1245
 ---
 
 # Next.js Pages

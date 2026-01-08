@@ -1,9 +1,14 @@
 ---
-title: Footer 인터랙션 리팩터링 노트
-date: 2025/11/25
-description: Footer ripple 애니메이션을 React 렌더 사이클에서 분리한 여정.
-tag: interaction
+title: FOOTER INTERACTION REFACTORING
+titleKo: Footer 인터랙션 리팩터링 노트
 author: HURRAEY
+date: 2025-11-25
+description: Footer ripple 애니메이션을 React 렌더 사이클에서 분리한 여정. Journey of separating ripple animation from React render cycle.
+tags: react, performance, animation
+color: from-[#f093fb] to-[#f5576c]
+likes: 89
+comments: 15
+views: 523
 ---
 
 <figure>
