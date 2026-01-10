@@ -17,7 +17,7 @@ export function PostTags({ tags }: PostTagsProps) {
         flex-wrap: wrap;
         gap: 0.5rem;
         margin-top: 2rem;
-        padding-top: 1.25rem;
+        padding-top: 1.5rem;
         border-top: 2px solid #fce4ec;
       `}
     >
@@ -28,18 +28,25 @@ export function PostTags({ tags }: PostTagsProps) {
           css={css`
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.35rem 0.75rem;
+            gap: 0.25rem;
+            padding: 0.5rem 0.75rem;
             background: #f8bbd0;
             border: 2px solid #ec407a;
             font-size: 0.75rem;
             font-family: "DungGeunMo", monospace;
+            @media (min-width: 768px) {
+              font-size: 0.875rem;
+            }
           `}
         >
           <Tag
             css={css`
-              width: 0.9rem;
-              height: 0.9rem;
+              width: 0.75rem;
+              height: 0.75rem;
+              @media (min-width: 768px) {
+                width: 1rem;
+                height: 1rem;
+              }
             `}
           />
           {tag}

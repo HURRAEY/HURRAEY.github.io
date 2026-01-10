@@ -76,9 +76,12 @@ export function RetroPostDetailLayout({
 
         <div
           css={css`
-            padding: 1.25rem 1rem 1.5rem;
+            padding: 1.5rem;
             @media (min-width: 768px) {
-              padding: 2rem 2rem 2.5rem;
+              padding: 2rem;
+            }
+            @media (min-width: 1024px) {
+              padding: 3rem;
             }
           `}
         >

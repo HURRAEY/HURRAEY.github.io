@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Clock, MessageCircle, User } from "lucide-react";
+import { Clock, Eye, User } from "lucide-react";
 import type { Post } from "../../lib/types";
 
 interface PostMetaProps {
@@ -85,7 +85,7 @@ export function PostMeta({ post, views }: PostMetaProps) {
           gap: 0.35rem;
         `}
       >
-        <MessageCircle
+        <Eye
           css={css`
             width: 1rem;
             height: 1rem;

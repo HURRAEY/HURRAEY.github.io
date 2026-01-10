@@ -40,12 +40,16 @@ export function PostActionBar({
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1rem;
             border: 3px solid black;
             box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
             font-family: "DungGeunMo", monospace;
             font-size: 0.875rem;
             transition: all 0.2s;
+            @media (min-width: 768px) {
+              padding: 0.75rem 1.5rem;
+              font-size: 1rem;
+            }
             ${isLiked
               ? css`
                   background: #e91e63;
@@ -64,6 +68,10 @@ export function PostActionBar({
             css={css`
               width: 1.25rem;
               height: 1.25rem;
+              @media (min-width: 768px) {
+                width: 1.5rem;
+                height: 1.5rem;
+              }
               ${isLiked ? "fill: currentColor;" : ""}
             `}
           />

@@ -18,6 +18,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
       return (
         <div css={codeBlockContainerStyle}>
+          {/* Window Title Bar */}
           <div css={titleBarStyle}>
             <div css={titleLeftStyle}>
               <div css={iconBoxStyle}>
@@ -31,12 +32,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
               </div>
             </div>
             <div css={controlButtonsStyle}>
-              <button css={[buttonStyle, buttonHoverStyle]}>_</button>
-              <button css={[buttonStyle, buttonHoverStyle]}>□</button>
-              <button css={[buttonStyle, closeButtonStyle]}>×</button>
+              <button css={[buttonBaseStyle, minimizeButtonStyle]}>_</button>
+              <button css={[buttonBaseStyle, maximizeButtonStyle]}>□</button>
+              <button css={[buttonBaseStyle, closeButtonStyle]}>×</button>
             </div>
           </div>
 
+          {/* Menu Bar */}
           <div css={menuBarStyle}>
             <span css={menuItemStyle}>File</span>
             <span css={menuItemStyle}>Edit</span>
@@ -44,9 +46,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             <span css={menuItemStyle}>Help</span>
           </div>
 
-          <div css={codeAreaStyle}>
-            <div css={innerCodeAreaStyle}>
+          {/* Code Content - 외부 박스 (다크 그라데이션) */}
+          <div css={outerCodeAreaStyle}>
+            {/* 내부 네모 박스 (반투명 검은색) */}
+            <div css={innerBoxStyle}>
               <div css={codeFlexStyle}>
+                {/* Line Numbers */}
                 <div css={lineNumberContainerStyle}>
                   {lines.map((_, index) => (
                     <div key={index} css={lineNumberStyle}>
@@ -55,9 +60,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                   ))}
                 </div>
 
+                {/* Code Lines */}
                 <div css={codeLinesContainerStyle}>
                   <pre css={preStyle}>
                     {lines.map((line, index) => {
+                      // Comments
                       if (line.trim().startsWith('//') || line.trim().startsWith('/*') || line.trim().startsWith('*')) {
                         return (
                           <div key={index} css={commentLineStyle}>
@@ -66,6 +73,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                         );
                       }
 
+                      // Function/Class declarations
                       if (line.includes('function') || line.includes('class') || line.includes('const') || line.includes('let') || line.includes('var')) {
                         return (
                           <div key={index} css={lineStyleBase}>
@@ -75,6 +83,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                         );
                       }
 
+                      // Import/Export
                       if (line.includes('import') || line.includes('export')) {
                         return (
                           <div key={index} css={importLineStyle}>
@@ -83,6 +92,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                         );
                       }
 
+                      // Return statements
                       if (line.includes('return')) {
                         return (
                           <div key={index} css={returnLineStyle}>
@@ -91,6 +101,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                         );
                       }
 
+                      // Strings
                       if (line.includes('"') || line.includes("'") || line.includes('`')) {
                         return (
                           <div key={index} css={stringLineStyle}>
@@ -99,6 +110,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                         );
                       }
 
+                      // JSX tags
                       if (line.includes('<') && line.includes('>')) {
                         return (
                           <div key={index} css={jsxLineStyle}>
@@ -107,6 +119,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
                         );
                       }
 
+                      // Default
                       return (
                         <div key={index} css={defaultLineStyle}>
                           {line || ' '}
@@ -119,6 +132,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             </div>
           </div>
 
+          {/* Status Bar */}
           <div css={statusBarStyle}>
             <div css={statusLeftStyle}>
               <div css={statusItemStyle}>
@@ -160,6 +174,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   };
 }
 
+// ===== Emotion Styles - 다운로드 프로젝트와 완전히 동일 =====
+
 const codeBlockContainerStyle = css`
   margin: 2rem 0;
   background: #c0c0c0;
@@ -169,6 +185,7 @@ const codeBlockContainerStyle = css`
   image-rendering: pixelated;
 `;
 
+// Title Bar
 const titleBarStyle = css`
   background: linear-gradient(to right, #ff1493, #ff69b4);
   padding: 0.5rem 0.75rem;
@@ -218,9 +235,9 @@ const ledStyle = css`
 
 const greenLedStyle = css`
   background: #00ff00;
-  animation: blink 2s infinite;
+  animation: ledPulse 2s infinite;
   
-  @keyframes blink {
+  @keyframes ledPulse {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0.3; }
   }
@@ -234,12 +251,13 @@ const purpleLedStyle = css`
   background: #ff00ff;
 `;
 
+// Control Buttons
 const controlButtonsStyle = css`
   display: flex;
   gap: 0.25rem;
 `;
 
-const buttonStyle = css`
+const buttonBaseStyle = css`
   width: 1.25rem;
   height: 1.25rem;
   background: #c0c0c0;
@@ -256,7 +274,13 @@ const buttonStyle = css`
   transition: background 0.2s;
 `;
 
-const buttonHoverStyle = css`
+const minimizeButtonStyle = css`
+  &:hover {
+    background: #a0a0a0;
+  }
+`;
+
+const maximizeButtonStyle = css`
   &:hover {
     background: #a0a0a0;
   }
@@ -269,6 +293,7 @@ const closeButtonStyle = css`
   }
 `;
 
+// Menu Bar
 const menuBarStyle = css`
   background: #c0c0c0;
   padding: 0.25rem 0.75rem;
@@ -295,7 +320,8 @@ const menuItemStyle = css`
   }
 `;
 
-const codeAreaStyle = css`
+// Code Area - 외부 박스 (다크 그라데이션)
+const outerCodeAreaStyle = css`
   background: linear-gradient(to bottom right, #1a0033, #2d0a4e, #1a0033);
   padding: 1rem;
   
@@ -304,7 +330,8 @@ const codeAreaStyle = css`
   }
 `;
 
-const innerCodeAreaStyle = css`
+// 내부 네모 박스 (반투명 검은색 + 핑크 테두리)
+const innerBoxStyle = css`
   background: rgba(0, 0, 0, 0.4);
   border: 4px solid rgba(255, 105, 180, 0.3);
   padding: 1rem;
@@ -316,12 +343,13 @@ const codeFlexStyle = css`
   gap: 0.5rem;
 `;
 
+// Line Numbers Container
 const lineNumberContainerStyle = css`
   padding-right: 1rem;
+  padding-left: 0.5rem;
   border-right: 4px solid rgba(255, 20, 147, 0.5);
   user-select: none;
   background: rgba(45, 10, 78, 0.5);
-  padding-left: 0.5rem;
 `;
 
 const lineNumberStyle = css`
@@ -330,14 +358,10 @@ const lineNumberStyle = css`
   font-family: "Press Start 2P", monospace;
   text-align: right;
   padding: 0.125rem 0;
-  line-height: 1.8;
-  
-  @media (min-width: 768px) {
-    font-size: 0.75rem;
-    line-height: 2;
-  }
+  line-height: 1.625;
 `;
 
+// Code Lines Container
 const codeLinesContainerStyle = css`
   flex: 1;
   overflow-x: auto;
@@ -347,14 +371,10 @@ const preStyle = css`
   margin: 0;
   font-family: "VT323", monospace;
   font-size: 0.875rem;
-  line-height: 1.8;
-  
-  @media (min-width: 768px) {
-    font-size: 1rem;
-    line-height: 2;
-  }
+  line-height: 1.625;
 `;
 
+// Line Styles
 const lineStyleBase = css`
   padding: 0.125rem 0;
 `;
@@ -399,6 +419,7 @@ const defaultLineStyle = css`
   color: #f8f8f2;
 `;
 
+// Status Bar
 const statusBarStyle = css`
   background: #c0c0c0;
   padding: 0.5rem 1rem;
@@ -411,10 +432,6 @@ const statusBarStyle = css`
   box-shadow: 
     inset -1px -1px 0 0 #000000,
     inset 1px 1px 0 0 #ffffff;
-  
-  @media (min-width: 768px) {
-    font-size: 0.75rem;
-  }
 `;
 
 const statusLeftStyle = css`
@@ -441,9 +458,9 @@ const readyIndicatorStyle = css`
   height: 0.75rem;
   background: #00ff00;
   border: 1px solid black;
-  animation: pulse 2s infinite;
+  animation: readyPulse 2s infinite;
   
-  @keyframes pulse {
+  @keyframes readyPulse {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0.5; }
   }
@@ -463,6 +480,7 @@ const separatorStyle = css`
   color: #808080;
 `;
 
+// Inline Code
 const inlineCodeStyle = css`
   padding: 0.25rem 0.75rem;
   background: linear-gradient(to right, #ff1493, #ff69b4);

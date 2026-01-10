@@ -24,19 +24,18 @@ export function PostHeader({ post, headerGradient }: PostHeaderProps) {
         className="post-header-title"
         css={css`
           color: white !important;
-          font-size: 1.5rem;
-          margin: 0 0 0.75rem;
-          font-family: "DungGeunMo", monospace !important;
+          font-size: 0.875rem;
+          margin: 0 0 0.5rem;
+          font-family: "Press Start 2P", monospace !important;
           line-height: 1.5;
-          text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.6);
-          font-weight: bold;
+          text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+          font-weight: normal;
           display: block !important;
           @media (min-width: 768px) {
-            font-size: 2rem;
-            margin: 0 0 1rem;
+            font-size: 1.125rem;
           }
           @media (min-width: 1024px) {
-            font-size: 2.5rem;
+            font-size: 1.25rem;
           }
         `}
       >
@@ -47,10 +46,10 @@ export function PostHeader({ post, headerGradient }: PostHeaderProps) {
           css={css`
             color: rgba(255, 255, 255, 0.9);
             margin: 0;
-            font-size: 0.875rem;
+            font-size: 1rem;
             font-family: "DungGeunMo", monospace;
             @media (min-width: 768px) {
-              font-size: 1rem;
+              font-size: 1.25rem;
             }
           `}
         >
