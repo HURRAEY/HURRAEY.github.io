@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 /**
- * 레트로 픽셀 아트 스타일의 마크다운 스타일
+ * 레트로 픽셀 아트 스타일의 마크다운 스타일 (다운로드 프로젝트와 동일)
  */
 export const retroMarkdownStyles = css`
   font-family: "DungGeunMo", monospace;
@@ -17,15 +17,12 @@ export const retroMarkdownStyles = css`
     font-family: "DungGeunMo", monospace;
     color: #ff1493;
     font-size: 1.25rem;
-    margin: 2rem 0 1rem;
-    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
     border-bottom: 4px solid #ffb6c1;
     font-weight: bold;
     @media (min-width: 768px) {
       font-size: 1.5rem;
-    }
-    @media (min-width: 1024px) {
-      font-size: 1.875rem;
     }
   }
 
@@ -33,7 +30,8 @@ export const retroMarkdownStyles = css`
     font-family: "DungGeunMo", monospace;
     color: #e91e63;
     font-size: 1.125rem;
-    margin: 1.5rem 0 0.75rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
     padding-bottom: 0.5rem;
     border-bottom: 3px solid #ffb6c1;
     font-weight: bold;
@@ -46,7 +44,8 @@ export const retroMarkdownStyles = css`
     font-family: "DungGeunMo", monospace;
     color: #ff69b4;
     font-size: 1rem;
-    margin: 1.25rem 0 0.5rem;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
     font-weight: bold;
     @media (min-width: 768px) {
       font-size: 1.125rem;
@@ -57,7 +56,8 @@ export const retroMarkdownStyles = css`
     font-family: "DungGeunMo", monospace;
     color: #ff1493;
     font-size: 0.875rem;
-    margin: 1rem 0 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
     font-weight: bold;
     @media (min-width: 768px) {
       font-size: 1rem;
@@ -83,6 +83,18 @@ export const retroMarkdownStyles = css`
     font-weight: bold;
   }
 
+  /* Paragraphs */
+  & p {
+    color: #1a0033;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    line-height: 1.625;
+    font-family: "DungGeunMo", monospace;
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
   /* Emphasis */
   & strong {
     color: #ff1493;
@@ -91,7 +103,9 @@ export const retroMarkdownStyles = css`
 
   & em {
     color: #9c27b0;
-    font-style: italic;
+    font-style: normal;
+    text-decoration: underline;
+    text-decoration-style: wavy;
   }
 
   & del {
@@ -128,10 +142,10 @@ export const retroMarkdownStyles = css`
     color: #c2185b;
     margin: 0;
     font-family: "DungGeunMo", monospace;
-    font-size: 0.875rem;
-    @media (min-width: 768px) {
-      font-size: 1rem;
-    }
+  }
+
+  & blockquote > * {
+    font-family: "DungGeunMo", monospace;
   }
 
   /* Lists */
@@ -147,12 +161,13 @@ export const retroMarkdownStyles = css`
   }
 
   & ul li {
-    display: block;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
     margin: 0.5rem 0;
     color: #1a0033;
     font-size: 0.75rem;
-    position: relative;
-    padding-left: 1.25rem;
+    font-family: "DungGeunMo", monospace;
     @media (min-width: 768px) {
       font-size: 0.875rem;
     }
@@ -161,9 +176,8 @@ export const retroMarkdownStyles = css`
   & ul li::before {
     content: "●";
     color: #ff1493;
-    position: absolute;
-    left: 0;
-    top: 0.25rem;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
   }
 
   /* 중첩된 리스트가 아래에 표시되도록 */
@@ -189,13 +203,14 @@ export const retroMarkdownStyles = css`
   }
 
   & ol li {
-    display: block;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
     margin: 0.5rem 0;
     color: #1a0033;
     font-size: 0.75rem;
     counter-increment: list-counter;
-    position: relative;
-    padding-left: 1.75rem;
+    font-family: "DungGeunMo", monospace;
     @media (min-width: 768px) {
       font-size: 0.875rem;
     }
@@ -204,10 +219,8 @@ export const retroMarkdownStyles = css`
   & ol li::before {
     content: counter(list-counter) ".";
     color: #00bcd4;
-    position: absolute;
-    left: 0;
-    top: 0;
     font-weight: bold;
+    flex-shrink: 0;
   }
 
   /* Code - Inline code with Pink Gradient */
@@ -572,8 +585,8 @@ export const retroMarkdownStyles = css`
     box-shadow: 6px 6px 0px 0px rgba(255, 20, 147, 0.3);
     margin: 1.5rem 0;
     image-rendering: pixelated;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
+    overflow: hidden;
   }
 
   & thead {
@@ -585,12 +598,11 @@ export const retroMarkdownStyles = css`
     padding: 0.75rem 1rem;
     text-align: left;
     color: white;
-    font-family: "DungGeunMo", monospace;
-    font-size: 0.625rem;
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.75rem;
     font-weight: bold;
     @media (min-width: 768px) {
-      font-size: 0.75rem;
-      padding: 1rem;
+      font-size: 0.875rem;
     }
   }
 
@@ -598,17 +610,13 @@ export const retroMarkdownStyles = css`
     font-family: "DungGeunMo", monospace;
   }
 
-  & tbody tr:nth-child(even) {
-    background: #ffe4e1;
-  }
-
-  & tbody tr:nth-child(odd) {
+  & tbody tr {
     background: white;
+    transition: background-color 0.2s;
   }
 
   & tbody tr:hover {
     background: #ffb6c1;
-    transition: background-color 0.2s;
   }
 
   & td {
@@ -618,83 +626,22 @@ export const retroMarkdownStyles = css`
     font-size: 0.75rem;
     @media (min-width: 768px) {
       font-size: 0.875rem;
-      padding: 1rem;
     }
-  }
-
-  & td:first-child {
-    color: #ff1493;
-    font-weight: bold;
   }
 
   /* Links */
   & a {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: #ffe4e1;
-    border: 3px solid #ff1493;
+    gap: 0.25rem;
     color: #ff1493;
-    text-decoration: none;
+    text-decoration: underline;
     font-family: "DungGeunMo", monospace;
-    font-size: 0.875rem;
-    box-shadow: 4px 4px 0px 0px rgba(255, 20, 147, 0.3);
-    image-rendering: pixelated;
-    transition: all 0.2s;
-    margin: 0.25rem 0;
+    transition: color 0.2s;
   }
 
   & a:hover {
-    background: #ffb6c1;
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0px 0px rgba(255, 20, 147, 0.3);
-  }
-
-  & a::before {
-    content: "";
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ff1493' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  /* Footnotes */
-  & sup {
-    color: #ff1493;
-    font-size: 0.625rem;
-  }
-
-  & sup a {
-    display: inline;
-    padding: 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    margin: 0;
-    font-size: inherit;
-  }
-
-  & sup a:hover {
-    text-decoration: underline;
-    transform: none;
-    box-shadow: none;
-  }
-
-  & sup a::before {
-    display: none;
-  }
-
-  /* Paragraphs */
-  & p {
-    margin: 1rem 0;
-    color: #1a0033;
-    font-size: 0.875rem;
-    @media (min-width: 768px) {
-      font-size: 1rem;
-    }
+    color: #c2185b;
   }
 
   /* Images */
