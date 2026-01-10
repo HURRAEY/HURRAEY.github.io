@@ -1,6 +1,8 @@
 // MDX 컴포넌트 라이브러리
 // 포스트에서 직접 사용할 수 있는 커스텀 컴포넌트들
 
+export { RetroCodeBlock } from './RetroCodeBlock';
+
 export const Video = ({ src, title, ...props }: { src: string; title?: string; [key: string]: any }) => {
   return (
     <figure style={{ margin: '2rem 0' }}>

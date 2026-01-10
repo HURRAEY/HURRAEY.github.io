@@ -38,6 +38,42 @@ function getRehypePlugins() {
             if (node.children.length === 0) {
               node.children = [{ type: "text", value: " " }];
             }
+            
+            // Add emoji icons based on line content
+            const lineText = node.children
+              .map(child => {
+                if (child.type === 'text') return child.value;
+                if (child.type === 'element' && child.children) {
+                  return child.children.map(c => c.value || '').join('');
+                }
+                return '';
+              })
+              .join('')
+              .trim();
+            
+            // Add data attribute for styling
+            if (!node.properties) node.properties = {};
+            if (!node.properties.className) node.properties.className = [];
+            
+            // Add line class
+            if (!node.properties.className.includes('line')) {
+              node.properties.className.push('line');
+            }
+            
+            // Determine line type and add appropriate emoji
+            if (lineText.startsWith('//') || lineText.startsWith('/*') || lineText.startsWith('*')) {
+              node.properties['data-line-type'] = 'comment';
+            } else if (lineText.includes('function') || lineText.includes('class') || lineText.includes('const') || lineText.includes('let') || lineText.includes('var')) {
+              node.properties['data-line-type'] = 'declaration';
+            } else if (lineText.includes('import') || lineText.includes('export')) {
+              node.properties['data-line-type'] = 'import';
+            } else if (lineText.includes('return')) {
+              node.properties['data-line-type'] = 'return';
+            } else if (lineText.includes('"') || lineText.includes("'") || lineText.includes('`')) {
+              node.properties['data-line-type'] = 'string';
+            } else if (lineText.includes('<') && lineText.includes('>')) {
+              node.properties['data-line-type'] = 'jsx';
+            }
           },
           onVisitHighlightedLine(node) {
             node.properties.className = ["line", "highlighted"];

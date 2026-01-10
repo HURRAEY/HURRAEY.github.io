@@ -212,7 +212,7 @@ export const retroMarkdownStyles = css`
 
   /* Code - Inline code with Pink Gradient */
   & code:not(pre code) {
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.75rem;
     background: linear-gradient(to right, #ff1493, #ff69b4);
     color: white;
     border: 3px solid #ff1493;
@@ -245,12 +245,11 @@ export const retroMarkdownStyles = css`
     content: " ⟩";
   }
 
-  /* Code blocks - Windows 95 Style with Pink Theme */
-  & pre {
+  /* Code blocks - Windows 95 Style with Pink Theme (다운로드 프로젝트 스타일) */
+  & figure[data-rehype-pretty-code-figure] {
+    margin: 2rem 0;
     background: #c0c0c0;
     border: 4px solid #ff1493;
-    padding: 0;
-    margin: 2rem 0;
     box-shadow: 8px 8px 0px 0px rgba(255, 20, 147, 0.5);
     overflow: hidden;
     border-radius: 0;
@@ -258,9 +257,17 @@ export const retroMarkdownStyles = css`
     image-rendering: pixelated;
   }
 
+  & figure[data-rehype-pretty-code-figure] pre {
+    margin: 0;
+    background: transparent;
+    border: none;
+    padding: 0;
+    overflow: visible;
+  }
+
   /* Window Title Bar */
-  & pre::before {
-    content: "📟 CODE_BLOCK.EXE   🟢 🟡 🟣";
+  & figure[data-rehype-pretty-code-figure]::before {
+    content: "📟 CODE_BLOCK.EXE";
     position: absolute;
     top: 0;
     left: 0;
@@ -271,7 +278,7 @@ export const retroMarkdownStyles = css`
     z-index: 3;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 0 0.75rem;
     color: white;
     font-family: "Press Start 2P", monospace;
@@ -296,22 +303,19 @@ export const retroMarkdownStyles = css`
     }
   }
 
-  /* Window Control Buttons (right side of title bar) */
-  & pre::after {
-    content: "▭  ☐  ✕";
+  /* LED indicators and Window Control Buttons */
+  & figure[data-rehype-pretty-code-figure]::after {
+    content: "🟢 🟡 🟣    ▭  ☐  ✕";
     position: absolute;
     top: 0.5rem;
     right: 0.75rem;
-    color: black;
-    background: #c0c0c0;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.625rem;
+    color: white;
     font-family: "Press Start 2P", monospace;
+    font-size: 0.625rem;
     z-index: 4;
-    letter-spacing: 0.5rem;
-    box-shadow: 
-      inset -1px -1px 0 0 #000000,
-      inset 1px 1px 0 0 #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     @media (min-width: 768px) {
       font-size: 0.75rem;
       top: 0.75rem;
@@ -320,7 +324,7 @@ export const retroMarkdownStyles = css`
   }
 
   /* Menu Bar */
-  & pre code::before {
+  & figure[data-rehype-pretty-code-figure] pre code::before {
     content: "File    Edit    View    Help";
     position: absolute;
     top: 2rem;
@@ -347,7 +351,7 @@ export const retroMarkdownStyles = css`
     }
   }
 
-  & pre code {
+  & figure[data-rehype-pretty-code-figure] pre code {
     display: block;
     min-width: 100%;
     width: max-content;
@@ -375,13 +379,13 @@ export const retroMarkdownStyles = css`
   }
 
   /* Code Content Wrapper with Inner Border */
-  & pre code {
+  & figure[data-rehype-pretty-code-figure] pre code {
     box-shadow: 
       inset 0 0 0 4px rgba(255, 105, 180, 0.3),
       inset 4px 4px 12px rgba(255, 20, 147, 0.2);
   }
 
-  & pre code > .line {
+  & figure[data-rehype-pretty-code-figure] pre code > .line {
     padding: 0.125rem 0.5rem;
     position: relative;
     display: block;
@@ -394,7 +398,7 @@ export const retroMarkdownStyles = css`
   }
 
   /* Line Numbers */
-  & pre code > .line::before {
+  & figure[data-rehype-pretty-code-figure] pre code > .line::before {
     counter-increment: line;
     content: counter(line, decimal-leading-zero);
     position: absolute;
@@ -419,20 +423,69 @@ export const retroMarkdownStyles = css`
     }
   }
 
+  /* Line type icons based on data-line-type attribute */
+  & figure[data-rehype-pretty-code-figure] pre code > .line[data-line-type="comment"]::after {
+    content: "💭";
+    position: absolute;
+    right: 0.5rem;
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+  
+  & figure[data-rehype-pretty-code-figure] pre code > .line[data-line-type="declaration"]::after {
+    content: "★";
+    position: absolute;
+    right: 0.5rem;
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+  
+  & figure[data-rehype-pretty-code-figure] pre code > .line[data-line-type="import"]::after {
+    content: "⚡";
+    position: absolute;
+    right: 0.5rem;
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+  
+  & figure[data-rehype-pretty-code-figure] pre code > .line[data-line-type="return"]::after {
+    content: "←";
+    position: absolute;
+    right: 0.5rem;
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+  
+  & figure[data-rehype-pretty-code-figure] pre code > .line[data-line-type="string"]::after {
+    content: "✿";
+    position: absolute;
+    right: 0.5rem;
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+  
+  & figure[data-rehype-pretty-code-figure] pre code > .line[data-line-type="jsx"]::after {
+    content: "♦";
+    position: absolute;
+    right: 0.5rem;
+    opacity: 0.5;
+    font-size: 0.75rem;
+  }
+
   /* Highlighted lines */
-  & pre code > .line.highlighted {
+  & figure[data-rehype-pretty-code-figure] pre code > .line.highlighted {
     background: rgba(255, 182, 193, 0.2);
   }
 
   /* Highlighted words */
-  & pre code .word.highlighted {
+  & figure[data-rehype-pretty-code-figure] pre code .word.highlighted {
     background: rgba(255, 20, 147, 0.3);
     padding: 0.125rem 0.25rem;
     border: 2px solid #ff69b4;
   }
 
   /* Status Bar */
-  & pre code::after {
+  & figure[data-rehype-pretty-code-figure] pre code::after {
     content: "🟩 LINES: " counter(line) "   🟢 READY   │   UTF-8   │   CRLF   │   PIXEL MODE";
     position: absolute;
     bottom: 0;
@@ -459,59 +512,56 @@ export const retroMarkdownStyles = css`
     }
   }
 
-  /* rehype-pretty-code가 생성하는 스타일 - Windows 95 Pink Theme */
-  & pre code[data-theme*=" "] {
-    color-scheme: dark;
-  }
-
-  & pre code[data-theme*=" "] span[data-highlighted-chars] {
-    background-color: rgba(255, 20, 147, 0.3);
-    border: 2px solid #ff69b4;
-  }
-
-  /* Syntax highlighting colors - Dracula-inspired Pink Theme with Icons */
-  /* 주석 - 퍼플 (💭 이모지) */
-  & pre code[data-theme*=" "] .line span[style*="rgb(106, 115, 125)"],
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(106, 115, 125)"] {
+  /* Syntax highlighting colors - Dracula-inspired Pink Theme */
+  /* 주석 - 퍼플 */
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="rgb(106, 115, 125)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(106, 115, 125)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="#6A737D"] {
     color: #bd93f9 !important;
     opacity: 0.7;
   }
 
-  /* 키워드, 함수 - 핑크 (★ 이모지) */
-  & pre code[data-theme*=" "] .line span[style*="rgb(215, 58, 73)"],
-  & pre code[data-theme*=" "] .line span[style*="rgb(111, 66, 193)"],
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(215, 58, 73)"],
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(111, 66, 193)"] {
+  /* 키워드, 함수 - 핑크 */
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="rgb(215, 58, 73)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="rgb(111, 66, 193)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(215, 58, 73)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(111, 66, 193)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="#D73A49"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="#6F42C1"] {
     color: #ff79c6 !important;
     font-weight: 600;
   }
 
-  /* import/export - 사이언 (⚡ 이모지) */
-  & pre code[data-theme*=" "] .line span[style*="rgb(0, 92, 197)"],
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(0, 92, 197)"] {
+  /* import/export - 사이언 */
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="rgb(0, 92, 197)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(0, 92, 197)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="#005CC5"] {
     color: #8be9fd !important;
   }
 
-  /* return - 그린 (← 이모지) */
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(34, 134, 58)"] {
+  /* return - 그린 */
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(34, 134, 58)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="#22863A"] {
     color: #50fa7b !important;
   }
 
-  /* 문자열 - 옐로우 (✿ 이모지) */
-  & pre code[data-theme*=" "] .line span[style*="rgb(0, 111, 224)"],
-  & pre code[data-theme*=" "] .line span[style*="rgb(0, 134, 179)"],
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(0, 111, 224)"],
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(0, 134, 179)"] {
+  /* 문자열 - 옐로우 */
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="rgb(0, 111, 224)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="rgb(0, 134, 179)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(0, 111, 224)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(0, 134, 179)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="#032F62"] {
     color: #f1fa8c !important;
   }
 
-  /* JSX 태그 - 오렌지 (♦ 이모지) */
-  & pre code[data-theme*=" "] .line span[style*="color: rgb(173, 86, 0)"] {
+  /* JSX 태그 - 오렌지 */
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="color: rgb(173, 86, 0)"],
+  & figure[data-rehype-pretty-code-figure] pre code .line span[style*="#E36209"] {
     color: #ffb86c !important;
   }
 
   /* 기본 텍스트 - 화이트 */
-  & pre code[data-theme*=" "] .line span {
+  & figure[data-rehype-pretty-code-figure] pre code .line span {
     color: #f8f8f2;
   }
 
